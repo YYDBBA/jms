@@ -1,6 +1,6 @@
 # jms
 
-> A Vue.js project
+>全栈旅行项目 Vue全家桶+Node.js+MongoDB
 
 ## Build Setup
 
