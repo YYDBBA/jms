@@ -5,7 +5,7 @@ let mongoose = require('mongoose');
 let Users = require('../models/users');
 
 //2.连接MongoDB数据库
-mongoose.connect('mongodb://localhost/jms',{ useNewUrlParser: true });
+mongoose.connect('mongodb://localhost/jms', {useNewUrlParser: true});
 
 //3.监听连接状态
 //3.1连接成功
@@ -25,21 +25,21 @@ mongoose.connection.on("disconnected", function () {
 
 //4.对数据库的操作
 //4.1获取用户信息
-router.get('/', (req, res, next)=> {
-  Users.find({},(err,doc)=>{
-    if(err){
+router.get('/', (req, res, next) => {
+  Users.find({}, (err, doc) => {
+    if (err) {
       res.json({
-        status:"1",
-        msg:err.message,
-        result:''
+        status: "1",
+        msg: err.message,
+        result: ''
       })
-    }else{
+    } else {
       res.json({
-        status:"0",
-        msg:'',
-        result:{
-          count:doc.length,
-          list:doc
+        status: "0",
+        msg: '',
+        result: {
+          count: doc.length,
+          list: doc
         }
       })
     }
@@ -47,21 +47,21 @@ router.get('/', (req, res, next)=> {
 });
 
 //4.2增加一个用户信息
-router.post('/addUser',(req,res,next)=>{
-  Users.create(req.body,(err1,doc1)=>{
-    if(err1){
+router.post('/addUser', (req, res, next) => {
+  Users.create(req.body, (err1, doc1) => {
+    if (err1) {
       res.json({
-        status:"1",
-        msg:err1.message,
-        result:''
+        status: "1",
+        msg: err1.message,
+        result: ''
       })
-    }else{
+    } else {
       res.json({
-        status:"0",
-        msg:'',
-        result:{
-          count:doc1.length,
-          list:doc1
+        status: "0",
+        msg: '',
+        result: {
+          count: doc1.length,
+          list: doc1
         }
       })
     }
@@ -69,22 +69,22 @@ router.post('/addUser',(req,res,next)=>{
 });
 
 //4.3删除一个用户信息
-router.post('/delUser',(req,res,next)=>{
-  Users.deleteOne(req.body,(err2,doc2)=>{
+router.post('/delUser', (req, res, next) => {
+  Users.deleteOne(req.body, (err2, doc2) => {
     console.log(req.body);
-    if(err2){
+    if (err2) {
       res.json({
-        status:"1",
-        msg:err2.message,
-        result:''
+        status: "1",
+        msg: err2.message,
+        result: ''
       })
-    }else{
+    } else {
       res.json({
-        status:"0",
-        msg:'',
-        result:{
-          count:doc2.length,
-          list:doc2
+        status: "0",
+        msg: '',
+        result: {
+          count: doc2.length,
+          list: doc2
         }
       })
     }
@@ -92,30 +92,81 @@ router.post('/delUser',(req,res,next)=>{
 });
 
 //4.4修改一个用户信息
-router.post('/changeUser',(req,res,next)=>{
+router.post('/changeUser', (req, res, next) => {
   let updataData = req.body;
-  Users.updateOne({id:updataData.changeId},{$set:{
-    name:updataData.changeName,
-    age:updataData.changeAge,
-    sendId:updataData.changeSendId,
-    sendName:updataData.changeSendName,
-    sendTop:updataData.changeSendTop,
-    sendBottom:updataData.changeSendBottom
-    }},(err3,doc3)=>{
-    if(err3){
+  Users.updateOne({id: updataData.changeId}, {
+    $set: {
+      name: updataData.changeName,
+      age: updataData.changeAge,
+      sendId: updataData.changeSendId,
+      sendName: updataData.changeSendName,
+      sendTop: updataData.changeSendTop,
+      sendBottom: updataData.changeSendBottom
+    }
+  }, (err3, doc3) => {
+    if (err3) {
       res.json({
-        status:"1",
-        msg:err3.message,
-        result:''
+        status: "1",
+        msg: err3.message,
+        result: ''
       })
-    }else{
+    } else {
       res.json({
-        status:"0",
-        msg:'',
-        result:{
-          count:doc3.length,
-          list:doc3
+        status: "0",
+        msg: '',
+        result: {
+          count: doc3.length,
+          list: doc3
         }
+      })
+    }
+  });
+});
+
+//5.注册
+//5.1校验用户名是否注册过
+router.post('/checkRegister', (req, res, next) => {
+  let userName = req.body.userName;
+  Users.findOne({userName: userName}, (err, doc) => {
+    if (err) {
+      res.json({
+        status: "1",
+        msg: err.message,
+        result: ''
+      });
+    } else {
+      if (doc) {
+        res.json({
+          status: "0",
+          msg: '该用户已经存在！',
+          result: ''
+        });
+      } else {
+        res.json({
+          status: "0",
+          msg: '该用户不存在',
+          result: ''
+        });
+      }
+    }
+  })
+});
+
+
+//5.2用户不存在则添加一条用户信息
+router.post('/addRegister', (req, res, next) => {
+  Users.create(req.body, (err1, doc1) => {
+    if (err1) {
+      res.json({
+        status: "1",
+        msg: err1.message,
+        result: ''
+      })
+    } else {
+      res.json({
+        status: "0",
+        msg: '创建成功',
+        result: ''
       })
     }
   });

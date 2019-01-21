@@ -22,7 +22,7 @@
         <td class="con">
           <button class="btn">详情</button>
           <button class="btn" @click="isTipChange(item)">编辑</button>
-          <button class="btn" @click="delUser(item)">删除</button>
+          <el-button class="btn" @click="delUser(item)">删除</el-button>
         </td>
       </tr>
     </table>
@@ -60,13 +60,13 @@
       <br>
       low:<input type="text" name="sendBottom" ref="sendBottom">
       <br>
-      <input type="button" value="确认修改" @click="changeUser">
+      <el-button type="button" @click="changeUser">确认修改</el-button>
     </div>
   </div>
 </template>
 
 <script>
-  import axios from 'axios'
+import axios from 'axios'
 export default {
   name: 'HelloWorld',
   data () {
@@ -109,6 +109,7 @@ export default {
           //返回0，添加成功，重新渲染数据
           this.getUserInfo();
           this.isAdd = false;
+          //todo something
         }else{
           // console.log(222);
         }
@@ -116,18 +117,33 @@ export default {
     },
     //删除一个用户信息
     delUser(item){
-      axios.post('/users/delUser',{
-        id:item.id
-      }).then((response)=>{
-        let res2 = response.data;
-        if(res2.status == 0){
-          //返回0，删除成功，重新渲染数据
-          this.getUserInfo();
-          console.log("成功");
-        }else{
-          // console.log(222);
-        }
-      })
+      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        axios.post('/users/delUser',{
+          id:item.id
+        }).then((response)=>{
+          let res2 = response.data;
+          if(res2.status == 0){
+            //返回0，删除成功，重新渲染数据
+            this.getUserInfo();
+            //todo something
+          }else{
+            // console.log(222);
+          }
+        });
+        this.$message({
+          type: 'success',
+          message: '删除成功!'
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
     },
     //修改一个用户信息
     changeUser(){
@@ -140,18 +156,34 @@ export default {
         changeSendTop:this.$refs.sendTop.value,
         changeSendBottom:this.$refs.sendBottom.value
       };
-      //判断信息是否修改
+      //判断信息是否修改,没有判断
+      this.$confirm('此操作将永久修改该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
         axios.post('/users/changeUser',params).then((response)=>{
           let res3 = response.data;
           if(res3.status == '0'){
             //返回0，修改成功，重新渲染数据
-            console.log("修改成功");
             this.getUserInfo();
             this.isChange = false;
+            //todo something
           }else{
             console.log("没有修改信息");
           }
         });
+        this.$message({
+          type: 'success',
+          message: '修改成功!'
+        });
+      }).catch(() => {
+        this.isChange = false;
+        this.$message({
+          type: 'info',
+          message: '已取消修改'
+        });
+      });
     },
     isTipAdd(){
       this.isAdd = true;
@@ -200,15 +232,10 @@ export default {
     border: 1px solid darkgray;
     background-color: white;
   }
-  .btn{
-    width: 40px;
-    height: 20px;
-    border-radius: 4px;
-    border: 0;
-    background-color: dodgerblue;
-    color: white;
-  }
   .con{
     width: 200px;
+  }
+  .motal{
+    background-color: #00bcd4;
   }
 </style>
