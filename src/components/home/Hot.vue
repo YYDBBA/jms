@@ -37,8 +37,8 @@
 <style scoped>
   .title {
     width: 100%;
-    height: 50px;
-    line-height: 50px;
+    height: 100px;
+    line-height: 100px;
     font-size: 20px;
     text-align: center;
     position: relative;
@@ -52,19 +52,19 @@
 
   .title::before {
     position: absolute;
-    top: 25px;
+    top: 49px;
     left: 5%;
   }
 
   .title::after {
     position: absolute;
-    top: 25px;
+    top: 49px;
     right: 5%;
   }
 
   .hot {
     width: 100%;
-    height: auto;
+    height: 150px;
     position: relative;
   }
 
@@ -74,6 +74,24 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  @media only screen and (max-width: 960px) {
+    .hot-content {
+      width: 720px;
+    }
+  }
+
+  @media only screen and (max-width: 720px) {
+    .hot-content {
+      width: 480px;
+    }
+  }
+
+  @media only screen and (max-width: 480px) {
+    .hot-content {
+      width: 240px;
+    }
   }
 
   .hot-item {
