@@ -4,77 +4,63 @@
     <div class="recommend">
       <ul class="recommend-content">
         <li class="item">
-          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
           <div class="panel">
             <i class="love">❥</i>
             <span class="des">5万人想去这里</span>
           </div>
         </li>
         <li class="item">
-          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
           <div class="panel">
             <i class="love">❥</i>
             <span class="des">5万人想去这里</span>
           </div>
         </li>
         <li class="item">
-          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
           <div class="panel">
             <i class="love">❥</i>
             <span class="des">5万人想去这里</span>
           </div>
         </li>
         <li class="item">
-          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
           <div class="panel">
             <i class="love">❥</i>
             <span class="des">5万人想去这里</span>
           </div>
         </li>
         <li class="item">
-          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
           <div class="panel">
             <i class="love">❥</i>
             <span class="des">5万人想去这里</span>
           </div>
         </li>
         <li class="item">
-          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
           <div class="panel">
             <i class="love">❥</i>
             <span class="des">5万人想去这里</span>
           </div>
         </li>
         <li class="item">
-          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
           <div class="panel">
             <i class="love">❥</i>
             <span class="des">5万人想去这里</span>
           </div>
         </li>
         <li class="item">
-          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
           <div class="panel">
             <i class="love">❥</i>
             <span class="des">5万人想去这里</span>
           </div>
         </li>
         <li class="item">
-          <img class="pic" src="./../../../static/hot1.jpg" alt="">
-          <div class="panel">
-            <i class="love">❥</i>
-            <span class="des">5万人想去这里</span>
-          </div>
-        </li>
-        <li class="item">
-          <img class="pic" src="./../../../static/hot1.jpg" alt="">
-          <div class="panel">
-            <i class="love">❥</i>
-            <span class="des">5万人想去这里</span>
-          </div>
-        </li>
-        <li class="item">
-          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
           <div class="panel">
             <i class="love">❥</i>
             <span class="des">5万人想去这里</span>

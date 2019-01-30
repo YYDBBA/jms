@@ -5,6 +5,7 @@
       <home-hot></home-hot>
       <home-recommend></home-recommend>
       <home-skip></home-skip>
+      <home-send></home-send>
     </div>
 </template>
 
@@ -14,6 +15,7 @@
   import HomeHot from './../components/home/Hot'
   import HomeRecommend from './../components/home/Recommend'
   import HomeSkip from './../components/home/Skip'
+  import HomeSend from './../components/home/Send'
     export default {
         name: "Home",
         components: {
@@ -21,7 +23,8 @@
           HomeSearch,
           HomeHot,
           HomeRecommend,
-          HomeSkip
+          HomeSkip,
+          HomeSend
         }
     }
 </script>

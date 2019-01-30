@@ -1,6 +1,6 @@
 <template>
     <div class="bg-search">
-      <img class="back" src="./../../../static/bg1.jpg" alt="">
+      <img class="back" src="./../../../static/image/bg1.jpg" alt="">
       <div class="search">
         <el-input size="mini" v-model="input" placeholder="搜索你喜欢的"></el-input>
         <el-button class="send" type="primary" size="mini" plain icon="el-icon-search">搜索</el-button>

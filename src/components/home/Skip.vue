@@ -19,11 +19,21 @@
             <span slot="label">最新精华游记</span>
             <div class="pics">
               <ul>
-                <li class="pic-detail"><a href="" target="_self"><img class="big-pic" src="./../../../static/hot1.jpg" alt=""></a></li>
-                <li class="pic-detail"><a href="" target="_self"><img class="small-pic" src="./../../../static/hot1.jpg" alt=""></a></li>
-                <li class="pic-detail"><a href="" target="_self"><img class="small-pic" src="./../../../static/hot1.jpg" alt=""></a></li>
-                <li class="pic-detail"><a href="" target="_self"><img class="small-pic" src="./../../../static/hot1.jpg" alt=""></a></li>
-                <li class="pic-detail"><a href="" target="_self"><img class="small-pic" src="./../../../static/hot1.jpg" alt=""></a></li>
+                <li class="pic-detail"><a href="" target="_self"><img class="big-pic"
+                                                                      src="./../../../static/image/hot1.jpg"
+                                                                      alt=""></a></li>
+                <li class="pic-detail"><a href="" target="_self"><img class="small-pic"
+                                                                      src="./../../../static/image/hot1.jpg"
+                                                                      alt=""></a></li>
+                <li class="pic-detail"><a href="" target="_self"><img class="small-pic"
+                                                                      src="./../../../static/image/hot1.jpg"
+                                                                      alt=""></a></li>
+                <li class="pic-detail"><a href="" target="_self"><img class="small-pic"
+                                                                      src="./../../../static/image/hot1.jpg"
+                                                                      alt=""></a></li>
+                <li class="pic-detail"><a href="" target="_self"><img class="small-pic"
+                                                                      src="./../../../static/image/hot1.jpg"
+                                                                      alt=""></a></li>
               </ul>
             </div>
             <div class="trip-bottom">
@@ -80,6 +90,7 @@
 <style scoped>
   .all {
     width: 93%;
+    height: 650px;
     margin: 0 auto;
   }
 
@@ -96,17 +107,21 @@
   .trip-bottom {
     margin-top: 10px;
   }
-  .pics{
+
+  .pics {
     width: 100%;
     height: 360px;
   }
+
   .pic-detail {
     float: left;
   }
-  .big-pic{
+
+  .big-pic {
     width: 630px;
     height: 350px;
   }
+
   .small-pic {
     margin-left: 10px;
     width: 300px;
@@ -118,14 +133,17 @@
     width: 100%;
     height: 180px;
   }
+
   .item {
     float: left;
     width: 48%;
     height: 170px;
   }
-  .item:nth-child(2){
+
+  .item:nth-child(2) {
     margin-left: 38px;
   }
+
   .item-title {
     width: 100%;
     height: 25px;
@@ -135,12 +153,14 @@
     box-sizing: border-box;
     border-left: 2px solid #409dfe;
   }
+
   .item-text {
     width: 100%;
     height: 145px;
     border-left: 2px solid #cccccc;
   }
-  .desc{
+
+  .desc {
     float: left;
     width: 290px;
     height: 48px;

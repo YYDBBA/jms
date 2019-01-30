@@ -6,22 +6,22 @@
         <li class="hot-item">
           <span class="hot-btn">点击了解</span>
           <span class="hot-count">4000人去过</span>
-          <img class="hot-pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="hot-pic" src="./../../../static/image/hot1.jpg" alt="">
         </li>
         <li class="hot-item">
           <span class="hot-btn">点击了解</span>
           <span class="hot-count">4000人去过</span>
-          <img class="hot-pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="hot-pic" src="./../../../static/image/hot1.jpg" alt="">
         </li>
         <li class="hot-item">
           <span class="hot-btn">点击了解</span>
           <span class="hot-count">4000人去过</span>
-          <img class="hot-pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="hot-pic" src="./../../../static/image/hot1.jpg" alt="">
         </li>
         <li class="hot-item">
           <span class="hot-btn">点击了解</span>
           <span class="hot-count">4000人去过</span>
-          <img class="hot-pic" src="./../../../static/hot1.jpg" alt="">
+          <img class="hot-pic" src="./../../../static/image/hot1.jpg" alt="">
         </li>
       </ul>
     </div>
