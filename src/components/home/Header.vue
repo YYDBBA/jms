@@ -125,12 +125,6 @@
 </script>
 
 <style scoped>
-  /*主页字体样式处理*/
-  .text-mute {
-    font-size: 16px;
-    color: #303133;
-  }
-
   @media only screen and (max-width: 900px) {
     .text-mute {
       font-size: 8px;

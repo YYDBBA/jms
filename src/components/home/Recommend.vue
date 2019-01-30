@@ -52,6 +52,34 @@
             <span class="des">5万人想去这里</span>
           </div>
         </li>
+        <li class="item">
+          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <div class="panel">
+            <i class="love">❥</i>
+            <span class="des">5万人想去这里</span>
+          </div>
+        </li>
+        <li class="item">
+          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <div class="panel">
+            <i class="love">❥</i>
+            <span class="des">5万人想去这里</span>
+          </div>
+        </li>
+        <li class="item">
+          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <div class="panel">
+            <i class="love">❥</i>
+            <span class="des">5万人想去这里</span>
+          </div>
+        </li>
+        <li class="item">
+          <img class="pic" src="./../../../static/hot1.jpg" alt="">
+          <div class="panel">
+            <i class="love">❥</i>
+            <span class="des">5万人想去这里</span>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
@@ -64,36 +92,9 @@
 </script>
 
 <style scoped>
-  .title {
-    width: 100%;
-    height: 100px;
-    line-height: 100px;
-    font-size: 20px;
-    text-align: center;
-    position: relative;
-  }
-
-  .title::before, .title::after {
-    width: 40%;
-    border-bottom: 1px solid darkgray;
-    content: '';
-  }
-
-  .title::before {
-    position: absolute;
-    top: 49px;
-    left: 5%;
-  }
-
-  .title::after {
-    position: absolute;
-    top: 49px;
-    right: 5%;
-  }
-
   .recommend {
     width: 100%;
-    height: auto;
+    min-height: 513px;
     position: relative;
   }
 
@@ -103,7 +104,6 @@
     top: 0;
     left: 50%;
     transform: translate(-50%);
-    background-color: yellow;
   }
 
   .item {
@@ -113,6 +113,7 @@
     float: left;
     margin-left: 11px;
     position: relative;
+    margin-bottom: 11px;
   }
 
   .pic {

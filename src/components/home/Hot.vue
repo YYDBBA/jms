@@ -35,33 +35,6 @@
 </script>
 
 <style scoped>
-  .title {
-    width: 100%;
-    height: 100px;
-    line-height: 100px;
-    font-size: 20px;
-    text-align: center;
-    position: relative;
-  }
-
-  .title::before, .title::after {
-    width: 35%;
-    border-bottom: 1px solid darkgray;
-    content: '';
-  }
-
-  .title::before {
-    position: absolute;
-    top: 49px;
-    left: 5%;
-  }
-
-  .title::after {
-    position: absolute;
-    top: 49px;
-    right: 5%;
-  }
-
   .hot {
     width: 100%;
     height: 150px;
