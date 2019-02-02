@@ -4,10 +4,10 @@
     <div class="all">
       <el-row class="top-detail">
         <el-col :span="20" class="detail-left">
-          <div class="grid-content bg-purple text-mute">你的旅行指南针</div>
+          <div class="text-mute">你的旅行指南针</div>
         </el-col>
         <el-col :span="4">
-          <div class="grid-content bg-purple-light">
+          <div>
             <span class="text-mute func">发表游记</span>
             <span class="text-mute func">创建行程</span>
           </div>
@@ -15,24 +15,15 @@
       </el-row>
       <div class="trip-bottom">
         <el-tabs type="border-card">
-          <el-tab-pane>
-            <span slot="label">最新精华游记</span>
+          <el-tab-pane v-for="(item,index) of tipList" :key="index">
+            <span slot="label">{{item.title}}</span>
             <div class="pics">
               <ul>
                 <li class="pic-detail"><a href="" target="_self"><img class="big-pic"
-                                                                      src="./../../../static/image/hot1.jpg"
+                                                                      :src="'./../../../static/image/'+item.tipBigImg"
                                                                       alt=""></a></li>
-                <li class="pic-detail"><a href="" target="_self"><img class="small-pic"
-                                                                      src="./../../../static/image/hot1.jpg"
-                                                                      alt=""></a></li>
-                <li class="pic-detail"><a href="" target="_self"><img class="small-pic"
-                                                                      src="./../../../static/image/hot1.jpg"
-                                                                      alt=""></a></li>
-                <li class="pic-detail"><a href="" target="_self"><img class="small-pic"
-                                                                      src="./../../../static/image/hot1.jpg"
-                                                                      alt=""></a></li>
-                <li class="pic-detail"><a href="" target="_self"><img class="small-pic"
-                                                                      src="./../../../static/image/hot1.jpg"
+                <li class="pic-detail" v-for="(item1,index1) of item.tipImgList" :key="index1"><a href="" target="_self"><img class="small-pic"
+                                                                      :src="'./../../../static/image/'+item1.tipSmallImg"
                                                                       alt=""></a></li>
               </ul>
             </div>
@@ -41,12 +32,7 @@
                 <div class="item-title">国内热门目的地</div>
                 <div class="item-text">
                   <ul>
-                    <li class="desc"><a href="">丽江：总有一种浪漫在等你</a></li>
-                    <li class="desc"><a href="">呼伦贝尔：大草原上放飞自我</a></li>
-                    <li class="desc"><a href="">杭州：感受慢生活</a></li>
-                    <li class="desc"><a href="">成都：带不走的只有你</a></li>
-                    <li class="desc"><a href="">东山岛：听风踏浪的“左耳”之行</a></li>
-                    <li class="desc"><a href="">黄山：日游黄山，夜醉黎阳</a></li>
+                    <li class="desc" v-for="(item2,index2) of item.tipContentCnaList" :key="index2"><a href="">{{item2.content}}</a></li>
                   </ul>
                 </div>
               </div>
@@ -54,22 +40,11 @@
                 <div class="item-title">海外热门目的地</div>
                 <div class="item-text">
                   <ul>
-                    <li class="desc"><a href="">圣托里尼：童话里的爱情圣地</a></li>
-                    <li class="desc"><a href="">罗马：古城为什么不是一天建成的</a></li>
-                    <li class="desc"><a href="">格鲁吉亚：被上帝遗忘的后花园</a></li>
-                    <li class="desc"><a href="">曼谷：佛教之都，了解佛文化</a></li>
-                    <li class="desc"><a href="">迪拜：中东沙漠里的璀璨之城</a></li>
-                    <li class="desc"><a href="">轻井泽：别致浪漫，静谧清凉</a></li>
+                    <li class="desc" v-for="(item3,index3) of item.tipContentCnaList" :key="index3"><a href="">{{item3.content}}</a></li>
                   </ul>
                 </div>
               </div>
             </div>
-          </el-tab-pane>
-          <el-tab-pane label="寻味·饕餮">
-            <span slot="label">寻味·饕餮</span>
-          </el-tab-pane>
-          <el-tab-pane label="花开一夏">
-            <span slot="label">花开一夏</span>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -80,10 +55,9 @@
 <script>
   export default {
     name: "Skip",
-    data() {
-      return {}
-    },
-
+    props:{
+      tipList: Array
+    }
   }
 </script>
 
@@ -95,7 +69,9 @@
   }
 
   .top-detail {
+    padding-bottom: 5px;
     border-bottom: 2px solid #409dfe;
+    box-sizing: border-box;
   }
 
 

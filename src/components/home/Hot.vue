@@ -3,25 +3,10 @@
     <h3 class="title">热门景点</h3>
     <div class="hot">
       <ul class="hot-content">
-        <li class="hot-item">
+        <li class="hot-item" v-for="(item,index) of hotList" :key="index">
           <span class="hot-btn">点击了解</span>
-          <span class="hot-count">4000人去过</span>
-          <img class="hot-pic" src="./../../../static/image/hot1.jpg" alt="">
-        </li>
-        <li class="hot-item">
-          <span class="hot-btn">点击了解</span>
-          <span class="hot-count">4000人去过</span>
-          <img class="hot-pic" src="./../../../static/image/hot1.jpg" alt="">
-        </li>
-        <li class="hot-item">
-          <span class="hot-btn">点击了解</span>
-          <span class="hot-count">4000人去过</span>
-          <img class="hot-pic" src="./../../../static/image/hot1.jpg" alt="">
-        </li>
-        <li class="hot-item">
-          <span class="hot-btn">点击了解</span>
-          <span class="hot-count">4000人去过</span>
-          <img class="hot-pic" src="./../../../static/image/hot1.jpg" alt="">
+          <span class="hot-count">{{item.hotCount}}人去过</span>
+          <img class="hot-pic" :src="'./../../../static/image/'+item.hotImg" alt="">
         </li>
       </ul>
     </div>
@@ -30,7 +15,10 @@
 
 <script>
   export default {
-    name: "Hot"
+    name: "Hot",
+    props: {
+      hotList: Array
+    }
   }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="footer-content">
     <h3 class="title">给我们留言</h3>
     <div class="footer">
       <el-row>
@@ -49,8 +49,11 @@
           </div>
         </el-col>
         <el-col :span="6">
-          <div class="grid-content bg-purple-light">
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+          <div class="send">
+            <el-input class="text" placeholder="用户名"></el-input>
+            <el-input class="text" type="password" placeholder="密码"></el-input>
+            <textarea name="" class="send-content"></textarea>
+            <el-button class="btn">发送</el-button>
           </div>
         </el-col>
       </el-row>
@@ -65,18 +68,42 @@
 </script>
 
 <style scoped>
+  .footer-content{
+    width: 100%;
+    height: 360px;
+  }
   .footer {
     background-color: #409dfe;
-    padding-top: 30px;
+    padding: 30px 40px 0 40px;
   }
   .tip{
     width: 200px;
     height: 30px;
+    font-size: 12px;
+    cursor: pointer;
   }
   .brown{
+    font-size: 14px;
     color: brown;
   }
   .white{
     color: #fff;
+  }
+  .send {
+    position: relative;
+  }
+  .send-content{
+    width: 220px;
+    height: 100px;
+    resize: none;
+    border-radius: 3px;
+  }
+  .text {
+    margin-bottom: 10px;
+  }
+  .btn{
+    position: absolute;
+    bottom: 0;
+    right: 5px;
   }
 </style>

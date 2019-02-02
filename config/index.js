@@ -16,6 +16,9 @@ module.exports = {
       },
       '/users/*': {  //代理地址
         target: 'http://localhost:3000'  //需要代理的地址
+      },
+      '/homeData': {  //代理地址
+        target: 'http://localhost:3000'  //需要代理的地址
       }
     },
 

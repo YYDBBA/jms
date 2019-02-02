@@ -3,67 +3,11 @@
     <h3 class="title">为您推荐</h3>
     <div class="recommend">
       <ul class="recommend-content">
-        <li class="item">
-          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
+        <li class="item" v-for="(item,index) of forYouList" :key="index">
+          <img class="pic" :src="'./../../../static/image/'+item.forYouImg" alt="">
           <div class="panel">
             <i class="love">❥</i>
-            <span class="des">5万人想去这里</span>
-          </div>
-        </li>
-        <li class="item">
-          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
-          <div class="panel">
-            <i class="love">❥</i>
-            <span class="des">5万人想去这里</span>
-          </div>
-        </li>
-        <li class="item">
-          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
-          <div class="panel">
-            <i class="love">❥</i>
-            <span class="des">5万人想去这里</span>
-          </div>
-        </li>
-        <li class="item">
-          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
-          <div class="panel">
-            <i class="love">❥</i>
-            <span class="des">5万人想去这里</span>
-          </div>
-        </li>
-        <li class="item">
-          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
-          <div class="panel">
-            <i class="love">❥</i>
-            <span class="des">5万人想去这里</span>
-          </div>
-        </li>
-        <li class="item">
-          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
-          <div class="panel">
-            <i class="love">❥</i>
-            <span class="des">5万人想去这里</span>
-          </div>
-        </li>
-        <li class="item">
-          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
-          <div class="panel">
-            <i class="love">❥</i>
-            <span class="des">5万人想去这里</span>
-          </div>
-        </li>
-        <li class="item">
-          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
-          <div class="panel">
-            <i class="love">❥</i>
-            <span class="des">5万人想去这里</span>
-          </div>
-        </li>
-        <li class="item">
-          <img class="pic" src="./../../../static/image/hot1.jpg" alt="">
-          <div class="panel">
-            <i class="love">❥</i>
-            <span class="des">5万人想去这里</span>
+            <span class="des">{{item.forYouCount}}人想去这里</span>
           </div>
         </li>
       </ul>
@@ -73,14 +17,17 @@
 
 <script>
   export default {
-    name: "Recommend"
+    name: "Recommend",
+    props:{
+      forYouList: Array
+    }
   }
 </script>
 
 <style scoped>
   .recommend {
     width: 100%;
-    min-height: 513px;
+    min-height: 684px;
     position: relative;
   }
 

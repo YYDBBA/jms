@@ -32,7 +32,7 @@
     top: 50%;
     left: 50%;
     margin-top: -20px;
-    margin-left: -180px;
+    margin-left: -130px;
     z-index: 20;
   }
   .send{
