@@ -47,7 +47,7 @@
                 this.hotList = homeData.hotList;
                 this.forYouList = homeData.forYouList;
                 this.tipList = homeData.tipList;
-                console.log(this.hotList);
+                // console.log(this.hotList);测试
               }else{
                 console.log(222);
               }

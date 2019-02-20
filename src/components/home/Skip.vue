@@ -22,9 +22,11 @@
                 <li class="pic-detail"><a href="" target="_self"><img class="big-pic"
                                                                       :src="'./../../../static/image/'+item.tipBigImg"
                                                                       alt=""></a></li>
-                <li class="pic-detail" v-for="(item1,index1) of item.tipImgList" :key="index1"><a href="" target="_self"><img class="small-pic"
-                                                                      :src="'./../../../static/image/'+item1.tipSmallImg"
-                                                                      alt=""></a></li>
+                <li class="pic-detail" v-for="(item1,index1) of item.tipImgList" :key="index1"><a href=""
+                                                                                                  target="_self"><img
+                  class="small-pic"
+                  :src="'./../../../static/image/'+item1.tipSmallImg"
+                  alt=""></a></li>
               </ul>
             </div>
             <div class="trip-bottom">
@@ -32,7 +34,8 @@
                 <div class="item-title">国内热门目的地</div>
                 <div class="item-text">
                   <ul>
-                    <li class="desc" v-for="(item2,index2) of item.tipContentCnaList" :key="index2"><a href="">{{item2.content}}</a></li>
+                    <li class="desc" v-for="(item2,index2) of item.tipContentCnaList" :key="index2"><a href="">{{item2.content}}</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -40,7 +43,8 @@
                 <div class="item-title">海外热门目的地</div>
                 <div class="item-text">
                   <ul>
-                    <li class="desc" v-for="(item3,index3) of item.tipContentCnaList" :key="index3"><a href="">{{item3.content}}</a></li>
+                    <li class="desc" v-for="(item3,index3) of item.tipContentCnaList" :key="index3"><a href="">{{item3.content}}</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -55,7 +59,7 @@
 <script>
   export default {
     name: "Skip",
-    props:{
+    props: {
       tipList: Array
     }
   }
@@ -94,13 +98,13 @@
   }
 
   .big-pic {
-    width: 630px;
+    width: 695px;
     height: 350px;
   }
 
   .small-pic {
     margin-left: 10px;
-    width: 300px;
+    width: 332px;
     height: 170px;
     margin-bottom: 10px;
   }
@@ -117,7 +121,7 @@
   }
 
   .item:nth-child(2) {
-    margin-left: 38px;
+    margin-left: 42px;
   }
 
   .item-title {

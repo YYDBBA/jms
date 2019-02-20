@@ -40,9 +40,8 @@
   }
 
   .item {
-    width: 283px;
+    width: 312px;
     height: 160px;
-    background-color: green;
     float: left;
     margin-left: 11px;
     position: relative;
@@ -50,12 +49,12 @@
   }
 
   .pic {
-    width: 283px;
+    width: 312px;
     height: 160px;
   }
 
   .panel {
-    width: 283px;
+    width: 312px;
     height: 160px;
     background-color: rgba(255, 255, 255, .3);
     position: absolute;
