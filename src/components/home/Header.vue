@@ -51,7 +51,7 @@
         <div class="grid-content text-mute menu-father">
           <el-menu default-active="1" class="el-menu-demo delBorder" mode="horizontal">
             <el-menu-item index="1" class="menu">旅行主页</el-menu-item>
-            <el-menu-item index="2" class="menu">社区论坛</el-menu-item>
+            <el-menu-item index="2" class="menu" @click="goCommuni">社区论坛</el-menu-item>
             <el-menu-item index="3" class="menu">海量美图</el-menu-item>
             <el-menu-item index="4" class="menu">关于我们</el-menu-item>
             <el-menu-item index="5" class="menu">更多>></el-menu-item>
@@ -120,6 +120,10 @@
           }
         })
       },
+      //路由跳转
+      goCommuni() {
+        this.$router.push('/communication');
+      }
     }
   }
 </script>
@@ -174,4 +178,16 @@
   .personal {
     line-height: 60px;
   }
+  
+  /*.menu {*/
+    /*position: relative;*/
+  /*}*/
+  /*.communication {*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*width: 100px;*/
+    /*height: 40px;*/
+    /*background-color: red;*/
+  /*}*/
 </style>
