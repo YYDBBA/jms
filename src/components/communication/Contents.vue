@@ -4,10 +4,10 @@
       <el-tab-pane label="超话社区" name="first">
         <div class="info-list border-bottom">
           <div class="info">
-            <img class="user-head" src="">
+            <img class="user-head" src="" alt="">
             <span class="username">XIXI</span>
             <p class="infoText">
-              妳說的愛情，是我觸及不到的永遠。
+              人需要沉淀，有时间去反思，才能一步一步往前走。
             </p>
             <ul class="info-operation">
               <li class="item infoTime">2018-8-29 20:45:14</li>
@@ -23,7 +23,7 @@
             <img class="user-head" src="">
             <span class="username">XIXI</span>
             <p class="infoText">
-              妳說的愛情，是我觸及不到的永遠。
+              人需要沉淀，有时间去反思，才能一步一步往前走。
             </p>
             <ul class="info-operation">
               <li class="item infoTime">2018-8-29 20:45:14</li>
@@ -39,7 +39,7 @@
           <img class="user-head" src="">
           <span class="username">XIXI</span>
           <p class="infoText">
-            妳說的愛情，是我觸及不到的永遠。
+            人需要沉淀，有时间去反思，才能一步一步往前走。
           </p>
           <ul class="info-operation">
             <li class="item infoTime">2018-8-29 20:45:14</li>
@@ -55,7 +55,7 @@
           <img class="user-head" src="">
           <span class="username">XIXI</span>
           <p class="infoText">
-            妳說的愛情，是我觸及不到的永遠。
+            人需要沉淀，有时间去反思，才能一步一步往前走。
           </p>
           <ul class="info-operation">
             <li class="item infoTime">2018-8-29 20:45:14</li>

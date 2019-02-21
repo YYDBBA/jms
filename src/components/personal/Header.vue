@@ -7,8 +7,8 @@
       </el-col>
       <el-col :span="12">
         <div class="grid-content text-mute menu-father">
-          <el-menu default-active="2" class="el-menu-demo delBorder" mode="horizontal">
-            <el-menu-item index="1" class="menu" @click="goPersonal">个人主页</el-menu-item>
+          <el-menu default-active="1" class="el-menu-demo delBorder" mode="horizontal">
+            <el-menu-item index="1" class="menu">个人主页</el-menu-item>
             <el-menu-item index="2" class="menu">社区论坛</el-menu-item>
             <el-menu-item index="3" class="menu">海量美图</el-menu-item>
             <el-menu-item index="4" class="menu">关于我们</el-menu-item>
@@ -22,8 +22,12 @@
         </div>
       </el-col>
     </el-row>
+    <div class="bgi">
+      <img class="user-head" src="" alt="">
+      <span class="hello">晚上好，YUYU!</span>
+    </div>
     <div class="communiTitle">
-      <h3 class="content">社区论坛</h3>
+      <h3 class="content">YUYU的个人主页</h3>
     </div>
   </div>
 </template>
@@ -80,9 +84,6 @@
             console.log("注册失败");
           }
         })
-      },
-      goPersonal() {
-        this.$router.push('/personal');
       }
     }
   }
@@ -124,6 +125,38 @@
   }
 
   /*标题*/
+
+  .bgi{
+    width: 100%;
+    height: 600px;
+    background-image: url(./../../../static/image/bg3.jpg);
+    background-size: 100% 100%;
+    position: relative;
+  }
+  
+  .user-head {
+    position: absolute;
+    left: 50%;
+    top: 25%;
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: black;
+  }
+
+  .hello {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    margin-left: -100px;
+    font-size: 20px;
+    text-align: center;
+  }
 
   .communiTitle {
     background-color: red;
