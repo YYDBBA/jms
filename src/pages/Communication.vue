@@ -2,17 +2,20 @@
   <div class="all">
     <communi-header></communi-header>
     <communi-tips></communi-tips>
+    <communi-contents></communi-contents>
   </div>
 </template>
 
 <script>
   import CommuniHeader from './../components/communication/Header'
   import CommuniTips from './../components/communication/Tips'
+  import CommuniContents from './../components/communication/Contents'
   export default {
     name: "Communication",
     components: {
       CommuniHeader,
-      CommuniTips
+      CommuniTips,
+      CommuniContents
     }
   }
 </script>
