@@ -39,43 +39,20 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的关注">
-          <div class="star-friend border-bottom">
-            <img class="friend-head" src="" alt="">
-            <span class="friend-name">YUYU</span>
-            <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
-          </div>
-          <div class="star-friend border-bottom">
-            <img class="friend-head" src="" alt="">
-            <span class="friend-name">YUYU</span>
-            <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
-          </div>
-          <div class="star-friend border-bottom">
-            <img class="friend-head" src="" alt="">
-            <span class="friend-name">YUYU</span>
-            <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
-          </div>
-          <div class="star-friend border-bottom">
-            <img class="friend-head" src="" alt="">
-            <span class="friend-name">YUYU</span>
-            <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
-          </div>
-          <div class="star-friend border-bottom">
-            <img class="friend-head" src="" alt="">
-            <span class="friend-name">YUYU</span>
-            <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
-          </div>
-          <div class="star-friend border-bottom">
-            <img class="friend-head" src="" alt="">
-            <span class="friend-name">YUYU</span>
-            <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
-          </div>
-          <div class="star-friend border-bottom">
+          <div class="star-friend border-bottom" @click="toChat">
             <img class="friend-head" src="" alt="">
             <span class="friend-name">YUYU</span>
             <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
           </div>
         </el-tab-pane>
       </el-tabs>
+    </div>
+    <div class="chat" v-show="isChat">
+      <span class="close" @click="closeChat">关闭</span>
+      <ul class="msg">
+        <li class="friend"></li>
+        <li class="me"></li>
+      </ul>
     </div>
     <div class="info-right"></div>
   </div>
@@ -86,8 +63,17 @@
     name: "Info",
     data() {
       return {
-        tabPosition: 'left'
+        tabPosition: 'left',
+        isChat: false
       };
+    },
+    methods: {
+      toChat() {
+        this.isChat = true;
+      },
+      closeChat() {
+        this.isChat = false;
+      }
     }
   }
 </script>
@@ -195,5 +181,23 @@
     position: absolute;
     top: 30px;
     left: 50px;
+  }
+
+  .chat {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%,-50%);
+    background-color: lightblue;
+    z-index: 999;
+  }
+
+  .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
   }
 </style>
