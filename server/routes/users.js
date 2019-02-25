@@ -123,8 +123,56 @@ router.post('/changeUser', (req, res, next) => {
   });
 });
 
-//5.注册
+//5.登录
 //5.1校验用户名是否注册过
+router.post('/checkLogin', (req, res, next) => {
+  let userName = req.body.userName;
+  let userPwd = req.body.userPwd;
+  Users.findOne({
+    userName: userName,
+    userPwd:userPwd
+  }, (err, docLogin) => {
+    if (err) {
+      res.json({
+        status: "1",
+        msg: err.message,
+        result: ''
+      });
+    } else {
+      if (docLogin) {
+        res.cookie("userName",docLogin.userName,{
+          path:'/',
+          maxAge:60000
+        });
+        res.json({
+          status: "0",
+          msg: '该用户已经存在！',
+          result: ''
+        });
+      } else {
+        res.json({
+          status: "0",
+          msg: '该用户不存在',
+          result: ''
+        });
+      }
+    }
+  })
+});
+//5.2注销登录
+router.post('/canelLogin',(req,res,next)=>{
+  res.cookie("userName","",{
+    path:'/',
+    maxAge:-1
+  });
+  res.json({
+    status: "0",
+    msg: '',
+    result: ''
+  });
+});
+//6.注册
+//6.1校验用户名是否注册过
 router.post('/checkRegister', (req, res, next) => {
   let userName = req.body.userName;
   Users.findOne({userName: userName}, (err, doc) => {
@@ -153,7 +201,7 @@ router.post('/checkRegister', (req, res, next) => {
 });
 
 
-//5.2用户不存在则添加一条用户信息
+//6.2用户不存在则添加一条用户信息
 router.post('/addRegister', (req, res, next) => {
   Users.create(req.body, (err1, doc1) => {
     if (err1) {

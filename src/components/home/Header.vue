@@ -19,15 +19,17 @@
       </el-col>
       <el-col :span="6">
         <div class="grid-content text-mute border-bottom">
-          <span>用户名</span>
-          <el-button type="primary" size="mini" plain @click="dialogVisible = true">登录</el-button>
-          <el-button type="primary" size="mini" plain @click="dialogVisible = true">注册</el-button>
+          <span>{{loginUserName}}</span>
+          <el-button type="primary" size="mini" plain @click="dialogVisible = true"  v-show="!login">登录</el-button>
+          <el-button type="primary" size="mini" plain v-show="login" @click="canelLogin">注销登录</el-button>
+          <el-button type="primary" size="mini" plain @click="dialogVisible = true"  v-show="!login">注册</el-button>
           <el-dialog
             title="欢迎加入我们"
             :visible.sync="dialogVisible"
             width="30%"
             :before-close="handleClose">
             <span>
+              <span class="loginFail" v-show="isCheckLogin">登录失败！用户名或密码不正确</span>
               <el-input size="small" v-model="userName">
                 <template slot="prepend">用户名</template>
               </el-input>
@@ -75,25 +77,79 @@
     data() {
       return {
         dialogVisible: false,
+        isCheckLogin: false,
+        loginUserName: document.cookie.split('=')[1],
         userName: '',
-        userPwd: ''
+        userPwd: '',
+        login: false
       }
     },
     methods: {
       handleClose(done) {
+        this.isCheckLogin = false;
         done();
       },
+      //登录校验
       loginCheck() {
+        let userName = this.userName;
+        let userPwd = this.userPwd;
+        //todo something 验证格式
+        axios.post('/users/checkLogin',
+          {
+            userName: userName,
+            userPwd: userPwd
+          }).then((response)=>{
+          let resLogin = response.data;
+          if (resLogin.status === "0") {
+            if(resLogin.msg === "该用户已经存在！") {
+              console.log("登录成功");
+              this.dialogVisible = false;
+              this.isCheckLogin = false;
+              this.loginUserName = document.cookie.split('=')[1];
+              this.userName = '';
+              this.userPwd = '';
+              this.login = true;
+            }else {
+              console.log('登录失败');
+              this.isCheckLogin = true;
+            }
+          }else {
+            console.log('校验失败');
+            this.isCheckLogin = true;
+          }
+        })
       },
+      //注销登录
+      canelLogin() {
+        if(document.cookie){
+          axios.post('/users/canelLogin').then((response)=>{
+            let res3 = response.data;
+            if (res3.status === "0") {
+              //返回0，添加成功
+              //todo something
+              console.log("注销成功!");
+              this.login = false;
+              this.loginUserName = '';
+            } else {
+              console.log("注销失败");
+            }
+          })
+        }
+      },
+      //注册校验
       registerCheck() {
         let userName = this.userName;
         let userPwd = this.userPwd;
-        //todo something
-        let params = {
-          userName: userName,
-          userPwd: userPwd
-        };
-        axios.post('/users/checkRegister', params).then((response) => {
+        //todo something 验证格式
+        if(!this.userName || !this.userPwd){
+          this.isCheckLogin = true;
+          return;
+        }
+        axios.post('/users/checkRegister',
+          {
+            userName: userName,
+            userPwd: userPwd
+          }).then((response) => {
           let res1 = response.data;
           if (res1.status === "0") {
             //返回0，校验成功
@@ -105,6 +161,8 @@
           } else {
             console.log('校验失败');
           }
+          this.userName = '';
+          this.userPwd = '';
         })
       },
       addUser(params) {
@@ -178,16 +236,8 @@
   .personal {
     line-height: 60px;
   }
-  
-  /*.menu {*/
-    /*position: relative;*/
-  /*}*/
-  /*.communication {*/
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*width: 100px;*/
-    /*height: 40px;*/
-    /*background-color: red;*/
-  /*}*/
+
+  .loginFail {
+    color: orangered;
+  }
 </style>

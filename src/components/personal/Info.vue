@@ -6,8 +6,8 @@
         <el-tab-pane label="修改资料">修改资料</el-tab-pane>
         <el-tab-pane label="我的发表">
           <div class="mySend">
-            <el-input></el-input>
-            <el-button>发表</el-button>
+            <el-input v-model="sendTip"></el-input>
+            <el-button @click="sendNew">发表</el-button>
           </div>
           <div class="info-list border-bottom">
             <div class="info">
@@ -59,15 +59,52 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: "Info",
     data() {
       return {
         tabPosition: 'left',
+        sendTip: '',
         isChat: false
       };
     },
+    mounted() {
+      // this.getPersonalInfo();
+  },
     methods: {
+      //个人主页信息获取,由于信息存在多个表格，获取有点复杂，后续整理
+      getPersonalInfo() {
+        axios.get('/').then((response)=>{
+          let res1 = response.data;
+          if(res1.status === "0"){
+            //成功
+          }else{
+            //失败
+            console.log(222);
+          }
+        })
+      },
+      //发表新的动态
+      sendNew() {
+        let sendParams = this.sendTip;
+        //拿到当前用户登录信息
+        // let userId = ...
+        console.log(sendParams);
+
+        axios.post('/users/addUser',{
+          // id:''数据传给后台，通过userId添加content内容，完成发表动态
+          content:sendParams
+        }).then((response)=>{
+          let res = response.data;
+          if(res.status === "0"){
+            //成功
+          }else{
+            //失败
+            console.log(222);
+          }
+        })
+      },
       toChat() {
         this.isChat = true;
       },
@@ -84,7 +121,6 @@
     width: 70%;
     height: 500px;
     margin: 0 auto;
-    background-color: pink;
   }
 
   .info-left {
@@ -98,7 +134,6 @@
   .info-list {
     width: 100%;
     min-height: 200px;
-    background-color: lightblue;
   }
 
   .info {
@@ -113,7 +148,6 @@
     left: 10px;
     width: 50px;
     height: 50px;
-    background-color: black;
     border-radius: 50%;
   }
 
@@ -168,7 +202,6 @@
     left: 3px;
     width: 42px;
     height: 42px;
-    background-color: brown;
   }
 
   .friend-name {
@@ -190,7 +223,6 @@
     width: 400px;
     height: 400px;
     transform: translate(-50%,-50%);
-    background-color: lightblue;
     z-index: 999;
   }
 
