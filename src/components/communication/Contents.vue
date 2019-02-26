@@ -89,7 +89,7 @@
 
   .content {
     position: absolute;
-    top: 150px;
+    top: 160px;
     left: 35.5%;
     width: 752px;
     height: 400px;
@@ -98,7 +98,7 @@
   .info-list {
     width: 100%;
     min-height: 200px;
-    background-color: pink;
+    background-color: #e6e9ec;
   }
 
   .info {

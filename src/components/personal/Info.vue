@@ -5,7 +5,7 @@
         <el-tab-pane label="个人资料">个人资料</el-tab-pane>
         <el-tab-pane label="修改资料">修改资料</el-tab-pane>
         <el-tab-pane label="我的发表">
-          <div class="mySend">
+          <div class="mySend border-bottom">
             <el-input v-model="sendTip"></el-input>
             <el-button @click="sendNew">发表</el-button>
           </div>
@@ -121,6 +121,7 @@
     width: 70%;
     height: 500px;
     margin: 0 auto;
+    margin-top: 10px;
   }
 
   .info-left {
@@ -224,6 +225,7 @@
     height: 400px;
     transform: translate(-50%,-50%);
     z-index: 999;
+    background-color: lightpink;
   }
 
   .close {

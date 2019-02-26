@@ -19,14 +19,15 @@
             <span slot="label">{{item.title}}</span>
             <div class="pics">
               <ul>
-                <li class="pic-detail"><a href="" target="_self"><img class="big-pic"
-                                                                      :src="'./../../../static/image/'+item.tipBigImg"
-                                                                      alt=""></a></li>
-                <li class="pic-detail" v-for="(item1,index1) of item.tipImgList" :key="index1"><a href=""
-                                                                                                  target="_self"><img
-                  class="small-pic"
-                  :src="'./../../../static/image/'+item1.tipSmallImg"
-                  alt=""></a></li>
+                <router-link to="/detail">
+                  <li class="pic-detail"><img class="big-pic"
+                                              :src="'./../../../static/image/'+item.tipBigImg"
+                                              alt=""></li>
+                  <li class="pic-detail" v-for="(item1,index1) of item.tipImgList" :key="index1"><img
+                    class="small-pic"
+                    :src="'./../../../static/image/'+item1.tipSmallImg"
+                    alt=""></li>
+                </router-link>
               </ul>
             </div>
             <div class="trip-bottom">
@@ -34,8 +35,10 @@
                 <div class="item-title">国内热门目的地</div>
                 <div class="item-text">
                   <ul>
-                    <li class="desc" v-for="(item2,index2) of item.tipContentCnaList" :key="index2"><a href="">{{item2.content}}</a>
-                    </li>
+                    <router-link to="/detail">
+                      <li class="desc" v-for="(item2,index2) of item.tipContentCnaList" :key="index2"><a href="">{{item2.content}}</a>
+                      </li>
+                    </router-link>
                   </ul>
                 </div>
               </div>
@@ -43,8 +46,10 @@
                 <div class="item-title">海外热门目的地</div>
                 <div class="item-text">
                   <ul>
-                    <li class="desc" v-for="(item3,index3) of item.tipContentCnaList" :key="index3"><a href="">{{item3.content}}</a>
-                    </li>
+                    <router-link to="/detail">
+                      <li class="desc" v-for="(item3,index3) of item.tipContentCnaList" :key="index3">{{item3.content}}
+                      </li>
+                    </router-link>
                   </ul>
                 </div>
               </div>

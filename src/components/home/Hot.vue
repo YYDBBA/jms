@@ -4,7 +4,9 @@
     <div class="hot">
       <ul class="hot-content">
         <li class="hot-item" v-for="(item,index) of hotList" :key="index">
-          <span class="hot-btn">点击了解</span>
+          <router-link to="/detail">
+            <span class="hot-btn">点击了解</span>
+          </router-link>
           <span class="hot-count">{{item.hotCount}}人去过</span>
           <img class="hot-pic" :src="'./../../../static/image/'+item.hotImg" alt="">
         </li>

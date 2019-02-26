@@ -97,7 +97,7 @@
   }
 
   .nav-menu {
-    background-color: rgba(0,0,0,.2);
+    background-color: #e6e9ec;
   }
 
   .grid-content {
@@ -126,10 +126,11 @@
   /*标题*/
 
   .communiTitle {
-    background-color: red;
     width: 70%;
     height: 80px;
     margin: 0 auto;
+    margin-top: 10px;
+    background-color: #e6e9ec;
   }
 
   .content {

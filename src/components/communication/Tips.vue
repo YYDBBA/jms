@@ -52,11 +52,11 @@
 
   .tips {
     position: absolute;
-    top: 150px;
+    top: 160px;
     left: 15%;
     width: 300px;
     min-height: 450px;
-    background-color: yellow;
+    background-color: #e6e9ec;
   }
 
   .tips-item {

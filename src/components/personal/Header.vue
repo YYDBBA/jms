@@ -98,7 +98,7 @@
   }
 
   .nav-menu {
-    background-color: rgba(0,0,0,.2);
+    background-color: #e6e9ec;
   }
 
   .grid-content {
@@ -159,10 +159,11 @@
   }
 
   .communiTitle {
-    background-color: red;
+    background-color: #e6e9ec;
     width: 70%;
     height: 80px;
     margin: 0 auto;
+    margin-top: 10px;
   }
 
   .content {

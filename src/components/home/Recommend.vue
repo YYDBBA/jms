@@ -5,10 +5,12 @@
       <ul class="recommend-content">
         <li class="item" v-for="(item,index) of forYouList" :key="index">
           <img class="pic" :src="'./../../../static/image/'+item.forYouImg" alt="">
-          <div class="panel">
-            <i class="love">❥</i>
-            <span class="des">{{item.forYouCount}}人想去这里</span>
-          </div>
+          <router-link to="/detail">
+            <div class="panel">
+              <i class="love">❥</i>
+              <span class="des">{{item.forYouCount}}人想去这里</span>
+            </div>
+          </router-link>
         </li>
       </ul>
     </div>
