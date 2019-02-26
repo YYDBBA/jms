@@ -46,6 +46,7 @@ router.get('/', (req, res, next) => {
   });
 });
 
+
 //4.2增加一个用户信息
 router.post('/addUser', (req, res, next) => {
   Users.create(req.body, (err1, doc1) => {
@@ -67,6 +68,7 @@ router.post('/addUser', (req, res, next) => {
     }
   });
 });
+
 
 //4.3删除一个用户信息
 router.post('/delUser', (req, res, next) => {
@@ -90,6 +92,7 @@ router.post('/delUser', (req, res, next) => {
     }
   });
 });
+
 
 //4.4修改一个用户信息
 router.post('/changeUser', (req, res, next) => {
@@ -123,6 +126,7 @@ router.post('/changeUser', (req, res, next) => {
   });
 });
 
+
 //5.登录
 //5.1校验用户名是否注册过
 router.post('/checkLogin', (req, res, next) => {
@@ -142,7 +146,7 @@ router.post('/checkLogin', (req, res, next) => {
       if (docLogin) {
         res.cookie("userName",docLogin.userName,{
           path:'/',
-          maxAge:60000
+          maxAge:1000*60*60
         });
         res.json({
           status: "0",
@@ -159,6 +163,8 @@ router.post('/checkLogin', (req, res, next) => {
     }
   })
 });
+
+
 //5.2注销登录
 router.post('/canelLogin',(req,res,next)=>{
   res.cookie("userName","",{
@@ -171,6 +177,8 @@ router.post('/canelLogin',(req,res,next)=>{
     result: ''
   });
 });
+
+
 //6.注册
 //6.1校验用户名是否注册过
 router.post('/checkRegister', (req, res, next) => {
@@ -203,21 +211,36 @@ router.post('/checkRegister', (req, res, next) => {
 
 //6.2用户不存在则添加一条用户信息
 router.post('/addRegister', (req, res, next) => {
-  Users.create(req.body, (err1, doc1) => {
-    if (err1) {
+  Users.countDocuments({},(errId,docId)=>{
+    if(errId){
       res.json({
-        status: "1",
-        msg: err1.message,
-        result: ''
+        status:'1',
+        msg: errId.message,
+        result:''
       })
-    } else {
-      res.json({
-        status: "0",
-        msg: '创建成功',
-        result: ''
-      })
+    }else {
+      let newDoc = docId + 1;
+      Users.create({
+        userId:newDoc,
+        userName:req.body.userName,
+        userPwd:req.body.userPwd
+      }, (err1, doc1) => {
+        if (err1) {
+          res.json({
+            status: "1",
+            msg: err1.message,
+            result: ''
+          })
+        } else {
+          res.json({
+            status: "0",
+            msg: '创建成功',
+            result: ''
+          })
+        }
+      });
     }
-  });
+  })
 });
 
 module.exports = router;

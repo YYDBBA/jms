@@ -17,8 +17,45 @@ let userScheam = new Scheam({
       "hoppyId": String,
       "hoppyItem": String
     }
+  ],
+  "userSignDayList": [
+    {
+      "signDay": String,
+      "isSign": String
+    }
+  ],
+  "userCareList": [
+    {
+      "userName": String,
+      "userPersonal": String,
+      "userHead": String
+    }
+  ],
+  "sendList": [
+    {
+      "sendId": String,
+      "userHead": String,
+      "content": String,
+      "time": String,
+      "up": String,
+      "down": String,
+      "commentList": [
+        {
+          "commentUserName": String,
+          "commentId": String,
+          "commentContent": String,
+          "commentTime": String,
+        }
+      ]
+    }
+  ],
+  "uploadPicList": [
+    {
+      "picId": String,
+      "name": String
+    }
   ]
-},{collection:'user_info'});
+}, {collection: 'user_info'});
 
 //导出数据模型
-module.exports = mongoose.model('Users',userScheam);
+module.exports = mongoose.model('Users', userScheam);

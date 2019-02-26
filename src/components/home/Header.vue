@@ -20,9 +20,9 @@
       <el-col :span="6">
         <div class="grid-content text-mute border-bottom">
           <span>{{loginUserName}}</span>
-          <el-button type="primary" size="mini" plain @click="dialogVisible = true"  v-show="!login">登录</el-button>
+          <el-button type="primary" size="mini" plain @click="dialogVisible = true" v-show="!login">登录</el-button>
           <el-button type="primary" size="mini" plain v-show="login" @click="canelLogin">注销登录</el-button>
-          <el-button type="primary" size="mini" plain @click="dialogVisible = true"  v-show="!login">注册</el-button>
+          <el-button type="primary" size="mini" plain @click="dialogVisible = true" v-show="!login">注册</el-button>
           <el-dialog
             title="欢迎加入我们"
             :visible.sync="dialogVisible"
@@ -30,6 +30,7 @@
             :before-close="handleClose">
             <span>
               <span class="loginFail" v-show="isCheckLogin">登录失败！用户名或密码不正确</span>
+              <span class="registerFail" v-show="isCheckRegister">注册失败！用户名已经存在</span>
               <el-input size="small" v-model="userName">
                 <template slot="prepend">用户名</template>
               </el-input>
@@ -78,6 +79,7 @@
       return {
         dialogVisible: false,
         isCheckLogin: false,
+        isCheckRegister: false,
         loginUserName: document.cookie.split('=')[1],
         userName: '',
         userPwd: '',
@@ -89,6 +91,9 @@
         this.isCheckLogin = false;
         done();
       },
+      // mounted() {
+      //   this.login = !!document.cookie;
+      // },
       //登录校验
       loginCheck() {
         let userName = this.userName;
@@ -98,10 +103,10 @@
           {
             userName: userName,
             userPwd: userPwd
-          }).then((response)=>{
+          }).then((response) => {
           let resLogin = response.data;
           if (resLogin.status === "0") {
-            if(resLogin.msg === "该用户已经存在！") {
+            if (resLogin.msg === "该用户已经存在！") {
               console.log("登录成功");
               this.dialogVisible = false;
               this.isCheckLogin = false;
@@ -109,11 +114,11 @@
               this.userName = '';
               this.userPwd = '';
               this.login = true;
-            }else {
+            } else {
               console.log('登录失败');
               this.isCheckLogin = true;
             }
-          }else {
+          } else {
             console.log('校验失败');
             this.isCheckLogin = true;
           }
@@ -121,8 +126,8 @@
       },
       //注销登录
       canelLogin() {
-        if(document.cookie){
-          axios.post('/users/canelLogin').then((response)=>{
+        if (document.cookie) {
+          axios.post('/users/canelLogin').then((response) => {
             let res3 = response.data;
             if (res3.status === "0") {
               //返回0，添加成功
@@ -141,15 +146,16 @@
         let userName = this.userName;
         let userPwd = this.userPwd;
         //todo something 验证格式
-        if(!this.userName || !this.userPwd){
+        if (!this.userName || !this.userPwd) {
           this.isCheckLogin = true;
           return;
         }
+        let params = {
+          userName: userName,
+          userPwd: userPwd
+        };
         axios.post('/users/checkRegister',
-          {
-            userName: userName,
-            userPwd: userPwd
-          }).then((response) => {
+          params).then((response) => {
           let res1 = response.data;
           if (res1.status === "0") {
             //返回0，校验成功
@@ -157,12 +163,11 @@
               this.addUser(params);
             } else {
               console.log(res1.msg);
+              this.isCheckRegister = true;
             }
           } else {
             console.log('校验失败');
           }
-          this.userName = '';
-          this.userPwd = '';
         })
       },
       addUser(params) {
@@ -173,6 +178,8 @@
             //todo something
             console.log("注册成功!");
             this.dialogVisible = false;
+            this.userName = '';
+            this.userPwd = '';
           } else {
             console.log("注册失败");
           }
@@ -238,6 +245,10 @@
   }
 
   .loginFail {
+    color: orangered;
+  }
+
+  .registerFail {
     color: orangered;
   }
 </style>
