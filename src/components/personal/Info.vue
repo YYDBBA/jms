@@ -47,13 +47,26 @@
         </el-tab-pane>
       </el-tabs>
     </div>
-    <div class="chat" v-show="isChat">
-      <span class="close" @click="closeChat">关闭</span>
-      <ul class="msg">
-        <li class="friend"></li>
-        <li class="me"></li>
-      </ul>
-    </div>
+    <transition name="el-fade-in-linear">
+      <div class="chat" v-show="isChat">
+        <span class="close" @click="closeChat">×</span>
+        <ul class="msg">
+          <li class="friend">
+            <img  class="youHead" src="" alt="">
+            <span class="youMsg">吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？？吃了吗？？吃了吗？？吃了吗？？吃了吗？？吃了吗？</span>
+          </li>
+          <li class="me">
+            <img class="myHead" src="" alt="">
+            <span class="myMsg">没吃吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？</span>
+          </li>
+        </ul>
+        <div style="margin-top: 15px;">
+          <el-input placeholder="请输入内容" clearable>
+            <el-button slot="append" @click="sendMsg">发送</el-button>
+          </el-input>
+        </div>
+      </div>
+    </transition>
     <div class="info-right"></div>
   </div>
 </template>
@@ -110,6 +123,9 @@
       },
       closeChat() {
         this.isChat = false;
+      },
+      sendMsg () {
+        console.log(111);
       }
     }
   }
@@ -223,8 +239,10 @@
     left: 50%;
     width: 400px;
     height: 400px;
+    padding: 10px;
     transform: translate(-50%,-50%);
     z-index: 999;
+    box-sizing: border-box;
     background-color: lightpink;
   }
 
@@ -232,6 +250,56 @@
     position: absolute;
     top: 5px;
     right: 5px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 20px;
+    background-color: #fff;
     cursor: pointer;
+  }
+
+  .msg {
+    margin-top: 30px;
+    width: 380px;
+    height: 300px;
+    background-color: #fff;
+  }
+
+  .friend,.me{
+    float: left;
+    width: 100%;
+    min-height: 50px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+  }
+
+  .youHead,.myHead {
+    float: left;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background-color: yellow;
+  }
+
+  .youMsg,.myMsg {
+    float: left;
+    padding: 0 10px 0 10px;
+    min-width: 20px;
+    min-height: 40px;
+    max-width: 200px;
+    line-height: 20px;
+    margin-left: 5px;
+    box-sizing: border-box;
+    background-color: deepskyblue;
+  }
+
+  .myHead,.myMsg {
+    float: right;
+    text-align: right;
+  }
+
+  .myMsg {
+    margin-right: 5px;
   }
 </style>
