@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animated rollIn faster">
     <personal-header></personal-header>
     <personal-info></personal-info>
   </div>
@@ -14,6 +14,13 @@
     components: {
       PersonalHeader,
       PersonalInfo
+    },
+    methods: {
+      created (){
+        setTimeout(()=>{
+          this.$router.push('/');
+        },5000)
+      }
     }
   }
 </script>

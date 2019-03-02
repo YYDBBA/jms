@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-search">
+    <div class="bg-search animated bounceInRight">
       <img class="back" src="./../../../static/image/bg1.jpg" alt="">
       <div class="search">
         <el-input size="mini" v-model="input" placeholder="搜索你喜欢的"></el-input>

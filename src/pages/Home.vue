@@ -20,11 +20,11 @@
 
   export default {
     name: "Home",
-    data(){
+    data() {
       return {
-        hotList:[],
+        hotList: [],
         forYouList: [],
-        tipList:[]
+        tipList: []
       }
     },
     components: {
@@ -35,28 +35,30 @@
       HomeSkip,
       HomeSend
     },
-    mounted (){
+    mounted() {
       this.getHomeInfo();
     },
     methods: {
-          getHomeInfo (){
-            axios.get('/homeData').then((response)=>{
-              let res = response.data;
-              let homeData = res.result.list[0];
-              if(res.status === "0"){
-                this.hotList = homeData.hotList;
-                this.forYouList = homeData.forYouList;
-                this.tipList = homeData.tipList;
-                // console.log(this.hotList);测试
-              }else{
-                console.log(222);
-              }
-            })
+      getHomeInfo() {
+        axios.get('/homeData').then((response) => {
+          let res = response.data;
+          let homeData = res.result.list[0];
+          if (res.status === "0") {
+            this.hotList = homeData.hotList;
+            this.forYouList = homeData.forYouList;
+            this.tipList = homeData.tipList;
+            // console.log(this.hotList);测试
+          } else {
+            console.log(222);
           }
+        })
+      }
     }
   }
 </script>
 
 <style scoped>
-
+.ddd{
+  background-color: #0fcbb8;
+}
 </style>

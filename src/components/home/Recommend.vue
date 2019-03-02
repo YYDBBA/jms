@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="animated bounceInRight">
     <h3 class="title">为您推荐</h3>
     <div class="recommend">
       <ul class="recommend-content">
-        <li class="item" v-for="(item,index) of forYouList" :key="index">
+        <li class="item " v-for="(item,index) of forYouList" :key="index">
           <img class="pic" :src="'./../../../static/image/'+item.forYouImg" alt="">
           <router-link to="/detail">
             <div class="panel">

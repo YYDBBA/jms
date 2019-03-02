@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animated zoomInDown faster">
     <detail-content></detail-content>
     <detail-header></detail-header>
     <detail-footer></detail-footer>

@@ -4,6 +4,7 @@ import Home from '@/pages/Home'
 import Communication from '@/pages/Communication'
 import Personal from '@/pages/Personal'
 import Detail from '@/pages/Detail'
+import End from '@/pages/End'
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/detail',
       name: 'Detail',
       component: Detail
+    },
+    {
+      path: '/end',
+      name: 'End',
+      component: End
     }
   ]
 })

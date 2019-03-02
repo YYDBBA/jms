@@ -57,7 +57,7 @@
             <el-menu-item index="2" class="menu" @click="goCommuni">社区论坛</el-menu-item>
             <el-menu-item index="3" class="menu">海量美图</el-menu-item>
             <el-menu-item index="4" class="menu">关于我们</el-menu-item>
-            <el-menu-item index="5" class="menu">更多>></el-menu-item>
+            <el-menu-item index="5" class="menu" @click="goEnd">更多>></el-menu-item>
           </el-menu>
         </div>
       </el-col>
@@ -188,6 +188,9 @@
       //路由跳转
       goCommuni() {
         this.$router.push('/communication');
+      },
+      goEnd() {
+        this.$router.push('/end');
       }
     }
   }

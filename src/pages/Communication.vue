@@ -1,5 +1,5 @@
 <template>
-  <div class="all">
+  <div class="all animated rollIn faster">
     <communi-header></communi-header>
     <communi-tips></communi-tips>
     <communi-contents></communi-contents>
@@ -24,5 +24,6 @@
 
   .all {
     position: relative;
+    transition: all 5s !important;
   }
 </style>

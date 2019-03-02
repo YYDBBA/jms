@@ -97,7 +97,7 @@
   }
 
   .nav-menu {
-    background-color: #e6e9ec;
+    background-color: #0fcbb8;
   }
 
   .grid-content {
@@ -130,7 +130,7 @@
     height: 80px;
     margin: 0 auto;
     margin-top: 10px;
-    background-color: #e6e9ec;
+    background-color: #0fcbb8;
   }
 
   .content {

@@ -26,54 +26,86 @@ mongoose.connection.on("disconnected", function () {
 //4.对数据库的操作
 //4.1获取用户信息
 router.get('/', (req, res, next) => {
-  Users.find({}, (err, doc) => {
-    if (err) {
+  Users.countDocuments({}, (errId, docId) => {
+    if (errId) {
       res.json({
-        status: "1",
-        msg: err.message,
+        status: '1',
+        msg: errId.message,
         result: ''
       })
     } else {
-      res.json({
-        status: "0",
-        msg: '',
-        result: {
-          count: doc.length,
-          list: doc
+      let countId = docId;
+      let page = parseInt(req.param("page"));
+      let pageSize = parseInt(req.param("pageSize"));
+
+      let skip = (page - 1) * pageSize;
+
+      let params = {};
+      let usersModel = Users.find(params).skip(skip).limit(pageSize);
+      usersModel.exec((err, doc) => {
+        if (err) {
+          res.json({
+            status: "1",
+            msg: err.message,
+            result: ''
+          })
+        } else {
+          res.json({
+            status: "0",
+            msg: '',
+            result: {
+              count: doc.length,
+              list: doc,
+              countId: countId
+            }
+          })
         }
-      })
+      });
     }
-  });
+  })
 });
 
 
 //4.2增加一个用户信息
 router.post('/addUser', (req, res, next) => {
-  Users.create(req.body, (err1, doc1) => {
-    if (err1) {
+  Users.countDocuments({}, (errId, docId) => {
+    if (errId) {
       res.json({
-        status: "1",
-        msg: err1.message,
+        status: '1',
+        msg: errId.message,
         result: ''
       })
     } else {
-      res.json({
-        status: "0",
-        msg: '',
-        result: {
-          count: doc1.length,
-          list: doc1
+      let newDoc = docId + 1;
+      Users.create({
+        userId: newDoc,
+        userName: req.body.userName,
+        userPwd: req.body.userPwd,
+        userBath: req.body.userBath,
+        userMajor: req.body.userMajor
+      }, (err1, doc1) => {
+        if (err1) {
+          res.json({
+            status: "1",
+            msg: err1.message,
+            result: ''
+          })
+        } else {
+          res.json({
+            status: "0",
+            msg: '创建成功',
+            result: ''
+          })
         }
-      })
+      });
     }
-  });
+  })
 });
 
 
 //4.3删除一个用户信息
 router.post('/delUser', (req, res, next) => {
   Users.deleteOne(req.body, (err2, doc2) => {
-    console.log(req.body);
     if (err2) {
       res.json({
         status: "1",
@@ -83,7 +115,7 @@ router.post('/delUser', (req, res, next) => {
     } else {
       res.json({
         status: "0",
-        msg: '',
+        msg: '删除成功',
         result: {
           count: doc2.length,
           list: doc2
@@ -134,7 +166,7 @@ router.post('/checkLogin', (req, res, next) => {
   let userPwd = req.body.userPwd;
   Users.findOne({
     userName: userName,
-    userPwd:userPwd
+    userPwd: userPwd
   }, (err, docLogin) => {
     if (err) {
       res.json({
@@ -144,9 +176,9 @@ router.post('/checkLogin', (req, res, next) => {
       });
     } else {
       if (docLogin) {
-        res.cookie("userName",docLogin.userName,{
-          path:'/',
-          maxAge:1000*60*60
+        res.cookie("userName", docLogin.userName, {
+          path: '/',
+          maxAge: 1000 * 60 * 60
         });
         res.json({
           status: "0",
@@ -166,10 +198,10 @@ router.post('/checkLogin', (req, res, next) => {
 
 
 //5.2注销登录
-router.post('/canelLogin',(req,res,next)=>{
-  res.cookie("userName","",{
-    path:'/',
-    maxAge:-1
+router.post('/canelLogin', (req, res, next) => {
+  res.cookie("userName", "", {
+    path: '/',
+    maxAge: -1
   });
   res.json({
     status: "0",
@@ -211,19 +243,19 @@ router.post('/checkRegister', (req, res, next) => {
 
 //6.2用户不存在则添加一条用户信息
 router.post('/addRegister', (req, res, next) => {
-  Users.countDocuments({},(errId,docId)=>{
-    if(errId){
+  Users.countDocuments({}, (errId, docId) => {
+    if (errId) {
       res.json({
-        status:'1',
+        status: '1',
         msg: errId.message,
-        result:''
+        result: ''
       })
-    }else {
+    } else {
       let newDoc = docId + 1;
       Users.create({
-        userId:newDoc,
-        userName:req.body.userName,
-        userPwd:req.body.userPwd
+        userId: newDoc,
+        userName: req.body.userName,
+        userPwd: req.body.userPwd
       }, (err1, doc1) => {
         if (err1) {
           res.json({
@@ -242,5 +274,6 @@ router.post('/addRegister', (req, res, next) => {
     }
   })
 });
+
 
 module.exports = router;

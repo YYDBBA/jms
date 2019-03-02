@@ -2,7 +2,13 @@
   <div class="info-more">
     <div class="info-left">
       <el-tabs :tab-position="tabPosition" class="tab">
-        <el-tab-pane label="个人资料">个人资料</el-tab-pane>
+        <el-tab-pane label="个人资料">
+          <el-carousel indicator-position="outside">
+            <el-carousel-item v-for="(item,index) in bgc" :key="index">
+              <h3><img class="ddd" :src="item.url" alt=""></h3>
+            </el-carousel-item>
+          </el-carousel>
+        </el-tab-pane>
         <el-tab-pane label="修改资料">修改资料</el-tab-pane>
         <el-tab-pane label="我的发表">
           <div class="mySend border-bottom">
@@ -38,8 +44,15 @@
             </div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="我的关注">
+        <el-tab-pane label="我的好友">
           <div class="star-friend border-bottom" @click="toChat">
+            <img class="friend-head" src="" alt="">
+            <span class="friend-name">YUYU</span>
+            <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
+          </div>
+        </el-tab-pane>
+        <el-tab-pane label="我的关注">
+          <div class="star-friend border-bottom">
             <img class="friend-head" src="" alt="">
             <span class="friend-name">YUYU</span>
             <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
@@ -67,7 +80,8 @@
         </div>
       </div>
     </transition>
-    <div class="info-right"></div>
+    <div class="info-right">
+    </div>
   </div>
 </template>
 
@@ -79,7 +93,25 @@
       return {
         tabPosition: 'left',
         sendTip: '',
-        isChat: false
+        isChat: false,
+        bgc: [
+          {
+            "id":"1",
+            "url":"./../../static/image/bg1.jpg"
+          },
+          {
+            "id":"2",
+            "url":"./../../static/image/bg2.jpg"
+          },
+          {
+            "id":"3",
+            "url":"./../../static/image/bg3.jpg"
+          },
+          {
+            "id":"4",
+            "url":"./../../static/image/bg4.jpg"
+          }
+        ]
       };
     },
     mounted() {
@@ -132,6 +164,11 @@
 </script>
 
 <style scoped>
+
+  .ddd {
+    width: 100%;
+    height: 100%;
+  }
 
   .info-more {
     width: 70%;
@@ -302,4 +339,5 @@
   .myMsg {
     margin-right: 5px;
   }
+
 </style>

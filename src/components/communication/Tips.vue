@@ -56,7 +56,7 @@
     left: 15%;
     width: 300px;
     min-height: 450px;
-    background-color: #e6e9ec;
+    background-color: #0fcbb8;
   }
 
   .tips-item {

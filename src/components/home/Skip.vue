@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content animated bounceInRight">
     <h3 class="title">旅游攻略</h3>
     <div class="all">
       <el-row class="top-detail">
