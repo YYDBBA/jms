@@ -5,7 +5,7 @@
       <ul class="hot-content">
         <li class="hot-item" v-for="(item,index) of hotList" :key="index">
           <router-link to="/detail">
-            <span class="hot-btn">点击了解</span>
+            <span class="hot-btn" @click="findCity(item)">点击了解</span>
           </router-link>
           <span class="hot-count">{{item.hotCount}}人去过</span>
           <img class="hot-pic" :src="'./../../../static/image/'+item.hotImg" alt="">
@@ -16,10 +16,16 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: "Hot",
     props: {
       hotList: Array
+    },
+    methods:{
+      findCity(item) {
+        this.$store.commit('changeCity',item.cityName);
+      }
     }
   }
 </script>

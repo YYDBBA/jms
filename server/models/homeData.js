@@ -8,7 +8,8 @@ let homeDataScheam = new Scheam(
     "hotList": [
       {
         "hotImg": String,
-        "hotCount": Number
+        "hotCount": Number,
+        "cityName": String
       }
     ],
     "forYouList": [
