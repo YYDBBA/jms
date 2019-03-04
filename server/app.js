@@ -9,10 +9,17 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+// app.all('*',(req,res,next)=>{
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   res.header("Access-Control-Allow-Origin", req.headers.origin);
+//   res.header("Access-Control-Allow-Methods","PUT,GET,POST,DELETE,OPTIONS")
+//   res.header("Access-Control-Allow-Headers", "Content-Type,username");
+// });
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(require('cors')());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

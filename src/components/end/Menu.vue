@@ -245,9 +245,9 @@
           resource: '',
           desc: ''
         },
-        page:'1',
-        pageSize:'4',
-        count:''
+        page: '1',
+        pageSize: '4',
+        count: ''
       }
     },
     mounted() {
@@ -256,11 +256,11 @@
     methods: {
       getUserInfo() {
         let param = {
-          page:this.page,
-          pageSize:this.pageSize
+          page: this.page,
+          pageSize: this.pageSize
         };
-        axios.get('/users',{
-          params:param
+        axios.get('/users', {
+          params: param
         }).then((response) => {
           let resUser = response.data;
           let userInfo = response.data.result.list;
@@ -273,9 +273,11 @@
           }
         })
       },
+      //弹出添加信息框
       addInfo() {
         this.dialogFormVisible = true;
       },
+      //确认添加
       addSuc() {
         axios.post('/users/addUser', {
           userName: this.name,
@@ -334,8 +336,8 @@
         });
       },
       handleSizeChange(val) {
-       this.pageSize = val;
-       this.getUserInfo();
+        this.pageSize = val;
+        this.getUserInfo();
       },
       handleCurrentChange(val) {
         this.page = val;

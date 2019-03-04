@@ -58,6 +58,9 @@
             <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
           </div>
         </el-tab-pane>
+        <el-tab-pane label="我的上传">
+          <upload-pic></upload-pic>
+        </el-tab-pane>
       </el-tabs>
     </div>
     <transition name="el-fade-in-linear">
@@ -86,9 +89,13 @@
 </template>
 
 <script>
+  import UploadPic from './Upload'
   import axios from 'axios'
   export default {
     name: "Info",
+    components:{
+      UploadPic
+    },
     data() {
       return {
         tabPosition: 'left',
@@ -120,7 +127,10 @@
     methods: {
       //个人主页信息获取,由于信息存在多个表格，获取有点复杂，后续整理
       getPersonalInfo() {
-        axios.get('/').then((response)=>{
+        axios.get('/',
+          {
+            params:userid
+          }).then((response)=>{
           let res1 = response.data;
           if(res1.status === "0"){
             //成功

@@ -40,7 +40,7 @@
     },
     methods: {
       getHomeInfo() {
-        axios.get('/homeData').then((response) => {
+        axios.get('http://localhost:3000/homeData').then((response) => {
           let res = response.data;
           let homeData = res.result.list[0];
           if (res.status === "0") {
