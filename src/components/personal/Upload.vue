@@ -6,22 +6,9 @@
       action="http://localhost:3000/users/uploadPic"
       :show-file-list="false"
       :on-success="handleAvatarSuccess"
-      :on-preview="handlePictureCardPreview"
       >
       <i class="el-icon-plus"></i>
     </el-upload>
-    <!--<el-dialog :visible.sync="dialogVisible">-->
-      <!--<img width="100%" :src="dialogImageUrl" alt="">-->
-    <!--</el-dialog>-->
-    <!--<el-upload-->
-      <!--class="avatar-uploader"-->
-      <!--action="http://localhost:3000/users/uploadPic"-->
-      <!--:show-file-list="false"-->
-      <!--:on-success="handleAvatarSuccess"-->
-      <!--&gt;-->
-      <!--<img v-if="imageUrl" :src="imageUrl" class="avatar">-->
-      <!--<i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
-    <!--</el-upload>-->
     <ul v-for="(item,index) of picUrlList" :key="index">
       <li class="pics"><img :src="'http://localhost:3000/avatar/'+ item.name" class="pic"></li>
     </ul>
@@ -35,8 +22,6 @@
     name: "Upload",
     data() {
       return {
-        dialogImageUrl: '',
-        dialogVisible: false,
         imageUrl:'',
         picUrlList:[]
       };
@@ -73,20 +58,12 @@
         } else {
           this.$message.error("图片上传失败！"+res.msg)
         }
-      },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
       }
     }
   }
 </script>
 
 <style scoped>
-  .avatar {
-    width: 200px;
-    height: 150px;
-  }
 .pic {
   width: 100px;
   height: 100px;

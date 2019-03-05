@@ -280,7 +280,7 @@ router.post('/addRegister', (req, res, next) => {
 
 //7用户上传图片
 
-//routers/upload.js
+//7.1上传图片
 router.post('/uploadPic',(req,res,next)=>{
   let AVATAR_UPLOAD_FOLDER = '/avatar';
   //创建上传表单
@@ -362,6 +362,7 @@ router.post('/uploadPic',(req,res,next)=>{
   })
 });
 
+//7.2将图片信息存在数据库里
 router.post('/addPicInfo',(req,res,next)=>{
   console.log(req.body.picInfo);
   let name = req.body.picInfo;

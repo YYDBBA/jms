@@ -9,7 +9,11 @@ let homeDataScheam = new Scheam(
       {
         "hotImg": String,
         "hotCount": Number,
-        "cityName": String
+        "wantCount":Number,
+        "cityName": String,
+        "title":String,
+        "adress":String,
+        "des":String
       }
     ],
     "forYouList": [

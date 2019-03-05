@@ -4,11 +4,11 @@
     <div class="recommend">
       <ul class="recommend-content">
         <li class="item " v-for="(item,index) of forYouList" :key="index">
-          <img class="pic" :src="'./../../../static/image/'+item.forYouImg" alt="">
+          <img class="pic" :src="'./../../../static/image/'+item.hotImg" alt="">
           <router-link to="/detail">
-            <div class="panel">
+            <div class="panel" @click="findCity(item)">
               <i class="love">❥</i>
-              <span class="des">{{item.forYouCount}}人想去这里</span>
+              <span class="des">{{item.wantCount}}人想去这里</span>
             </div>
           </router-link>
         </li>
@@ -22,6 +22,12 @@
     name: "Recommend",
     props:{
       forYouList: Array
+    },
+    methods:{
+      findCity(item) {
+        let cityHot = 'forYouList';
+        this.$store.commit('changeCity',[item.cityName,cityHot]);
+      }
     }
   }
 </script>

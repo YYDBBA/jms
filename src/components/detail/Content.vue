@@ -1,19 +1,18 @@
 <template>
   <div class="all">
     <div class="tips">
-      <el-container class="tip">
+      <el-container class="tip" v-for="(item,index) of list" :key="index">
         <el-aside class="aside">
-          <img class="pic" src="./../../../static/image/bg2.jpg" alt="">
+          <img class="pic" :src="'./../../../static/image/'+item.hotImg" alt="">
         </el-aside>
         <el-container>
-          <el-header class="header">{{cityChangeName}}：看橘子洲头</el-header>
+          <el-header class="header">{{cityChangeName}}：{{item.title}}</el-header>
           <el-main class="main">
-            <p class="small">多少人去过：1444</p>
-            <p class="small">多少人想去：5678</p>
-            <p class="small">地理位置：湖南省长沙市</p>
+            <p class="small">多少人去过：{{item.hotCount}}</p>
+            <p class="small">多少人想去：{{item.wantCount}}</p>
+            <p class="small">地理位置：{{item.adress}}</p>
             <p class="big-small">简介：</p>
-            <p class="big">
-              长沙是首批国家历史文化名城，历经三千年城的名、城址是不变，享有“屈贾之乡”、“楚汉名城”、“潇湘洙泗”之称。存有马王堆汉墓、四羊说方尊、三国的吴简、岳麓山书院、铜官窑等历史遗迹。凝练出“经世致用、兼收并蓄”的湖湘文化。长沙既是清末维新运动和旧民主主义革命策源地之一，又是新民主主义的发祥地之一。走出了黄兴、蔡锷，孕育了毛泽东、刘少奇等名人。</p>
+            <p class="big">{{item.des}}</p>
           </el-main>
           <el-footer class="footer">
             <span>2345</span>
@@ -32,31 +31,45 @@
     name: "Content",
     data() {
       return {
-        cityName:''
+        cityChangeName: '',
+        list: []
       }
     },
-    computed: {
-      cityChangeName() {
-        return this.$store.state.city;
-      }
-    },
+    // computed: {
+    //   cityChangeName() {
+    //     return this.$store.state.city;
+    //   }
+    // },
     mounted() {
       this.getCityInfo();
     },
     methods: {
       getCityInfo() {
+        this.cityChangeName = this.$store.state.city;
         let name = this.cityChangeName;
-        console.log(name);
-        // axios.get('http://localhost:3000/homeData',{
-        //   params:{cityName:name}
-        // }).then((response)=>{
-        //   let res = response.data;
-        //   if(res.status === '200'){
-        //     console.log(111);
-        //   }else {
-        //     console.log(222);
-        //   }
-        // })
+        let devide = this.$store.state.cityHot;
+        axios.get('http://localhost:3000/homeData/detail', {
+          params: {
+            cityName: name,
+            devide:devide
+          }
+        }).then((response) => {
+          let res = response.data;
+          if (res.status === '0') {
+            let cityHot = this.$store.state.cityHot;
+            let listData = res.result;
+            console.log(cityHot);
+            console.log(listData);
+            listData.forEach((item, index) => {
+                if(item.cityName === name){
+                  this.list.push(item);
+                }
+              }
+            );
+          } else {
+            console.log(222);
+          }
+        })
       }
     }
   }

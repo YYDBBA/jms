@@ -24,7 +24,8 @@
     },
     methods:{
       findCity(item) {
-        this.$store.commit('changeCity',item.cityName);
+        let cityHot = 'hotList';
+        this.$store.commit('changeCity',[item.cityName,cityHot]);
       }
     }
   }
