@@ -7,5 +7,23 @@ export default {
       localStorage.cityHot = cityHot;
     } catch (e) {
     }
+  },
+  changeLogin(state, [checkLogin,loginName]) {
+    state.checkLogin = checkLogin;
+    state.loginName = loginName;
+    try {
+      localStorage.checkLogin = checkLogin;
+      localStorage.loginName = loginName;
+    } catch (e) {
+    }
+  },
+  canelLogin(state, [checkLogin,loginName]) {
+    state.checkLogin = checkLogin;
+    state.loginName = loginName;
+    try {
+      localStorage.checkLogin = checkLogin;
+      localStorage.loginName = loginName;
+    } catch (e) {
+    }
   }
 }

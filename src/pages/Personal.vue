@@ -15,11 +15,21 @@
       PersonalHeader,
       PersonalInfo
     },
+    beforeRouteEnter(to, from, next) {
+      // console.log(to);
+      // if (to.meta.login) {
+      //
+      // }else{
+      //
+      // }
+        next((vm)=>{
+        })
+    },
     methods: {
-      created (){
-        setTimeout(()=>{
+      created() {
+        setTimeout(() => {
           this.$router.push('/');
-        },5000)
+        }, 5000)
       }
     }
   }

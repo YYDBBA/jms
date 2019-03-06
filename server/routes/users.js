@@ -179,10 +179,6 @@ router.post('/checkLogin', (req, res, next) => {
       });
     } else {
       if (docLogin) {
-        res.cookie("userName", docLogin.userName, {
-          path: '/',
-          maxAge: 1000 * 60 * 60
-        });
         res.json({
           status: "0",
           msg: '该用户已经存在！',
@@ -201,17 +197,6 @@ router.post('/checkLogin', (req, res, next) => {
 
 
 //5.2注销登录
-router.post('/canelLogin', (req, res, next) => {
-  res.cookie("userName", "", {
-    path: '/',
-    maxAge: -1
-  });
-  res.json({
-    status: "0",
-    msg: '',
-    result: ''
-  });
-});
 
 
 //6.注册

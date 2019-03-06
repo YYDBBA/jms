@@ -24,10 +24,10 @@
     </el-row>
     <div class="bgi">
       <img class="user-head" src="" alt="">
-      <span class="hello">晚上好，YUYU!</span>
+      <span class="hello">晚上好，{{userName}}</span>
     </div>
     <div class="communiTitle">
-      <h3 class="content">YUYU的个人主页</h3>
+      <h3 class="content">{{userName}}的个人主页</h3>
     </div>
   </div>
 </template>
@@ -43,6 +43,9 @@
         userName: '',
         userPwd: ''
       }
+    },
+    created(){
+      this.userName = this.$store.state.loginName;
     },
     methods: {
       handleClose(done) {

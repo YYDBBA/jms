@@ -58,8 +58,8 @@
           if (res.status === '0') {
             let cityHot = this.$store.state.cityHot;
             let listData = res.result;
-            console.log(cityHot);
-            console.log(listData);
+            // console.log(cityHot);
+            // console.log(listData);
             listData.forEach((item, index) => {
                 if(item.cityName === name){
                   this.list.push(item);

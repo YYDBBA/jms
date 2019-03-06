@@ -90,7 +90,7 @@
           @current-change="handleCurrentChange"
           :page-sizes="[4, 5, 6, 7]"
           :page-size="4"
-          layout="total, sizes, prev, pager, next, jumper"
+          layout="total, sizes, prev,pager, next, jumper"
           :total="parseInt(count)"
           class="fenye"
         >
