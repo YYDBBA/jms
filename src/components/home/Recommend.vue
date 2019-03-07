@@ -4,7 +4,7 @@
     <div class="recommend">
       <ul class="recommend-content">
         <li class="item " v-for="(item,index) of forYouList" :key="index">
-          <img class="pic" :src="'./../../../static/image/'+item.hotImg" alt="">
+          <img class="pic" v-lazy="'./../../../static/image/'+item.hotImg" alt="">
           <router-link to="/detail">
             <div class="panel" @click="findCity(item)">
               <i class="love">❥</i>

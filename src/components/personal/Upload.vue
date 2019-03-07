@@ -10,7 +10,7 @@
       <i class="el-icon-plus"></i>
     </el-upload>
     <ul v-for="(item,index) of picUrlList" :key="index">
-      <li class="pics"><img :src="'http://localhost:3000/avatar/'+ item.name" class="pic"></li>
+      <li class="pics"><img v-lazy="'http://localhost:3000/avatar/'+ item.name" class="pic"></li>
     </ul>
   </div>
 </template>

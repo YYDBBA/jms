@@ -3,7 +3,7 @@
     <div class="tips">
       <el-container class="tip" v-for="(item,index) of list" :key="index">
         <el-aside class="aside">
-          <img class="pic" :src="'./../../../static/image/'+item.hotImg" alt="">
+          <img class="pic" v-lazy="'./../../../static/image/'+item.hotImg" alt="">
         </el-aside>
         <el-container>
           <el-header class="header">{{cityChangeName}}：{{item.title}}</el-header>

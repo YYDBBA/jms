@@ -8,7 +8,7 @@
             <span class="hot-btn" @click="findCity(item)">点击了解</span>
           </router-link>
           <span class="hot-count">{{item.hotCount}}人去过</span>
-          <img class="hot-pic" :src="'./../../../static/image/'+item.hotImg" alt="">
+          <img class="hot-pic" v-lazy="'./../../../static/image/'+item.hotImg" alt="">
         </li>
       </ul>
     </div>
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-  import axios from 'axios'
   export default {
     name: "Hot",
     props: {

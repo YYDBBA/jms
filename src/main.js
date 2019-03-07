@@ -3,6 +3,7 @@ import App from './App'
 import router from './router'
 import Element from 'element-ui'
 import store from './store/docs'
+import vueLazyLoad from 'vue-lazyload'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/styles/reset.css'
 import './assets/styles/border.css'
@@ -12,6 +13,9 @@ import 'animate.css'
 
 Vue.config.productionTip = false;
 Vue.use(Element);
+Vue.use(vueLazyLoad,{
+  loading:"./../static/loading-svg/loading-balls.svg"
+});
 
 new Vue({
   el: '#app',

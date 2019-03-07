@@ -21,11 +21,11 @@
               <ul>
                 <router-link to="/detail">
                   <li class="pic-detail"><img class="big-pic"
-                                              :src="'./../../../static/image/'+item.tipBigImg"
+                                              v-lazy="'./../../../static/image/'+item.tipBigImg"
                                               alt=""></li>
                   <li class="pic-detail" v-for="(item1,index1) of item.tipImgList" :key="index1"><img
                     class="small-pic"
-                    :src="'./../../../static/image/'+item1.tipSmallImg"
+                    v-lazy="'./../../../static/image/'+item1.tipSmallImg"
                     alt=""></li>
                 </router-link>
               </ul>
