@@ -8,14 +8,19 @@
     </el-col>
     <el-col :span="4" class="grid-content bg-purple ddd">
         <span class="name">YUYU</span>
-        <img class="head-pic" src="" alt="">
+        <img class="head-pic" src="" alt="" @click="goHome">
     </el-col>
   </el-row>
 </template>
 
 <script>
   export default {
-    name: "Header"
+    name: "Header",
+    methods: {
+      goHome(){
+        this.$router.push('/');
+      }
+    }
   }
 </script>
 

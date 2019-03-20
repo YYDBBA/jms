@@ -15,51 +15,38 @@
             <el-input v-model="sendTip"></el-input>
             <el-button @click="sendNew">发表</el-button>
           </div>
-          <div class="info-list border-bottom">
+          <div class="info-list border-bottom" v-for="(item,index) of sendList" :key="index">
             <div class="info">
-              <img class="user-head" src="" alt="">
-              <span class="username">XIXI</span>
+              <img class="user-head" :src="'http://localhost:3000/userHeader/'+item.userHead" alt="">
+              <span class="username">{{item.userName}}</span>
+              <i class="el-icon-delete delete" title="删除" @click="delSend(item)"></i>
               <p class="infoText">
-                人需要沉淀，有时间去反思，才能一步一步往前走。
+                {{item.content}}
               </p>
               <ul class="info-operation">
-                <li class="item infoTime">2018-8-29 20:45:14</li>
-                <li class="item infoTop">3345</li>
-                <li class="item infoDown">2345</li>
-              </ul>
-            </div>
-          </div>
-          <div class="info-list border-bottom">
-            <div class="info">
-              <img class="user-head" src="" alt="">
-              <span class="username">XIXI</span>
-              <p class="infoText">
-                人需要沉淀，有时间去反思，才能一步一步往前走。
-              </p>
-              <ul class="info-operation">
-                <li class="item infoTime">2018-8-29 20:45:14</li>
-                <li class="item infoTop">3345</li>
-                <li class="item infoDown">2345</li>
+                <li class="item infoTime">{{item.time}}</li>
+                <li class="item infoTop">{{item.up}}</li>
+                <li class="item infoDown">{{item.down}}</li>
               </ul>
             </div>
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的好友">
-          <div class="star-friend border-bottom" @click="toChat">
+          <div class="star-friend border-bottom" @click="toChat" v-for="(item,index) of userFriendList" :key="index">
             <img class="friend-head" src="" alt="">
-            <span class="friend-name">YUYU</span>
-            <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
+            <span class="friend-name">{{item.userName}}</span>
+            <span class="geqian">个性签名:{{item.userPersonal}}</span>
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的关注">
-          <div class="star-friend border-bottom">
+          <div class="star-friend border-bottom" v-for="(item,index) of userCareList" :key="index">
             <img class="friend-head" src="" alt="">
-            <span class="friend-name">YUYU</span>
-            <span class="geqian">个性签名：人需要沉淀，有时间去反思，才能一步一步往前走。</span>
+            <span class="friend-name">{{item.userName}}</span>
+            <span class="geqian">个性签名:{{item.userPersonal}}</span>
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的上传">
-          <upload-pic></upload-pic>
+          <upload-pic :picUrlList="uploadPicList"></upload-pic>
         </el-tab-pane>
       </el-tabs>
     </div>
@@ -118,22 +105,35 @@
             "id":"4",
             "url":"./../../static/image/bg4.jpg"
           }
-        ]
+        ],
+        uploadPicList:[],
+        sendList:[],
+        userFriendList:[],
+        userCareList:[]
       };
     },
     mounted() {
-      // this.getPersonalInfo();
-  },
+      this.getPersonalInfo();
+    },
     methods: {
-      //个人主页信息获取,由于信息存在多个表格，获取有点复杂，后续整理
+      //个人主页信息获取,根据用户登录的userName获取用户信息
       getPersonalInfo() {
-        axios.get('/',
+        let userName = this.$store.state.loginName;
+        axios.get('http://localhost:3000/users/getPersonalInfo',
           {
-            params:userid
+            params:{
+              userName:userName
+            }
           }).then((response)=>{
           let res1 = response.data;
           if(res1.status === "0"){
             //成功
+            this.sendList = res1.result.sendList.sort((a,b)=>{
+              return a>b ? 1 : -1
+            });
+            this.uploadPicList = res1.result.uploadPicList;
+            this.userFriendList = res1.result.userFriendList;
+            this.userCareList = res1.result.userCareList;
           }else{
             //失败
             console.log(222);
@@ -143,17 +143,24 @@
       //发表新的动态
       sendNew() {
         let sendParams = this.sendTip;
-        //拿到当前用户登录信息
-        // let userId = ...
-        console.log(sendParams);
 
-        axios.post('/users/addUser',{
-          // id:''数据传给后台，通过userId添加content内容，完成发表动态
-          content:sendParams
+        //拿到当前用户登录信息
+        let userName = this.$store.state.loginName;
+
+        //获取发表时间
+        let date = this.getTime();
+
+        axios.post('http://localhost:3000/users/addNewSend',{
+          userName:userName,
+          content:sendParams,
+          date:date
         }).then((response)=>{
           let res = response.data;
           if(res.status === "0"){
             //成功
+            this.$message.success('发表成功！');
+            this.sendTip = '';
+            this.getPersonalInfo();
           }else{
             //失败
             console.log(222);
@@ -167,7 +174,49 @@
         this.isChat = false;
       },
       sendMsg () {
-        console.log(111);
+        // console.log(111);
+      },
+      //用户删除一条动态
+      delSend (item) {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          let time = item.time;
+          let name = item.userName;
+          axios.post('http://localhost:3000/users/delSend',{
+            time:time,
+            userName:name
+          }).then((response)=>{
+            let res = response.data;
+            if(res.status === '0'){
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              this.getPersonalInfo();
+            }else{
+              console.log(222);
+            }
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      },
+      //格式化时间
+      getTime(){
+        let d = new Date();
+        let year = d.getFullYear();
+        let month = (d.getMonth() + 1)<10 ? "0"+(d.getMonth() + 1) : (d.getMonth() + 1);
+        let day = d.getDate()<10 ? "0"+d.getDate() : d.getDate();
+        let hour = d.getHours()<10 ? "0"+d.getHours() : d.getHours();
+        let minute = d.getMinutes()<10 ? "0"+d.getMinutes() : d.getMinutes();
+        let second = d.getSeconds()<10 ? "0"+d.getSeconds() : d.getSeconds();
+        return year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second
       }
     }
   }
@@ -222,6 +271,14 @@
     width: 200px;
     height: 60px;
     font-size: 20px;
+  }
+
+  .delete {
+    position: absolute;
+    bottom: 17px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
   }
 
   .infoText {

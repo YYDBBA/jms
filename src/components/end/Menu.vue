@@ -1,8 +1,10 @@
 <template>
   <div class="nav-menu">
     <el-tabs :tab-position="tabPosition" style="width: 90%; height: 500px;">
-      <el-tab-pane label="用户信息">
-        <el-container>
+
+      <!--用户信息管理-->
+      <el-tab-pane label="用户信息" class="userInfo">
+        <el-container class="search">
           <el-input placeholder="请输入" clearable size="mini" style="width: 200px;"></el-input>
           <el-button class="el-icon-search" size="mini">搜索</el-button>
           <el-button class="el-icon-edit" size="mini" @click="addInfo">添加</el-button>
@@ -29,7 +31,7 @@
         </el-container>
         <el-table
           :data="tableData"
-          style="width: 100%">
+          class="info-table">
           <el-table-column
             label="id"
             width="180">
@@ -85,17 +87,20 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :page-sizes="[4, 5, 6, 7]"
-          :page-size="4"
-          layout="total, sizes, prev,pager, next, jumper"
-          :total="parseInt(count)"
-          class="fenye"
-        >
-        </el-pagination>
+        <el-container class="fenye">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :page-sizes="[3, 4, 5, 6]"
+            :page-size="3"
+            layout="total, sizes, prev,pager, next, jumper"
+            :total="parseInt(count)"
+          >
+          </el-pagination>
+        </el-container>
       </el-tab-pane>
+
+      <!--主页信息管理-->
       <el-tab-pane label="主页信息">
         <el-table
           :data="tableData"
@@ -136,6 +141,8 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
+
+      <!--城市信息管理-->
       <el-tab-pane label="城市详情">
         <el-table
           :data="tableData"
@@ -176,6 +183,8 @@
           </el-table-column>
         </el-table>
       </el-tab-pane>
+
+      <!--社区信息管理-->
       <el-tab-pane label="社区论坛">
         <el-table
           :data="tableData"
@@ -246,7 +255,7 @@
           desc: ''
         },
         page: '1',
-        pageSize: '4',
+        pageSize: '3',
         count: ''
       }
     },
@@ -349,4 +358,26 @@
 
 <style scoped>
 
+  .nav-menu {
+    position: relative;
+  }
+  .userInfo {
+    padding: 25px 0 0 20px;
+    box-sizing: border-box;
+  }
+
+  .search {
+    padding-left: 38%;
+  }
+
+  .info-table{
+    width: 100%;
+    margin-top: 25px;
+  }
+
+  .fenye {
+    position: fixed;
+    left: 38%;
+    bottom: 180px;
+  }
 </style>

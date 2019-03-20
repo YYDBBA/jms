@@ -22,30 +22,19 @@
     name: "Upload",
     data() {
       return {
-        imageUrl:'',
-        picUrlList:[]
+        imageUrl:''
       };
     },
-    mounted(){
-      this.getUserInfo();
+    props:{
+      picUrlList:Array
     },
     methods: {
-      getUserInfo() {
-        axios.get('http://localhost:3000/users').then((response) => {
-          let res = response.data;
-          let url = res.result.list[0].uploadPicList;
-          if (res.status === '0') {
-            this.picUrlList = url;
-          } else {
-            this.$message.error("抱歉！图片数据取不到！");
-          }
-        })
-      },
       handleAvatarSuccess (res, file) {
         if (res.status === '0') {
           this.imageUrl = 'http://localhost:3000/avatar/' + res.result.data;
           axios.post('http://localhost:3000/users/addPicInfo',{
-            picInfo:res.result.data
+            picInfo:res.result.data,
+            userName:this.$store.state.loginName
           }).then((response)=>{
             let res = response.data;
             if(res.status === '0'){

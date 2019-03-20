@@ -31,14 +31,22 @@ let userScheam = new Scheam({
       "userHead": String
     }
   ],
+  "userFriendList": [
+    {
+      "userName": String,
+      "userPersonal": String,
+      "userHead": String
+    }
+  ],
   "sendList": [
     {
       "sendId": String,
+      "userName": String,
       "userHead": String,
       "content": String,
       "time": String,
-      "up": String,
-      "down": String,
+      "up": Number,
+      "down": Number,
       "commentList": [
         {
           "commentUserName": String,

@@ -26,8 +26,8 @@ mongoose.connection.on("disconnected", function () {
   console.log("MongoDB connected disconnected");
 });
 
-//4.对数据库的操作
-//4.1获取用户信息
+//一.后台对数据库的操作
+//4.1获取全部用户信息
 router.get('/', (req, res, next) => {
   Users.countDocuments({}, (errId, docId) => {
     if (errId) {
@@ -162,8 +162,8 @@ router.post('/changeUser', (req, res, next) => {
 });
 
 
-//5.登录
-//5.1校验用户名是否注册过
+//二.用户操作数据库
+//5校验用户名是否注册过
 router.post('/checkLogin', (req, res, next) => {
   let userName = req.body.userName;
   let userPwd = req.body.userPwd;
@@ -194,10 +194,6 @@ router.post('/checkLogin', (req, res, next) => {
     }
   })
 });
-
-
-//5.2注销登录
-
 
 //6.注册
 //6.1校验用户名是否注册过
@@ -263,28 +259,47 @@ router.post('/addRegister', (req, res, next) => {
   })
 });
 
-//7用户上传图片
+//7用户获取自身相关信息
+router.get('/getPersonalInfo', (req, res, next) => {
+  let userName = req.param('userName');
+  Users.findOne({userName: userName}, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: doc
+      });
+    }
+  });
+});
+//8用户上传图片
 
-//7.1上传图片
-router.post('/uploadPic',(req,res,next)=>{
+//8.1上传图片
+router.post('/uploadPic', (req, res, next) => {
   let AVATAR_UPLOAD_FOLDER = '/avatar';
   //创建上传表单
   let form = new formidable.IncomingForm();
   //设置编码格式
   form.encoding = 'utf-8';
   //设置上传目录
-  form.uploadDir = './jms/server/public' + AVATAR_UPLOAD_FOLDER;
+  form.uploadDir = './server/public' + AVATAR_UPLOAD_FOLDER;
   //保留后缀
   form.keepExtensions = true;
   //文件大小
   form.maxFieldsSize = 2 * 1024 * 1024;
-  form.parse(req,function(err,fields,files){
+  form.parse(req, function (err, fields, files) {
     let filesFile = files.file;
     if (err) {
       return res.json({
         status: 500,
         msg: "内部服务器错误",
-        result:''
+        result: ''
       })
     }
     // 限制文件大小 单位默认字节 这里限制大小为2m
@@ -293,7 +308,7 @@ router.post('/uploadPic',(req,res,next)=>{
       return res.json({
         status: '1',
         msg: "图片大小不能超过2M",
-        result:''
+        result: ''
       })
     }
     //后缀名
@@ -316,7 +331,7 @@ router.post('/uploadPic',(req,res,next)=>{
       return res.json({
         status: '1',
         msg: "只支持png和jpg格式图片",
-        result:''
+        result: ''
       })
     }
     //使用第三方模块silly-datetime
@@ -334,12 +349,12 @@ router.post('/uploadPic',(req,res,next)=>{
           "code": 401,
           "message": "图片上传失败"
         })
-      } else{
+      } else {
         return res.json({
           status: "0",
           msg: "图片上传成功",
           result: {
-            data:avatarName
+            data: avatarName
           }
         })
       }
@@ -347,26 +362,85 @@ router.post('/uploadPic',(req,res,next)=>{
   })
 });
 
-//7.2将图片信息存在数据库里
-router.post('/addPicInfo',(req,res,next)=>{
-  console.log(req.body.picInfo);
+//8.2将图片信息存在数据库里
+router.post('/addPicInfo', (req, res, next) => {
   let name = req.body.picInfo;
-  Users.updateOne({userName:"wls"},{
-    $push:{
-      uploadPicList:{name:name}
+  let userName = req.param('userName');
+  Users.updateOne({userName: userName}, {
+    $push: {
+      uploadPicList: {name: name}
     }
-  },(err,doc)=>{
-    if(err){
+  }, (err, doc) => {
+    if (err) {
       res.json({
-        status:'1',
-        msg:'',
-        result:''
+        status: '1',
+        msg: '',
+        result: ''
       });
-    }else{
+    } else {
       res.json({
-        status:'0',
-        msg:name,
-        result:''
+        status: '0',
+        msg: name,
+        result: ''
+      });
+    }
+  });
+});
+
+//9用户发表一条动态
+router.post('/addNewSend', (req, res, next) => {
+
+  let up = 0;
+  let down = 0;
+  let userHead = '' || 'default.jpg';
+  Users.updateOne({userName: req.body.userName}, {
+    $push: {
+      sendList: {
+        content: req.body.content,
+        time: req.body.date,
+        userName: req.body.userName,
+        up: up,
+        down: down,
+        userHead: userHead
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
+      });
+    }
+  });
+});
+
+//10用户删除一条动态
+router.post('/delSend', (req, res, next) => {
+  Users.updateOne({userName: req.body.userName}, {
+    $pull:{
+        sendList:{
+          time:req.body.time
+        }
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
       });
     }
   });
