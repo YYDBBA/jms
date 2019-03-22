@@ -62,6 +62,12 @@ let userScheam = new Scheam({
       "picId": String,
       "name": String
     }
+  ],
+  "uploadHeadList": [
+    {
+      "picId": String,
+      "name": String
+    }
   ]
 }, {collection: 'user_info'});
 

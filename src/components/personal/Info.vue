@@ -32,15 +32,15 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的好友">
-          <div class="star-friend border-bottom" @click="toChat" v-for="(item,index) of userFriendList" :key="index">
-            <img class="friend-head" src="" alt="">
+          <div class="star-friend border-bottom" @click="toChat(item)" v-for="(item,index) of userFriendList" :key="index">
+            <img class="friend-head" :src="'http://localhost:3000/userHeader/'+item.userHead" alt="">
             <span class="friend-name">{{item.userName}}</span>
             <span class="geqian">个性签名:{{item.userPersonal}}</span>
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的关注">
           <div class="star-friend border-bottom" v-for="(item,index) of userCareList" :key="index">
-            <img class="friend-head" src="" alt="">
+            <img class="friend-head" :src="'http://localhost:3000/userHeader/'+item.userHead" alt="">
             <span class="friend-name">{{item.userName}}</span>
             <span class="geqian">个性签名:{{item.userPersonal}}</span>
           </div>
@@ -52,6 +52,7 @@
     </div>
     <transition name="el-fade-in-linear">
       <div class="chat" v-show="isChat">
+        <span class="friendName">{{friendName}}</span>
         <span class="close" @click="closeChat">×</span>
         <ul class="msg">
           <li class="friend">
@@ -109,7 +110,8 @@
         uploadPicList:[],
         sendList:[],
         userFriendList:[],
-        userCareList:[]
+        userCareList:[],
+        friendName:''
       };
     },
     mounted() {
@@ -167,8 +169,9 @@
           }
         })
       },
-      toChat() {
+      toChat(item) {
         this.isChat = true;
+        this.friendName = item.userName;
       },
       closeChat() {
         this.isChat = false;
@@ -347,7 +350,18 @@
     transform: translate(-50%,-50%);
     z-index: 999;
     box-sizing: border-box;
-    background-color: lightpink;
+    background-color: lightblue;
+  }
+
+  .friendName{
+    position: absolute;
+    top: 10px;
+    left: 150px;
+    width: 100px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 20px;
   }
 
   .close {
@@ -382,8 +396,8 @@
     float: left;
     width: 40px;
     height: 40px;
+    border-radius: 50%;
     cursor: pointer;
-    background-color: yellow;
   }
 
   .youMsg,.myMsg {
@@ -395,7 +409,7 @@
     line-height: 20px;
     margin-left: 5px;
     box-sizing: border-box;
-    background-color: deepskyblue;
+    background-color: lightblue;
   }
 
   .myHead,.myMsg {

@@ -26,6 +26,11 @@ let Personal = (resolve) => {
     resolve(require('@/pages/Personal'))
   })
 };
+let Headpic = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/pages/Headpic'))
+  })
+};
 let Detail = (resolve) => {
   return require.ensure([], () => {
     resolve(require('@/pages/Detail'))
@@ -67,6 +72,11 @@ const router = new Router({
         ddd:true
       },
       component: Personal
+    },
+    {
+      path: '/headpic',
+      name: 'Headpic',
+      component: Headpic
     },
     {
       path: '/detail',

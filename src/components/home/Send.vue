@@ -73,7 +73,7 @@
     height: 360px;
   }
   .footer {
-    background-color: #409dfe;
+    background-color: lightblue;
     padding: 30px 40px 0 40px;
   }
   .tip{

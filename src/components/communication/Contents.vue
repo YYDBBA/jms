@@ -98,7 +98,7 @@
   .info-list {
     width: 100%;
     min-height: 200px;
-    background-color: #0fcbb8;
+    background-color: lightblue;
   }
 
   .info {

@@ -1,5 +1,5 @@
 <template>
-  <div class="animated bounceInRight delay-2s">
+  <div class="animated bounceInRight">
     <h3 class="title">热门景点</h3>
     <div class="hot">
       <ul class="hot-content">

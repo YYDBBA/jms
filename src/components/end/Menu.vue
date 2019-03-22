@@ -361,6 +361,7 @@
   .nav-menu {
     position: relative;
   }
+
   .userInfo {
     padding: 25px 0 0 20px;
     box-sizing: border-box;
@@ -370,7 +371,7 @@
     padding-left: 38%;
   }
 
-  .info-table{
+  .info-table {
     width: 100%;
     margin-top: 25px;
   }

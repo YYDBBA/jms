@@ -23,7 +23,17 @@
       </el-col>
     </el-row>
     <div class="bgi">
-      <img class="user-head" src="" alt="">
+      <img class="user-head" src="" alt="" @click="centerDialogVisible = true">
+      <el-dialog
+        title="提示"
+        :visible.sync="centerDialogVisible"
+        width="30%"
+        center>
+        <span slot="footer" class="dialog-footer">
+          <el-button icon="el-icon-search" @click="goBig">查看大图</el-button>
+        <el-button icon="el-icon-upload el-icon--right" @click="goHeadWall">上传头像</el-button>
+        </span>
+      </el-dialog>
       <span class="hello">晚上好，{{userName}}</span>
     </div>
     <div class="communiTitle">
@@ -39,54 +49,23 @@
     name: "Header",
     data() {
       return {
-        dialogVisible: false,
+        centerDialogVisible: false,
         userName: '',
         userPwd: ''
       }
     },
-    created(){
+    created() {
       this.userName = this.$store.state.loginName;
     },
     methods: {
       handleClose(done) {
         done();
       },
-      loginCheck() {
+      goBig(){
+        // window.location.href = 'http://localhost:3000/userHeader/default.jpg';
       },
-      registerCheck() {
-        let userName = this.userName;
-        let userPwd = this.userPwd;
-        //todo something
-        let params = {
-          userName: userName,
-          userPwd: userPwd
-        };
-        axios.post('/users/checkRegister', params).then((response) => {
-          let res1 = response.data;
-          if (res1.status === "0") {
-            //返回0，校验成功
-            if (res1.msg === '该用户不存在') {
-              this.addUser(params);
-            } else {
-              console.log(res1.msg);
-            }
-          } else {
-            console.log('校验失败');
-          }
-        })
-      },
-      addUser(params) {
-        axios.post('/users/addRegister', params).then((response) => {
-          let res2 = response.data;
-          if (res2.status === "0") {
-            //返回0，添加成功
-            //todo something
-            console.log("注册成功!");
-            this.dialogVisible = false;
-          } else {
-            console.log("注册失败");
-          }
-        })
+      goHeadWall(){
+        this.$router.push('/headpic');
       }
     }
   }
@@ -101,7 +80,7 @@
   }
 
   .nav-menu {
-    background-color: #e6e9ec;
+    background-color: #fff;
   }
 
   .grid-content {
@@ -129,14 +108,14 @@
 
   /*标题*/
 
-  .bgi{
+  .bgi {
     width: 100%;
     height: 600px;
     background-image: url(./../../../static/image/bg3.jpg);
     background-size: 100% 100%;
     position: relative;
   }
-  
+
   .user-head {
     position: absolute;
     left: 50%;
@@ -162,7 +141,7 @@
   }
 
   .communiTitle {
-    background-color: #e6e9ec;
+    background-color: lightblue;
     width: 70%;
     height: 80px;
     margin: 0 auto;

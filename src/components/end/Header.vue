@@ -27,7 +27,7 @@
 <style scoped>
   .ddd {
     line-height: 60px;
-    background-color: #209ffe;
+    background-color: lightblue;
     color: #fff;
     font-size: 15px;
   }
@@ -36,7 +36,6 @@
     display: inline-block;
     width: 100px;
     height: 50px;
-    background-color: pink;
   }
   .bg-purple-light {
     text-align: center;

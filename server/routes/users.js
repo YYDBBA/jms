@@ -421,6 +421,74 @@ router.post('/addNewSend', (req, res, next) => {
   });
 });
 
+//9.1用户发表评论
+router.post('/sendComment', (req, res, next) => {
+
+  let up = 0;
+  let down = 0;
+  let userHead = '' || 'default.jpg';
+  Users.updateOne({userName: req.body.userName}, {
+    $push: {
+      sendList: {
+        content: req.body.content,
+        time: req.body.date,
+        userName: req.body.userName,
+        up: up,
+        down: down,
+        userHead: userHead
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
+      });
+    }
+  });
+});
+
+//9.2用户点赞，点low
+router.post('/sendComment', (req, res, next) => {
+
+  let up = 0;
+  let down = 0;
+  let userHead = '' || 'default.jpg';
+  Users.updateOne({userName: req.body.userName}, {
+    $push: {
+      sendList: {
+        content: req.body.content,
+        time: req.body.date,
+        userName: req.body.userName,
+        up: up,
+        down: down,
+        userHead: userHead
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
+      });
+    }
+  });
+});
+
 //10用户删除一条动态
 router.post('/delSend', (req, res, next) => {
   Users.updateOne({userName: req.body.userName}, {
@@ -440,6 +508,233 @@ router.post('/delSend', (req, res, next) => {
       res.json({
         status: '0',
         msg: '',
+        result: ''
+      });
+    }
+  });
+});
+
+//11用户添加好友
+router.post('/addFriend', (req, res, next) => {
+  Users.updateOne({userName: req.body.userName}, {
+    $pull:{
+      sendList:{
+        time:req.body.time
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
+      });
+    }
+  });
+});
+
+//12用户删除好友
+router.post('/delFriend', (req, res, next) => {
+  Users.updateOne({userName: req.body.userName}, {
+    $pull:{
+      sendList:{
+        time:req.body.time
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
+      });
+    }
+  });
+});
+
+//13用户添加关注
+router.post('/addCare', (req, res, next) => {
+  Users.updateOne({userName: req.body.userName}, {
+    $pull:{
+      sendList:{
+        time:req.body.time
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
+      });
+    }
+  });
+});
+
+//14用户取消关注
+router.post('/delCare', (req, res, next) => {
+  Users.updateOne({userName: req.body.userName}, {
+    $pull:{
+      sendList:{
+        time:req.body.time
+      }
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
+      });
+    }
+  });
+});
+
+//15用户拿到头像墙
+router.get('/getHeadWall', (req, res, next) => {
+  let name = req.param('userName');
+  Users.findOne({userName: name},(err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: doc
+      });
+    }
+  });
+});
+
+//16用户上传头像
+router.post('/uploadHead', (req, res, next) => {
+  let AVATAR_UPLOAD_FOLDER = '/userHeader';
+  //创建上传表单
+  let form = new formidable.IncomingForm();
+  //设置编码格式
+  form.encoding = 'utf-8';
+  //设置上传目录
+  form.uploadDir = './server/public' + AVATAR_UPLOAD_FOLDER;
+  //保留后缀
+  form.keepExtensions = true;
+  //文件大小
+  form.maxFieldsSize = 2 * 1024 * 1024;
+  form.parse(req, function (err, fields, files) {
+    let filesFile = files.file;
+    if (err) {
+      return res.json({
+        status: 500,
+        msg: "内部服务器错误",
+        result: ''
+      })
+    }
+    // 限制文件大小 单位默认字节 这里限制大小为2m
+    if (filesFile.size > form.maxFieldsSize) {
+      fs.unlink(filesFile.path);
+      return res.json({
+        status: '1',
+        msg: "图片大小不能超过2M",
+        result: ''
+      })
+    }
+    //后缀名
+    let extName = '';
+    switch (filesFile.type) {
+      case 'image/pjpeg':
+        extName = 'jpg';
+        break;
+      case 'image/jpeg':
+        extName = 'jpg';
+        break;
+      case 'image/png':
+        extName = 'png';
+        break;
+      case 'image/x-png':
+        extName = 'png';
+        break;
+    }
+    if (extName.length === 0) {
+      return res.json({
+        status: '1',
+        msg: "只支持png和jpg格式图片",
+        result: ''
+      })
+    }
+    //使用第三方模块silly-datetime
+    let t = sd.format(new Date(), 'YYYYMMDDHHmmss');
+    //生成随机数
+    let ran = parseInt(Math.random() * 8999 + 10000);
+    // 生成新图片名称
+    let avatarName = t + '_' + ran + '.' + extName;
+    // 新图片路径
+    let newPath = form.uploadDir + '/' + avatarName;
+    // 更改名字和路径
+    fs.rename(filesFile.path, newPath, function (err) {
+      if (err) {
+        return res.json({
+          "code": 401,
+          "message": "图片上传失败"
+        })
+      } else {
+        return res.json({
+          status: "0",
+          msg: "图片上传成功",
+          result: {
+            data: avatarName
+          }
+        })
+      }
+    })
+  })
+});
+
+//17将头像信息存在数据库里
+router.post('/addHeadInfo', (req, res, next) => {
+  let name = req.body.picInfo;
+  let userName = req.param('userName');
+  Users.updateOne({userName: userName}, {
+    $push: {
+      uploadHeadList: {name: name}
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: name,
         result: ''
       });
     }

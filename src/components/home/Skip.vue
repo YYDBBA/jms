@@ -79,7 +79,7 @@
 
   .top-detail {
     padding-bottom: 5px;
-    border-bottom: 2px solid #409dfe;
+    border-bottom: 2px solid lightblue;
     box-sizing: border-box;
   }
 

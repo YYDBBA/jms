@@ -1,5 +1,5 @@
 <template>
-  <div class="animated rollIn faster">
+  <div class="">
     <personal-header></personal-header>
     <personal-info></personal-info>
   </div>
