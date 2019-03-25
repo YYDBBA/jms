@@ -5,11 +5,12 @@
   font-size: 20px;
   text-align: center;
   position: relative;
+  color: lightblue;
 }
 
 .title::before, .title::after {
   width: 40%;
-  border-bottom: 1px solid darkgray;
+  border-bottom: 1px solid lightblue;
   content: '';
 }
 

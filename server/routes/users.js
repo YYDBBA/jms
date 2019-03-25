@@ -456,7 +456,7 @@ router.post('/sendComment', (req, res, next) => {
 });
 
 //9.2用户点赞，点low
-router.post('/sendComment', (req, res, next) => {
+router.post('/upDown', (req, res, next) => {
 
   let up = 0;
   let down = 0;
@@ -719,7 +719,7 @@ router.post('/uploadHead', (req, res, next) => {
 //17将头像信息存在数据库里
 router.post('/addHeadInfo', (req, res, next) => {
   let name = req.body.picInfo;
-  let userName = req.param('userName');
+  let userName = req.body.userName;
   Users.updateOne({userName: userName}, {
     $push: {
       uploadHeadList: {name: name}
@@ -736,6 +736,70 @@ router.post('/addHeadInfo', (req, res, next) => {
         status: '0',
         msg: name,
         result: ''
+      });
+    }
+  });
+});
+
+//18用户删除头像墙
+router.post('/delHead', (req, res, next) => {
+  let name = req.body.name;
+  let userName = req.body.userName;
+  Users.updateOne({userName: userName}, {
+    $pull: {
+      uploadHeadList: {name: name}
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      res.json({
+        status: '0',
+        msg: name,
+        result: ''
+      });
+    }
+  });
+});
+
+//19用户头像墙设置头像
+router.post('/setHead', (req, res, next) => {
+  let name = req.body.name;
+  let userName = req.body.userName;
+  Users.updateOne({userName: userName},{
+    $pull: {
+      uploadHeadList: {name: name}
+    }
+  },(err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      });
+    } else {
+      Users.updateOne({userName: userName},{
+        $push: {
+          uploadHeadList: {name: name}
+        }
+      },(err1,doc1)=>{
+        if (err) {
+          res.json({
+            status: '1',
+            msg: '',
+            result: ''
+          });
+        }else {
+          res.json({
+            status: '0',
+            msg: '',
+            result: doc1
+          })
+        }
       });
     }
   });

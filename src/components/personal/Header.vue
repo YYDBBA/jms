@@ -23,14 +23,14 @@
       </el-col>
     </el-row>
     <div class="bgi">
-      <img class="user-head" src="" alt="" @click="centerDialogVisible = true">
+      <img class="user-head" :src="'http://localhost:3000/userHeader/'+userHead" alt="" @click="centerDialogVisible = true">
       <el-dialog
         title="提示"
         :visible.sync="centerDialogVisible"
         width="30%"
         center>
         <span slot="footer" class="dialog-footer">
-          <el-button icon="el-icon-search" @click="goBig">查看大图</el-button>
+          <el-button icon="el-icon-search">查看大图</el-button>
         <el-button icon="el-icon-upload el-icon--right" @click="goHeadWall">上传头像</el-button>
         </span>
       </el-dialog>
@@ -51,18 +51,29 @@
       return {
         centerDialogVisible: false,
         userName: '',
-        userPwd: ''
+        userHead:''
       }
     },
-    created() {
+    mounted() {
       this.userName = this.$store.state.loginName;
+      axios.get('http://localhost:3000/users/getHeadWall', {
+        params: {
+          userName: this.userName,
+        }
+      }).then((response) => {
+        let res = response.data;
+        if (res.status === '0') {
+          this.headList = res.result.uploadHeadList.sort((a,b)=>{
+            return a>b ? 1 : -1});
+          this.userHead = this.headList[0].name || '';
+        } else {
+          console.log(222);
+        }
+      })
     },
     methods: {
       handleClose(done) {
         done();
-      },
-      goBig(){
-        // window.location.href = 'http://localhost:3000/userHeader/default.jpg';
       },
       goHeadWall(){
         this.$router.push('/headpic');

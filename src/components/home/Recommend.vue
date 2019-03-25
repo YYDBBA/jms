@@ -7,7 +7,7 @@
           <img class="pic" v-lazy="'./../../../static/image/'+item.hotImg" alt="">
           <router-link to="/detail">
             <div class="panel" @click="findCity(item)">
-              <i class="love">❥</i>
+              <i class="el-icon-star-on love" @click="giveStar" :style="{'color':bgc}"></i>
               <span class="des">{{item.wantCount}}人想去这里</span>
             </div>
           </router-link>
@@ -20,6 +20,11 @@
 <script>
   export default {
     name: "Recommend",
+    data(){
+      return {
+        bgc:'white'
+      }
+    },
     props:{
       forYouList: Array
     },
@@ -27,6 +32,10 @@
       findCity(item) {
         let cityHot = 'forYouList';
         this.$store.commit('changeCity',[item.cityName,cityHot]);
+      },
+      giveStar(e){
+        e.preventDefault();
+        // this.bgc = 'red';
       }
     }
   }
@@ -77,6 +86,7 @@
     bottom: 2px;
     z-index: 2;
     color: #fff;
+    font-size: 15px;
   }
 
   .des {
@@ -85,6 +95,7 @@
     bottom: 2px;
     z-index: 2;
     color: #fff;
+    font-size: 15px;
   }
 
   .item:hover .panel {
