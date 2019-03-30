@@ -136,7 +136,7 @@
     font-size: 15px;
     padding-left: 3px;
     box-sizing: border-box;
-    border-left: 2px solid #409dfe;
+    border-left: 2px solid lightblue;
   }
 
   .item-text {
@@ -153,5 +153,6 @@
     box-sizing: border-box;
     line-height: 60px;
     font-size: 14px;
+    color: lightblue;
   }
 </style>

@@ -456,38 +456,34 @@ router.post('/sendComment', (req, res, next) => {
 });
 
 //9.2用户点赞，点low
-router.post('/upDown', (req, res, next) => {
-
-  let up = 0;
-  let down = 0;
-  let userHead = '' || 'default.jpg';
-  Users.updateOne({userName: req.body.userName}, {
-    $push: {
-      sendList: {
-        content: req.body.content,
-        time: req.body.date,
-        userName: req.body.userName,
-        up: up,
-        down: down,
-        userHead: userHead
-      }
-    }
-  }, (err, doc) => {
-    if (err) {
-      res.json({
-        status: '1',
-        msg: '',
-        result: ''
-      });
-    } else {
-      res.json({
-        status: '0',
-        msg: '',
-        result: ''
-      });
-    }
-  });
-});
+// router.post('/upDown', (req, res, next) => {
+//
+//   let flag = req.body.flag;
+//   if(flag === '1'){
+//     let up = parseInt(req.body.up) + 1;
+//     Users.updateOne({userName: req.body.userName}, {
+//       $push: {
+//         sendList: {
+//           up: up
+//         }
+//       }
+//     }, (err, doc) => {
+//       if (err) {
+//         res.json({
+//           status: '1',
+//           msg: '',
+//           result: ''
+//         });
+//       } else {
+//         res.json({
+//           status: '0',
+//           msg: '',
+//           result: ''
+//         });
+//       }
+//     });
+//   }
+// });
 
 //10用户删除一条动态
 router.post('/delSend', (req, res, next) => {

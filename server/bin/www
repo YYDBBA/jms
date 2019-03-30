@@ -20,6 +20,8 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+const io = require('socket.io')(server);
+
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -88,3 +90,28 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+/**
+ * 监听连接成功
+ */
+
+io.on('connection', (socket) => {
+  console.log('连接成功');
+
+  var socketId = socket.id;
+  console.log(socketId);
+  //接受客户端的消息
+  let toUser = {};
+  let fromUser = {};
+  socket.emit('open');
+  socket.on('msg',(data) => {
+    console.log(data);
+    socket.emit('msg', '欢迎来找我聊天');
+  });
+
+  //监听连接关闭
+  socket.on('disconnect', () => {
+    console.log("连接已经关闭");
+  })
+});

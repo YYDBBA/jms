@@ -8,9 +8,12 @@ let userScheam = new Scheam({
   "userHead": String,
   "userName": String,
   "userPwd": String,
+  "userSex":String,
   "userEmail": String,
   "userBath": String,
   "userMajor": String,
+  "userAddress":String,
+  "userHometown":String,
   "userPersonal": String,
   "userHoppyList": [
     {

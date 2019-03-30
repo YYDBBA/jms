@@ -17,7 +17,7 @@
   .some {
     width: 100%;
     height: 60px;
-    background-color: lightskyblue;
+    background-color: lightblue;
   }
   .back{
     font-size: 20px;

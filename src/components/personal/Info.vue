@@ -3,13 +3,83 @@
     <div class="info-left">
       <el-tabs :tab-position="tabPosition" class="tab">
         <el-tab-pane label="个人资料">
-          <el-carousel indicator-position="outside">
-            <el-carousel-item v-for="(item,index) in bgc" :key="index">
-              <h3><img class="ddd" :src="item.url" alt=""></h3>
-            </el-carousel-item>
-          </el-carousel>
+          <el-row class="only-info">
+            <el-col :span="12">
+              <div class="">昵称：</div>
+            </el-col>
+            <el-col :span="12">
+              <div class="">性别：</div>
+            </el-col>
+          </el-row>
+          <el-row class="only-info">
+            <el-col :span="12">
+              <div class="">生日：</div>
+            </el-col>
+            <el-col :span="12">
+              <div class="">职业：</div>
+            </el-col>
+          </el-row>
+          <el-row class="only-info">
+            <el-col :span="12">
+              <div class="">所在地：</div>
+            </el-col>
+            <el-col :span="12">
+              <div class="">家乡：</div>
+            </el-col>
+          </el-row>
+          <el-row class="only-info">
+            <el-col :span="12">
+              <div class="">邮箱：</div>
+            </el-col>
+            <el-col :span="12">
+              <div class="">爱好：</div>
+            </el-col>
+          </el-row>
+          <el-row class="only-info">
+            <el-col :span="24">
+              <div class="">个签</div>
+            </el-col>
+          </el-row>
         </el-tab-pane>
-        <el-tab-pane label="修改资料">修改资料</el-tab-pane>
+        <el-tab-pane label="修改资料">
+          <el-row class="only-info">
+            <el-col :span="12">
+              <div class="">昵称：</div>
+            </el-col>
+            <el-col :span="12">
+              <div class="">性别：</div>
+            </el-col>
+          </el-row>
+          <el-row class="only-info">
+            <el-col :span="12">
+              <div class="">生日：</div>
+            </el-col>
+            <el-col :span="12">
+              <div class="">职业：</div>
+            </el-col>
+          </el-row>
+          <el-row class="only-info">
+            <el-col :span="12">
+              <div class="">所在地：</div>
+            </el-col>
+            <el-col :span="12">
+              <div class="">家乡：</div>
+            </el-col>
+          </el-row>
+          <el-row class="only-info">
+            <el-col :span="12">
+              <div class="">邮箱：</div>
+            </el-col>
+            <el-col :span="12">
+              <div class="">爱好：</div>
+            </el-col>
+          </el-row>
+          <el-row class="only-info">
+            <el-col :span="24">
+              <div class="">个签</div>
+            </el-col>
+          </el-row>
+        </el-tab-pane>
         <el-tab-pane label="我的发表">
           <div class="mySend border-bottom">
             <el-input v-model="sendTip"></el-input>
@@ -25,17 +95,19 @@
               </p>
               <ul class="info-operation">
                 <li class="item infoTime">{{item.time}}</li>
-                <li class="item infoTop">{{item.up}}</li>
-                <li class="item infoDown">{{item.down}}</li>
+                <li class="item infoTop" @click="up(item)">{{item.up}}</li>
+                <li class="item infoDown" @click="down(item)">{{item.down}}</li>
               </ul>
             </div>
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的好友">
-          <div class="star-friend border-bottom" @click="toChat(item)" v-for="(item,index) of userFriendList" :key="index">
-            <img class="friend-head" :src="'http://localhost:3000/userHeader/'+item.userHead" alt="">
-            <span class="friend-name">{{item.userName}}</span>
-            <span class="geqian">个性签名:{{item.userPersonal}}</span>
+          <div class="star-friend border-bottom" @click="toChat(item1)" v-for="(item1,index) of userFriendList"
+               :key="index">
+            <img class="friend-head" :src="'http://localhost:3000/userHeader/'+item1.userHead" alt="">
+            <span class="friend-name">{{item1.userName}}</span>
+            <span class="geqian">个性签名:{{item1.userPersonal}}</span>
+            <el-badge class="infoCount" :value="infoCount"></el-badge>
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的关注">
@@ -43,6 +115,7 @@
             <img class="friend-head" :src="'http://localhost:3000/userHeader/'+item.userHead" alt="">
             <span class="friend-name">{{item.userName}}</span>
             <span class="geqian">个性签名:{{item.userPersonal}}</span>
+            <el-badge class="infoCount" :value="infoCount"></el-badge>
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的上传">
@@ -54,19 +127,15 @@
       <div class="chat" v-show="isChat">
         <span class="friendName">{{friendName}}</span>
         <span class="close" @click="closeChat">×</span>
-        <ul class="msg">
-          <li class="friend">
-            <img  class="youHead" src="" alt="">
-            <span class="youMsg">吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？？吃了吗？？吃了吗？？吃了吗？？吃了吗？？吃了吗？</span>
-          </li>
-          <li class="me">
-            <img class="myHead" src="" alt="">
-            <span class="myMsg">没吃吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？吃了吗？</span>
+        <ul class="msg" ref="message">
+          <li v-for="(item,index) of chatList" :key="index" :class="item.liClass">
+            <img :class="item.imgClass" :src="'http://localhost:3000/userHeader/'+item.userHead" alt="">
+            <span :class="item.spanClass">{{item.message}}</span>
           </li>
         </ul>
         <div style="margin-top: 15px;">
-          <el-input placeholder="请输入内容" clearable>
-            <el-button slot="append" @click="sendMsg">发送</el-button>
+          <el-input placeholder="请输入内容" clearable v-model="msg">
+            <el-button slot="append" @click="sendMsg()">发送</el-button>
           </el-input>
         </div>
       </div>
@@ -79,9 +148,11 @@
 <script>
   import UploadPic from './Upload'
   import axios from 'axios'
+  import io from 'socket.io-client'
+
   export default {
     name: "Info",
-    components:{
+    components: {
       UploadPic
     },
     data() {
@@ -91,28 +162,32 @@
         isChat: false,
         bgc: [
           {
-            "id":"1",
-            "url":"./../../static/image/bg1.jpg"
+            "id": "1",
+            "url": "./../../static/image/bg1.jpg"
           },
           {
-            "id":"2",
-            "url":"./../../static/image/bg2.jpg"
+            "id": "2",
+            "url": "./../../static/image/bg2.jpg"
           },
           {
-            "id":"3",
-            "url":"./../../static/image/bg3.jpg"
+            "id": "3",
+            "url": "./../../static/image/bg3.jpg"
           },
           {
-            "id":"4",
-            "url":"./../../static/image/bg4.jpg"
+            "id": "4",
+            "url": "./../../static/image/bg4.jpg"
           }
         ],
-        uploadPicList:[],
-        sendList:[],
-        userFriendList:[],
-        userCareList:[],
-        friendName:''
-      };
+        uploadPicList: [],
+        sendList: [],
+        userFriendList: [],
+        userCareList: [],
+        friendName: '',
+        friendHead: '',
+        infoCount: '1',
+        chatList: [],
+        msg: ''
+      }
     },
     mounted() {
       this.getPersonalInfo();
@@ -123,20 +198,20 @@
         let userName = this.$store.state.loginName;
         axios.get('http://localhost:3000/users/getPersonalInfo',
           {
-            params:{
-              userName:userName
+            params: {
+              userName: userName
             }
-          }).then((response)=>{
+          }).then((response) => {
           let res1 = response.data;
-          if(res1.status === "0"){
+          if (res1.status === "0") {
             //成功
-            this.sendList = res1.result.sendList.sort((a,b)=>{
-              return a>b ? 1 : -1
+            this.sendList = res1.result.sendList.sort((a, b) => {
+              return a > b ? 1 : -1
             });
             this.uploadPicList = res1.result.uploadPicList;
             this.userFriendList = res1.result.userFriendList;
             this.userCareList = res1.result.userCareList;
-          }else{
+          } else {
             //失败
             console.log(222);
           }
@@ -152,54 +227,149 @@
         //获取发表时间
         let date = this.getTime();
 
-        axios.post('http://localhost:3000/users/addNewSend',{
-          userName:userName,
-          content:sendParams,
-          date:date
-        }).then((response)=>{
+        axios.post('http://localhost:3000/users/addNewSend', {
+          userName: userName,
+          content: sendParams,
+          date: date
+        }).then((response) => {
           let res = response.data;
-          if(res.status === "0"){
+          if (res.status === "0") {
             //成功
             this.$message.success('发表成功！');
             this.sendTip = '';
             this.getPersonalInfo();
-          }else{
+          } else {
             //失败
             console.log(222);
           }
         })
       },
-      toChat(item) {
+      up(item) {
+        let sendTime = item.time;
+        let flag = 1;
+        axios.post('http://localhost:3000/users/upDown', {
+          time: sendTime,
+          up: item.up,
+          flag: flag
+        }).then((response) => {
+          let res = response.data;
+          if (res.status === '0') {
+            console.log(111);
+          } else {
+            console.log(222);
+          }
+        })
+      },
+      down(item) {
+        let sendTime = item.time;
+        let flag = -1;
+        axios.post('http://localhost:3000/users/upDown', {
+          time: sendTime,
+          down: item.down,
+          flag: flag
+        }).then((response) => {
+          let res = response.data;
+          if (res.status === '0') {
+            console.log(111);
+          } else {
+            console.log(222);
+          }
+        })
+      },
+      toChat(item1) {
         this.isChat = true;
-        this.friendName = item.userName;
+        this.friendName = item1.userName;
+        // console.log(item1);
+        this.friendHead = item1.userHead;
+        this.qq();
       },
       closeChat() {
         this.isChat = false;
       },
-      sendMsg () {
-        // console.log(111);
+      qq(obj) {
+        let url = 'http://localhost:3000';
+        let socket = io.connect(url);
+
+        //监听连接
+        socket.on('connect', () => {
+          console.log('success');
+
+          //打开通道
+          socket.emit('open');
+          socket.emit('msg', obj);
+        });
+        //接收服务器返回的消息
+        socket.on('msg', (data) => {
+          console.log(data);
+
+        });
+
+        //添加用户发送消息
+
+        // let message = this.sendMsg();
+        // console.log(message);
+      },
+      sendMsg() {
+        if (this.msg !== '') {
+          this.chatList.push({
+            from: this.$store.state.loginName,
+            to:this.friendName,
+            userHead: this.friendHead,
+            message: this.msg,
+            liClass: 'me',
+            imgClass: 'myHead',
+            spanClass: 'myMsg'
+          });
+          this.qq({
+            from: this.$store.state.loginName,
+            to:this.friendName,
+            userHead: this.friendHead,
+            message: this.msg,
+            liClass: 'me',
+            imgClass: 'myHead',
+            spanClass: 'myMsg'
+          });
+          // this.chatList.push({
+          //   from: this.friendName,
+          //   userHead: this.friendHead,
+          //   message: '干嘛',
+          //   liClass: 'friend',
+          //   imgClass: 'youHead',
+          //   spanClass: 'youMsg'
+          // });
+          // this.qq({
+          //   userName: this.friendName,
+          //   userHead: this.friendHead,
+          //   message: '干嘛',
+          //   liClass: 'friend',
+          //   imgClass: 'youHead',
+          //   spanClass: 'youMsg'
+          // });
+          this.msg = '';
+          console.log(this.chatList);
+        }
       },
       //用户删除一条动态
-      delSend (item) {
-        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+      delSend(item) {
+        this.$confirm('此操作将永久删除该动态, 是否继续?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
           let time = item.time;
           let name = item.userName;
-          axios.post('http://localhost:3000/users/delSend',{
-            time:time,
-            userName:name
-          }).then((response)=>{
+          axios.post('http://localhost:3000/users/delSend', {
+            time: time,
+            userName: name
+          }).then((response) => {
             let res = response.data;
-            if(res.status === '0'){
+            if (res.status === '0') {
               this.$message({
                 type: 'success',
                 message: '删除成功!'
               });
               this.getPersonalInfo();
-            }else{
+            } else {
               console.log(222);
             }
           })
@@ -211,26 +381,27 @@
         });
       },
       //格式化时间
-      getTime(){
+      getTime() {
         let d = new Date();
         let year = d.getFullYear();
-        let month = (d.getMonth() + 1)<10 ? "0"+(d.getMonth() + 1) : (d.getMonth() + 1);
-        let day = d.getDate()<10 ? "0"+d.getDate() : d.getDate();
-        let hour = d.getHours()<10 ? "0"+d.getHours() : d.getHours();
-        let minute = d.getMinutes()<10 ? "0"+d.getMinutes() : d.getMinutes();
-        let second = d.getSeconds()<10 ? "0"+d.getSeconds() : d.getSeconds();
-        return year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second
+        let month = (d.getMonth() + 1) < 10 ? "0" + (d.getMonth() + 1) : (d.getMonth() + 1);
+        let day = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
+        let hour = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
+        let minute = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
+        let second = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
+        return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second
       }
+    },
+    updated() {
+      this.$nextTick(function () {
+        let div = document.getElementsByClassName('msg')[0];
+        div.scrollTop = div.scrollHeight;
+      })
     }
   }
 </script>
 
 <style scoped>
-
-  .ddd {
-    width: 100%;
-    height: 100%;
-  }
 
   .info-more {
     width: 70%;
@@ -247,6 +418,7 @@
   .tab {
     min-height: 200px;
   }
+
   .info-list {
     width: 100%;
     min-height: 200px;
@@ -258,7 +430,15 @@
     position: relative;
   }
 
-  .user-head{
+  .only-info {
+    height: 50px;
+    line-height: 50px;
+    padding-left: 10px;
+    box-sizing: border-box;
+    background-color: yellow;
+  }
+
+  .user-head {
     position: absolute;
     top: 5px;
     left: 10px;
@@ -340,6 +520,12 @@
     left: 50px;
   }
 
+  .infoCount {
+    position: absolute;
+    right: 5px;
+    bottom: 15px;
+  }
+
   .chat {
     position: fixed;
     top: 50%;
@@ -347,13 +533,13 @@
     width: 400px;
     height: 400px;
     padding: 10px;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     z-index: 999;
     box-sizing: border-box;
     background-color: lightblue;
   }
 
-  .friendName{
+  .friendName {
     position: absolute;
     top: 10px;
     left: 150px;
@@ -382,9 +568,10 @@
     width: 380px;
     height: 300px;
     background-color: #fff;
+    overflow: auto;
   }
 
-  .friend,.me{
+  .friend, .me {
     float: left;
     width: 100%;
     min-height: 50px;
@@ -392,7 +579,7 @@
     box-sizing: border-box;
   }
 
-  .youHead,.myHead {
+  .youHead, .myHead {
     float: left;
     width: 40px;
     height: 40px;
@@ -400,7 +587,7 @@
     cursor: pointer;
   }
 
-  .youMsg,.myMsg {
+  .youMsg, .myMsg {
     float: left;
     padding: 0 10px 0 10px;
     min-width: 20px;
@@ -412,7 +599,7 @@
     background-color: lightblue;
   }
 
-  .myHead,.myMsg {
+  .myHead, .myMsg {
     float: right;
     text-align: right;
   }

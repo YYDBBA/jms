@@ -34,7 +34,7 @@
         <el-button icon="el-icon-upload el-icon--right" @click="goHeadWall">上传头像</el-button>
         </span>
       </el-dialog>
-      <span class="hello">晚上好，{{userName}}</span>
+      <span class="hello">{{time}}好，{{userName}}</span>
     </div>
     <div class="communiTitle">
       <h3 class="content">{{userName}}的个人主页</h3>
@@ -51,10 +51,12 @@
       return {
         centerDialogVisible: false,
         userName: '',
-        userHead:''
+        userHead:'',
+        time:''
       }
     },
     mounted() {
+      this.getTime();
       this.userName = this.$store.state.loginName;
       axios.get('http://localhost:3000/users/getHeadWall', {
         params: {
@@ -77,6 +79,23 @@
       },
       goHeadWall(){
         this.$router.push('/headpic');
+      },
+      getTime() {
+        let a = new Date();
+        let time = a.getHours();
+        if(time<=4){
+          this.time = '深夜';
+        }else if(time<=8) {
+          this.time = '早上';
+        }else if(time<=11) {
+          this.time = '上午';
+        }else if(time<13) {
+          this.time = '中午';
+        }else if(time<=18){
+          this.time = '下午';
+        }else {
+          this.time = '晚上';
+        }
       }
     }
   }

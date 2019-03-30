@@ -13,6 +13,6 @@
     margin-top: 593px;
     width: 100%;
     height: 100px;
-    background-color: lightskyblue;
+    background-color: lightblue;
   }
 </style>

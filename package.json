@@ -12,8 +12,11 @@
   "dependencies": {
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
+    "better-scroll": "^1.15.1",
     "element-ui": "^2.4.11",
     "formidable": "^1.2.1",
+    "socket.io": "^2.2.0",
+    "uws": "^100.0.1",
     "vue": "^2.5.2",
     "vue-lazyload": "^1.2.6",
     "vue-router": "^3.0.1",

@@ -15,6 +15,7 @@
     "jade": "~1.11.0",
     "mongoose": "^5.4.3",
     "morgan": "~1.9.0",
-    "silly-datetime": "^0.1.2"
+    "silly-datetime": "^0.1.2",
+    "socket.io": "^2.2.0"
   }
 }

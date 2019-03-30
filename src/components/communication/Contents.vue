@@ -18,7 +18,7 @@
         </div>
       </el-tab-pane>
       <el-tab-pane label="我的关注" name="second">
-        <div class="info-list border-bottom">
+        <div class="info-list border-bottom" v-show="isLogin">
           <div class="info">
             <img class="user-head" src="">
             <span class="username">XIXI</span>
@@ -32,6 +32,7 @@
             </ul>
           </div>
         </div>
+        <div class="info-list check-login" v-show="!isLogin">当前未登录！没有关注信息</div>
       </el-tab-pane>
       <el-tab-pane label="热点评论" name="third">
         <div class="info-list border-bottom">
@@ -74,12 +75,20 @@
     name: "Contents",
     data() {
       return {
-        activeName2: 'first'
+        activeName2: 'first',
+        isLogin:false
       };
+    },
+    mounted(){
+      this.checkLogin();
     },
     methods: {
       handleClick(tab, event) {
 
+      },
+      checkLogin() {
+        let flag = this.$store.state.checkLogin;
+        this.isLogin = !!flag;
       }
     }
   }
@@ -99,6 +108,14 @@
     width: 100%;
     min-height: 200px;
     background-color: lightblue;
+  }
+
+  .check-login{
+    font-size: 20px;
+    color: #FFF;
+    text-align: center;
+    padding-top: 80px;
+    box-sizing: border-box;
   }
 
   .info {
