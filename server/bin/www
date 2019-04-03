@@ -96,22 +96,47 @@ function onListening() {
  * 监听连接成功
  */
 
+
+//在线用户
+let onlineUser = {};
+//当前在线人数
+let onlineCount = 0;
 io.on('connection', (socket) => {
   console.log('连接成功');
 
-  var socketId = socket.id;
-  console.log(socketId);
   //接受客户端的消息
-  let toUser = {};
-  let fromUser = {};
   socket.emit('open');
-  socket.on('msg',(data) => {
+  socket.on('setRoom', function(obj) {
+    //将新加入用户的唯一标识当作socket的名称，后面退出的时候会用到
+
+    //检查在线列表，如果不在里面就加入
+    if (!onlineUser.hasOwnProperty(obj.from)) {
+      onlineUser[obj.from] = socket;
+      //在线人数+1
+      onlineCount++;
+    }
+    console.log(onlineUser);
+    console.log(onlineCount);
+  });
+
+  socket.on('sendTo', function (data) {
     console.log(data);
-    socket.emit('msg', '欢迎来找我聊天');
+    let toName = data.to;
+    // return onlineUser[toName];
+    onlineUser[toName].emit('message',{
+      from: data.from,
+      to:toName,
+      userHead: data.userHead,
+      message: data.message,
+      liClass: 'you',
+      imgClass: 'youHead',
+      spanClass: 'youMsg'
+    });
+    // onlineUser[data.from].emit('message',data);
   });
 
   //监听连接关闭
   socket.on('disconnect', () => {
     console.log("连接已经关闭");
-  })
+  });
 });

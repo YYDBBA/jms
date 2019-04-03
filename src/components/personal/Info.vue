@@ -281,12 +281,14 @@
         this.friendName = item1.userName;
         // console.log(item1);
         this.friendHead = item1.userHead;
-        this.qq();
+        this.qq().emit('setRoom',{
+          "from": this.$store.state.loginName
+        });
       },
       closeChat() {
         this.isChat = false;
       },
-      qq(obj) {
+      qq() {
         let url = 'http://localhost:3000';
         let socket = io.connect(url);
 
@@ -296,18 +298,19 @@
 
           //打开通道
           socket.emit('open');
-          socket.emit('msg', obj);
+
+          socket.on('message',(data)=>{
+            // let a = Array.from(data);
+            this.chatList.push(data);
+            console.log(data);
+            // console.log(arr);
+            // this.chatList.push(data);
+          });
         });
         //接收服务器返回的消息
-        socket.on('msg', (data) => {
-          console.log(data);
-
-        });
-
+        return socket;
         //添加用户发送消息
 
-        // let message = this.sendMsg();
-        // console.log(message);
       },
       sendMsg() {
         if (this.msg !== '') {
@@ -320,31 +323,16 @@
             imgClass: 'myHead',
             spanClass: 'myMsg'
           });
-          this.qq({
-            from: this.$store.state.loginName,
-            to:this.friendName,
-            userHead: this.friendHead,
-            message: this.msg,
-            liClass: 'me',
-            imgClass: 'myHead',
-            spanClass: 'myMsg'
+          this.qq().emit('sendTo',{
+            "toId":this.friendName,
+            "from": this.$store.state.loginName,
+            "to": this.friendName,
+            "userHead": this.friendHead,
+            "message": this.msg,
+            "liClass": 'me',
+            "imgClass": 'myHead',
+            "spanClass": 'myMsg'
           });
-          // this.chatList.push({
-          //   from: this.friendName,
-          //   userHead: this.friendHead,
-          //   message: '干嘛',
-          //   liClass: 'friend',
-          //   imgClass: 'youHead',
-          //   spanClass: 'youMsg'
-          // });
-          // this.qq({
-          //   userName: this.friendName,
-          //   userHead: this.friendHead,
-          //   message: '干嘛',
-          //   liClass: 'friend',
-          //   imgClass: 'youHead',
-          //   spanClass: 'youMsg'
-          // });
           this.msg = '';
           console.log(this.chatList);
         }
@@ -393,6 +381,10 @@
       }
     },
     updated() {
+      // this.qq().on('message',(data)=>{
+      //   console.log(111);
+      //   console.log(data);
+      // });
       this.$nextTick(function () {
         let div = document.getElementsByClassName('msg')[0];
         div.scrollTop = div.scrollHeight;
