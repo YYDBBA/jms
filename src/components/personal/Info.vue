@@ -287,6 +287,7 @@
       },
       closeChat() {
         this.isChat = false;
+        this.chatList = [];
       },
       qq() {
         let url = 'http://localhost:3000';
@@ -314,15 +315,6 @@
       },
       sendMsg() {
         if (this.msg !== '') {
-          this.chatList.push({
-            from: this.$store.state.loginName,
-            to:this.friendName,
-            userHead: this.friendHead,
-            message: this.msg,
-            liClass: 'me',
-            imgClass: 'myHead',
-            spanClass: 'myMsg'
-          });
           this.qq().emit('sendTo',{
             "toId":this.friendName,
             "from": this.$store.state.loginName,
@@ -333,6 +325,30 @@
             "imgClass": 'myHead',
             "spanClass": 'myMsg'
           });
+          this.chatList.push({
+            from: this.$store.state.loginName,
+            to:this.friendName,
+            userHead: this.friendHead,
+            message: this.msg,
+            liClass: 'me',
+            imgClass: 'myHead',
+            spanClass: 'myMsg'
+          });
+          axios.post("http://localhost:3000/users/addMessage",{
+            from: this.$store.state.loginName,
+            to:this.friendName,
+            message: this.msg,
+            liClass: 'me',
+            imgClass: 'myHead',
+            spanClass: 'myMsg'
+          }).then((response)=>{
+            let res = response.data;
+            if(res.status === '0'){
+              this.$message.success('消息发送成功');
+            }else{
+              this.$message.error('消息发送失败');
+            }
+          })
           this.msg = '';
           console.log(this.chatList);
         }

@@ -96,7 +96,6 @@ function onListening() {
  * 监听连接成功
  */
 
-
 //在线用户
 let onlineUser = {};
 //当前在线人数
@@ -115,14 +114,14 @@ io.on('connection', (socket) => {
       //在线人数+1
       onlineCount++;
     }
-    console.log(onlineUser);
     console.log(onlineCount);
   });
 
   socket.on('sendTo', function (data) {
     console.log(data);
+
+    //向指定用户发消息
     let toName = data.to;
-    // return onlineUser[toName];
     onlineUser[toName].emit('message',{
       from: data.from,
       to:toName,
@@ -132,11 +131,9 @@ io.on('connection', (socket) => {
       imgClass: 'youHead',
       spanClass: 'youMsg'
     });
-    // onlineUser[data.from].emit('message',data);
-  });
-
   //监听连接关闭
   socket.on('disconnect', () => {
     console.log("连接已经关闭");
   });
+})
 });

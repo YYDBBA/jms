@@ -71,6 +71,16 @@ let userScheam = new Scheam({
       "picId": String,
       "name": String
     }
+  ],
+  "chatList": [
+    {
+      "from": String,
+      "to": String,
+      "message": String,
+      "liClass": String,
+      "imgClass": String,
+      "spanClass": String
+    }
   ]
 }, {collection: 'user_info'});
 

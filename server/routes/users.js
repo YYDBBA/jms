@@ -801,4 +801,56 @@ router.post('/setHead', (req, res, next) => {
   });
 });
 
+//20添加到自己的消息库
+ router.post('/addMessage', (req, res, next) => {
+  Users.updateOne({userName:req.body.from},{
+    $push:{
+      chatList:{
+        from: req.body.from,
+        to: req.body.to,
+        message: req.body.message,
+        liClass: 'me',
+        imgClass: 'myHead',
+        spanClass: 'myMsg'
+      }
+    }
+  },(err,doc)=>{
+    if(err){
+      res.json({
+        status:'1',
+        msg:err.message,
+        result:''
+      })
+    }else {
+      //添加到好友的消息库
+      Users.updateOne({userName:req.body.to},{
+        $push:{
+        chatList:{
+          from: req.body.from,
+          to: req.body.to,
+          message: req.body.message,
+          liClass: 'you',
+          imgClass: 'youHead',
+          spanClass: 'youMsg'
+        }
+      }
+    },(err,doc)=>{
+      if(err){
+        res.json({
+          status:'1',
+          msg:err.message,
+          result:''
+        })
+      }else {
+        res.json({
+          status:'0',
+          msg:'',
+          result:doc
+        })
+      }
+    }) 
+    }
+  })
+});     
+
 module.exports = router;
