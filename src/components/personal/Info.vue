@@ -217,6 +217,27 @@
           }
         })
       },
+      getChatInfo(){
+        let userName = this.$store.state.loginName;
+        axios.get('http://localhost:3000/users/getPersonalInfo',
+          {
+            params: {
+              userName: userName,
+
+            }
+          }).then((response) => {
+          let res2 = response.data;
+          if (res2.status === "0") {
+            //成功
+            this.chatList = res2.result.chatList;
+            //to do someting
+            //将请求到的数据过滤to === friend || from === friend
+          } else {
+            //失败
+            console.log(222);
+          }
+        })
+      },
       //发表新的动态
       sendNew() {
         let sendParams = this.sendTip;
@@ -284,6 +305,7 @@
         this.qq().emit('setRoom',{
           "from": this.$store.state.loginName
         });
+        this.getChatInfo();
       },
       closeChat() {
         this.isChat = false;
@@ -341,6 +363,7 @@
             liClass: 'me',
             imgClass: 'myHead',
             spanClass: 'myMsg'
+            //flag: this.$store.state.loginName + this.friendName把用户id之和相加的结果作为唯一标识
           }).then((response)=>{
             let res = response.data;
             if(res.status === '0'){
@@ -397,10 +420,7 @@
       }
     },
     updated() {
-      // this.qq().on('message',(data)=>{
-      //   console.log(111);
-      //   console.log(data);
-      // });
+      //聊天窗口始终保持在最底部
       this.$nextTick(function () {
         let div = document.getElementsByClassName('msg')[0];
         div.scrollTop = div.scrollHeight;
@@ -542,7 +562,7 @@
     height: 400px;
     padding: 10px;
     transform: translate(-50%, -50%);
-    z-index: 999;
+    z-index: 20;
     box-sizing: border-box;
     background-color: lightblue;
   }
@@ -576,15 +596,24 @@
     width: 380px;
     height: 300px;
     background-color: #fff;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-X: hidden;
   }
 
-  .friend, .me {
-    float: left;
-    width: 100%;
-    min-height: 50px;
+  .you{
+    width: 380px;
+    height: 50px;
     padding: 5px 10px;
     box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .me {
+    width: 380px;
+    height: 50px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .youHead, .myHead {
