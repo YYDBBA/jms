@@ -46,6 +46,11 @@ let No = (resolve) => {
     resolve(require('@/pages/404'))
   })
 };
+let Picture = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/pages/Picture'))
+  })
+};
 //这种懒加载不能传第三个参数，也就是不能合并
 // let No = (resolve) => {
 //   return import('@/pages/404')
@@ -87,6 +92,11 @@ const router = new Router({
       path: '/end',
       name: 'End',
       component: End
+    },
+    {
+      path: '/picture',
+      name: 'Picture',
+      component: Picture
     },
     {
       path: '*',

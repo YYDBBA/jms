@@ -75,6 +75,7 @@
     width: 93%;
     height: 650px;
     margin: 0 auto;
+    overflow: auto;
   }
 
   .top-detail {
