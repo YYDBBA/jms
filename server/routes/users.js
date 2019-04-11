@@ -288,7 +288,7 @@ router.post('/uploadPic', (req, res, next) => {
   //设置编码格式
   form.encoding = 'utf-8';
   //设置上传目录
-  form.uploadDir = './server/public' + AVATAR_UPLOAD_FOLDER;
+  form.uploadDir = 'D:/code/jms/server/public' + AVATAR_UPLOAD_FOLDER;
   //保留后缀
   form.keepExtensions = true;
   //文件大小
@@ -638,7 +638,7 @@ router.post('/uploadHead', (req, res, next) => {
   //设置编码格式
   form.encoding = 'utf-8';
   //设置上传目录
-  form.uploadDir = './server/public' + AVATAR_UPLOAD_FOLDER;
+  form.uploadDir = 'D:/code/jms/server/public' + AVATAR_UPLOAD_FOLDER;
   //保留后缀
   form.keepExtensions = true;
   //文件大小
@@ -851,6 +851,11 @@ router.post('/setHead', (req, res, next) => {
     }) 
     }
   })
-});     
+}); 
+
+//修改性别
+router.post('/changeSex',(req,res,next)=>{
+  
+})
 
 module.exports = router;

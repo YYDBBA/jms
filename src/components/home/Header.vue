@@ -49,7 +49,7 @@
     </el-row>
     <el-row class="nav-menu">
       <el-col :span="6">
-        <div class="grid-content text-mute logo">我是logo</div>
+        <div class="grid-content text-mute logo"><img class="logoimg" src="./../../../static/image/logotwo.png" alt=""></div>
       </el-col>
       <el-col :span="12">
         <div class="grid-content text-mute menu-father">
@@ -237,6 +237,11 @@
   .logo {
     float: right;
     line-height: 60px;
+  }
+
+  .logoimg {
+    width:140px;
+    height: 60px;
   }
 
   .menu-father {

@@ -197,7 +197,6 @@
   .head-pic {
     width: 90px;
     height: 90px;
-    background-color: yellow;
   }
 
   .panel {
