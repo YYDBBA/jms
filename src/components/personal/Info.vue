@@ -59,7 +59,7 @@
           <el-row class="only-info">
             <el-col :span="24">
               <div class="asd">
-                个签:{{personal}}
+                个签：{{personal}}
                 <i class="el-icon-edit" title="修改" @click="changePersonal"></i>
               </div>
             </el-col>
@@ -67,11 +67,12 @@
         </el-tab-pane>
         <el-tab-pane label="我的发表">
           <div class="mySend border-bottom">
+            <h3 style="height:26px;font-size:16px;">发表动态:</h3>
             <el-input v-model="sendTip" type="textarea" class="send-des"></el-input>
             <el-button @click="sendNew" class="biu">发表</el-button>
           </div>
           <div class="info-list border-bottom" v-for="(item,index) of sendList" :key="index">
-            <div class="info">
+            <div class="info animated bounceIn">
               <img class="user-head" :src="'http://localhost:3000/userHeader/'+item.userHead" alt>
               <span class="username">{{item.userName}}</span>
               <i class="el-icon-delete delete" title="删除" @click="delSend(item)"></i>
@@ -86,7 +87,7 @@
         </el-tab-pane>
         <el-tab-pane label="我的好友">
           <div
-            class="star-friend border-bottom"
+            class="star-friend border-bottom animated bounceInRight"
             @click="toChat(item1)"
             v-for="(item1,index) of userFriendList"
             :key="index"
@@ -98,7 +99,7 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的关注">
-          <div class="star-friend border-bottom" v-for="(item,index) of userCareList" :key="index">
+          <div class="star-friend border-bottom animated rotateIn faster" v-for="(item,index) of userCareList" :key="index">
             <img class="friend-head" :src="'http://localhost:3000/userHeader/'+item.userHead" alt>
             <span class="friend-name">{{item.userName}}</span>
             <span class="geqian">个性签名:{{item.userPersonal}}</span>
@@ -168,19 +169,24 @@ export default {
       chatList: [],
       msg: "",
       thisName: this.$store.state.loginName,
-      sex: "1",
-      bath: "-2",
-      major: "-3",
-      address: "-4",
-      homeTown: "-5",
-      email: "-6",
-      hoppy: "-7",
-      personal: "-8",
-      changeValue:''
+      sex: "-",
+      bath: "-",
+      major: "-",
+      address: "-",
+      homeTown: "-",
+      email: "-",
+      hoppy: "-",
+      personal: "-",
+      changeValue: "-"
     };
   },
   mounted() {
     this.getPersonalInfo();
+  },
+  computed: {
+    value() {
+      return this.changeValue;
+    }
   },
   methods: {
     //个人主页信息获取,根据用户登录的userName获取用户信息
@@ -201,6 +207,14 @@ export default {
             });
             this.userFriendList = res1.result.userFriendList;
             this.userCareList = res1.result.userCareList;
+            this.sex = res1.result.userSex;
+            this.bath = res1.result.userBath;
+            this.major = res1.result.userMajor;
+            this.address = res1.result.userAddress;
+            this.homeTown = res1.result.userHometown;
+            this.email = res1.result.userEmail;
+            this.hoppy = res1.result.userHoppy;
+            this.personal = res1.result.userPersonal;
           } else {
             //失败
             console.log(222);
@@ -437,76 +451,60 @@ export default {
     //修改性别
     changeSex() {
       this.dialogVisible = true;
-      this.changeValue = this.sex; 
-      localStorage.setItem('changeWhat',this.sex);
-      localStorage.setItem("change","changeSex");
+      localStorage.setItem("change", "changeSex");
     },
     //修改生日
     changeBath() {
       this.dialogVisible = true;
-      this.changeValue = this.bath; 
-      localStorage.setItem('changeWhat',this.bath);
-      localStorage.setItem("change","changeBath");
+      localStorage.setItem("change", "changeBath");
     },
     //修改职业
     changeMajor() {
-     this.dialogVisible = true;
-      this.changeValue = this.major; 
-      localStorage.setItem('changeWhat',this.major);
-      localStorage.setItem("change","changeMajor");
+      this.dialogVisible = true;
+      localStorage.setItem("change", "changeMajor");
     },
     //修改地址
     changeAddress() {
       this.dialogVisible = true;
-      this.changeValue = this.address; 
-      localStorage.setItem('changeWhat',this.address);
-      localStorage.setItem("change","changeAddress");
+      localStorage.setItem("change", "changeAddress");
     },
     //修改家乡
     changeHomeTown() {
       this.dialogVisible = true;
-      this.changeValue = this.homeTown; 
-      localStorage.setItem('changeWhat',this.homeTown);
-      localStorage.setItem("change","changeHomeTown");
+      localStorage.setItem("change", "changeHomeTown");
     },
     //修改邮箱
     changeEmail() {
       this.dialogVisible = true;
-      this.changeValue = this.email; 
-      localStorage.setItem('changeWhat',this.email);
-      localStorage.setItem("change","changeEmail");
+      localStorage.setItem("change", "changeEmail");
     },
     //修改爱好
     changeHoppy() {
       this.dialogVisible = true;
-      this.changeValue = this.hoppy;
-      localStorage.setItem('changeWhat',this.hoppy);
-      localStorage.setItem("change","changeHoppy");
+      localStorage.setItem("change", "changeHoppy");
     },
     //修改个签
     changePersonal() {
       this.dialogVisible = true;
-      this.changeValue = this.personal; 
-      localStorage.setItem('changeWhat',this.personal);
-      localStorage.setItem("change","changePersonal");
+      localStorage.setItem("change", "changePersonal");
     },
-    changeGGG(){
-      let a = localStorage.getItem('changeWhat');
-      let b = localStorage.getItem("change");
-      // axios
-      //   .post("http://localhost:3000/users/"+a, {
-      //     type: b
-      //   })
-      //   .then(res => {
-      //     let dd = res.data;
-      //     if (dd.status === "0") {
-      //       this.$message.success("修改成功！");
-      //       this.dialogVisible = false;
-      //     }
-      //   })
-      //   .catch(err => {
-      //     this.$message.error("修改失败！");
-      //   });
+    changeGGG() {
+      let a = localStorage.getItem("change");
+      axios
+        .post("http://localhost:3000/users/" + a, {
+          userName: this.$store.state.loginName,
+          type: this.changeValue
+        })
+        .then(res => {
+          let dd = res.data;
+          this.$message.success("修改成功！");
+          this.dialogVisible = false;
+          this.changeValue = '';
+          this.getPersonalInfo();
+        })
+        .catch(err => {
+          this.$message.error("修改失败！");
+        });
     },
     handleClose(done) {
       this.$confirm("确认关闭？")
@@ -527,6 +525,17 @@ export default {
 </script>
 
 <style scoped>
+
+.mySend {
+  overflow: hidden;
+}
+.biu {
+float:right;
+margin: 5px 0 5px 0;
+}
+.send-des {
+float:right;
+}
 .asd {
   position: relative;
   font-size: 15px;
@@ -539,7 +548,7 @@ export default {
   cursor: pointer;
 }
 .info-more {
-  width: 70%;
+  width: 79%;
   height: 500px;
   margin: 0 auto;
   margin-top: 10px;
@@ -592,7 +601,7 @@ export default {
 
 .delete {
   position: absolute;
-  bottom: 17px;
+  bottom: 15px;
   right: 10px;
   font-size: 20px;
   cursor: pointer;

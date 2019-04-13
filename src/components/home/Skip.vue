@@ -36,7 +36,7 @@
                 <div class="item-text">
                   <ul>
                     <router-link to="/detail">
-                      <li class="desc" v-for="(item2,index2) of item.tipContentCnaList" :key="index2"><a href="">{{item2.content}}</a>
+                      <li class="desc" v-for="(item2,index2) of item.tipContentCnaList" :key="index2">{{item2.content}}
                       </li>
                     </router-link>
                   </ul>
@@ -75,7 +75,7 @@
     width: 93%;
     height: 650px;
     margin: 0 auto;
-    overflow: auto;
+    overflow: hidden;
   }
 
   .top-detail {
@@ -86,7 +86,7 @@
 
 
   .func {
-    margin-left: 40px;
+    margin-left: 20px;
     cursor: pointer;
   }
 
@@ -104,13 +104,13 @@
   }
 
   .big-pic {
-    width: 695px;
+    width: 600px;
     height: 350px;
   }
 
   .small-pic {
     margin-left: 10px;
-    width: 332px;
+    width: 290px;
     height: 170px;
     margin-bottom: 10px;
   }
@@ -122,8 +122,8 @@
 
   .item {
     float: left;
-    width: 48%;
-    height: 170px;
+    width: 46%;
+    height: 145px;
   }
 
   .item:nth-child(2) {
@@ -148,12 +148,12 @@
 
   .desc {
     float: left;
-    width: 290px;
+    width: 280px;
     height: 48px;
     padding-left: 3px;
     box-sizing: border-box;
     line-height: 60px;
     font-size: 14px;
-    color: lightblue;
+    color: lightblue !important;
   }
 </style>

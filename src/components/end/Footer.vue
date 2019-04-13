@@ -14,11 +14,11 @@
 
   .foot {
     width: 100%;
-    height: 140px;
-    margin-top: 53px;
+    height: 82px;
+    margin-top: 15px;
     background-color: lightblue;
     text-align: center;
-    padding-top: 40px;
+    padding-top: 30px;
     box-sizing: border-box;
     font-size: 20px;
     color: #fff;

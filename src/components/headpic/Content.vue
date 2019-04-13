@@ -18,7 +18,7 @@
     <div class="head">历史头像墙</div>
     <div class="head-wall">
       <ul class="item-list">
-        <li class="item"  v-for="(item,index) of headList" :key="index">
+        <li class="item animated" v-for="(item,index) of headList" :key="index">
           <img class="head-pic" :src="'http://localhost:3000/userHeader/'+item.name" alt="">
           <div class="panel">
             <span class="el-icon-zoom-in op" @click="setHead(item,index)">设为头像</span>

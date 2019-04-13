@@ -4,6 +4,7 @@ let Scheam = mongoose.Schema;
 
 //创建新的数据模型
 let userScheam = new Scheam({
+  "token":String,
   "userId": String,
   "userHead": String,
   "userName": String,
@@ -15,12 +16,7 @@ let userScheam = new Scheam({
   "userAddress":String,
   "userHometown":String,
   "userPersonal": String,
-  "userHoppyList": [
-    {
-      "hoppyId": String,
-      "hoppyItem": String
-    }
-  ],
+  "userHoppy":String,
   "userSignDayList": [
     {
       "signDay": String,

@@ -8,7 +8,9 @@ let sd = require('silly-datetime');
 let Users = require('../models/users');
 
 //2.连接MongoDB数据库
-mongoose.connect('mongodb://localhost/jms', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/jms', {
+  useNewUrlParser: true
+});
 
 //3.监听连接状态
 //3.1连接成功
@@ -132,7 +134,9 @@ router.post('/delUser', (req, res, next) => {
 //4.4修改一个用户信息
 router.post('/changeUser', (req, res, next) => {
   let updataData = req.body;
-  Users.updateOne({id: updataData.changeId}, {
+  Users.updateOne({
+    id: updataData.changeId
+  }, {
     $set: {
       name: updataData.changeName,
       age: updataData.changeAge,
@@ -179,11 +183,38 @@ router.post('/checkLogin', (req, res, next) => {
       });
     } else {
       if (docLogin) {
-        res.json({
-          status: "0",
-          msg: '该用户已经存在！',
-          result: ''
-        });
+        // res.json({
+        //   status: "0",
+        //   msg: '该用户已经存在！',
+        //   result: ''
+        // });
+        if(docLogin.token === "login"){
+          res.json({
+            status:'1',
+            msg:'当前已经在其他地方登录',
+            result:''
+          })
+        }else{
+          Users.updateOne({userName: userName},{
+            $set:{
+              token:"login"
+            }         
+          },(err,doc)=>{
+            if(err){
+              res.json({
+                status: "1",
+                msg: '该用户已经登录！',
+                result: ''
+              });
+            }else{
+              res.json({
+                status: "0",
+                msg: '该用户已经存在！',
+                result: ''
+              });
+            }
+          })
+        }
       } else {
         res.json({
           status: "0",
@@ -199,7 +230,9 @@ router.post('/checkLogin', (req, res, next) => {
 //6.1校验用户名是否注册过
 router.post('/checkRegister', (req, res, next) => {
   let userName = req.body.userName;
-  Users.findOne({userName: userName}, (err, doc) => {
+  Users.findOne({
+    userName: userName
+  }, (err, doc) => {
     if (err) {
       res.json({
         status: "1",
@@ -224,6 +257,27 @@ router.post('/checkRegister', (req, res, next) => {
   })
 });
 
+router.post('/canelToken',(req,res,next)=>{
+  Users.updateOne({userName:req.body.userName},{
+    $set:{
+      token:"noLogin"
+    }
+  },(err,doc)=>{
+    if(err){
+      res.json({
+        status:'1',
+        msg:'',
+        result:''
+      })
+    }else{
+      res.json({
+        status:'0',
+        msg:'',
+        result:''
+      })
+    }
+  })
+})
 
 //6.2用户不存在则添加一条用户信息
 router.post('/addRegister', (req, res, next) => {
@@ -262,7 +316,9 @@ router.post('/addRegister', (req, res, next) => {
 //7用户获取自身相关信息
 router.get('/getPersonalInfo', (req, res, next) => {
   let userName = req.param('userName');
-  Users.findOne({userName: userName}, (err, doc) => {
+  Users.findOne({
+    userName: userName
+  }, (err, doc) => {
     if (err) {
       res.json({
         status: '1',
@@ -366,9 +422,13 @@ router.post('/uploadPic', (req, res, next) => {
 router.post('/addPicInfo', (req, res, next) => {
   let name = req.body.picInfo;
   let userName = req.param('userName');
-  Users.updateOne({userName: userName}, {
+  Users.updateOne({
+    userName: userName
+  }, {
     $push: {
-      uploadPicList: {name: name}
+      uploadPicList: {
+        name: name
+      }
     }
   }, (err, doc) => {
     if (err) {
@@ -393,7 +453,9 @@ router.post('/addNewSend', (req, res, next) => {
   let up = 0;
   let down = 0;
   let userHead = '' || 'default.jpg';
-  Users.updateOne({userName: req.body.userName}, {
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
     $push: {
       sendList: {
         content: req.body.content,
@@ -427,7 +489,9 @@ router.post('/sendComment', (req, res, next) => {
   let up = 0;
   let down = 0;
   let userHead = '' || 'default.jpg';
-  Users.updateOne({userName: req.body.userName}, {
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
     $push: {
       sendList: {
         content: req.body.content,
@@ -487,11 +551,13 @@ router.post('/sendComment', (req, res, next) => {
 
 //10用户删除一条动态
 router.post('/delSend', (req, res, next) => {
-  Users.updateOne({userName: req.body.userName}, {
-    $pull:{
-        sendList:{
-          time:req.body.time
-        }
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $pull: {
+      sendList: {
+        time: req.body.time
+      }
     }
   }, (err, doc) => {
     if (err) {
@@ -512,10 +578,12 @@ router.post('/delSend', (req, res, next) => {
 
 //11用户添加好友
 router.post('/addFriend', (req, res, next) => {
-  Users.updateOne({userName: req.body.userName}, {
-    $pull:{
-      sendList:{
-        time:req.body.time
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $pull: {
+      sendList: {
+        time: req.body.time
       }
     }
   }, (err, doc) => {
@@ -537,10 +605,12 @@ router.post('/addFriend', (req, res, next) => {
 
 //12用户删除好友
 router.post('/delFriend', (req, res, next) => {
-  Users.updateOne({userName: req.body.userName}, {
-    $pull:{
-      sendList:{
-        time:req.body.time
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $pull: {
+      sendList: {
+        time: req.body.time
       }
     }
   }, (err, doc) => {
@@ -562,10 +632,12 @@ router.post('/delFriend', (req, res, next) => {
 
 //13用户添加关注
 router.post('/addCare', (req, res, next) => {
-  Users.updateOne({userName: req.body.userName}, {
-    $pull:{
-      sendList:{
-        time:req.body.time
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $pull: {
+      sendList: {
+        time: req.body.time
       }
     }
   }, (err, doc) => {
@@ -587,10 +659,12 @@ router.post('/addCare', (req, res, next) => {
 
 //14用户取消关注
 router.post('/delCare', (req, res, next) => {
-  Users.updateOne({userName: req.body.userName}, {
-    $pull:{
-      sendList:{
-        time:req.body.time
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $pull: {
+      sendList: {
+        time: req.body.time
       }
     }
   }, (err, doc) => {
@@ -613,7 +687,9 @@ router.post('/delCare', (req, res, next) => {
 //15用户拿到头像墙
 router.get('/getHeadWall', (req, res, next) => {
   let name = req.param('userName');
-  Users.findOne({userName: name},(err, doc) => {
+  Users.findOne({
+    userName: name
+  }, (err, doc) => {
     if (err) {
       res.json({
         status: '1',
@@ -716,9 +792,13 @@ router.post('/uploadHead', (req, res, next) => {
 router.post('/addHeadInfo', (req, res, next) => {
   let name = req.body.picInfo;
   let userName = req.body.userName;
-  Users.updateOne({userName: userName}, {
+  Users.updateOne({
+    userName: userName
+  }, {
     $push: {
-      uploadHeadList: {name: name}
+      uploadHeadList: {
+        name: name
+      }
     }
   }, (err, doc) => {
     if (err) {
@@ -741,9 +821,13 @@ router.post('/addHeadInfo', (req, res, next) => {
 router.post('/delHead', (req, res, next) => {
   let name = req.body.name;
   let userName = req.body.userName;
-  Users.updateOne({userName: userName}, {
+  Users.updateOne({
+    userName: userName
+  }, {
     $pull: {
-      uploadHeadList: {name: name}
+      uploadHeadList: {
+        name: name
+      }
     }
   }, (err, doc) => {
     if (err) {
@@ -766,11 +850,15 @@ router.post('/delHead', (req, res, next) => {
 router.post('/setHead', (req, res, next) => {
   let name = req.body.name;
   let userName = req.body.userName;
-  Users.updateOne({userName: userName},{
+  Users.updateOne({
+    userName: userName
+  }, {
     $pull: {
-      uploadHeadList: {name: name}
+      uploadHeadList: {
+        name: name
+      }
     }
-  },(err, doc) => {
+  }, (err, doc) => {
     if (err) {
       res.json({
         status: '1',
@@ -778,18 +866,22 @@ router.post('/setHead', (req, res, next) => {
         result: ''
       });
     } else {
-      Users.updateOne({userName: userName},{
+      Users.updateOne({
+        userName: userName
+      }, {
         $push: {
-          uploadHeadList: {name: name}
+          uploadHeadList: {
+            name: name
+          }
         }
-      },(err1,doc1)=>{
+      }, (err1, doc1) => {
         if (err) {
           res.json({
             status: '1',
             msg: '',
             result: ''
           });
-        }else {
+        } else {
           res.json({
             status: '0',
             msg: '',
@@ -802,10 +894,12 @@ router.post('/setHead', (req, res, next) => {
 });
 
 //20添加到自己的消息库
- router.post('/addMessage', (req, res, next) => {
-  Users.updateOne({userName:req.body.from},{
-    $push:{
-      chatList:{
+router.post('/addMessage', (req, res, next) => {
+  Users.updateOne({
+    userName: req.body.from
+  }, {
+    $push: {
+      chatList: {
         from: req.body.from,
         to: req.body.to,
         message: req.body.message,
@@ -814,48 +908,228 @@ router.post('/setHead', (req, res, next) => {
         spanClass: 'myMsg'
       }
     }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: err.message,
+        result: ''
+      })
+    } else {
+      //添加到好友的消息库
+      Users.updateOne({
+        userName: req.body.to
+      }, {
+        $push: {
+          chatList: {
+            from: req.body.from,
+            to: req.body.to,
+            message: req.body.message,
+            liClass: 'you',
+            imgClass: 'youHead',
+            spanClass: 'youMsg'
+          }
+        }
+      }, (err, doc) => {
+        if (err) {
+          res.json({
+            status: '1',
+            msg: err.message,
+            result: ''
+          })
+        } else {
+          res.json({
+            status: '0',
+            msg: '',
+            result: doc
+          })
+        }
+      })
+    }
+  })
+});
+
+//修改性别
+router.post('/changeSex', (req, res, next) => {
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $set: {
+      userSex: req.body.type
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      })
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
+      })
+    }
+  })
+});
+//修改生日
+router.post('/changeBath', (req, res, next) => {
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $set: {
+      userBath: req.body.type
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      })
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
+      })
+    }
+  })
+});
+//修改企业
+router.post('/changeMajor', (req, res, next) => {
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $set: {
+      userMajor: req.body.type
+    }
+  }, (err, doc) => {
+    if (err) {
+      res.json({
+        status: '1',
+        msg: '',
+        result: ''
+      })
+    } else {
+      res.json({
+        status: '0',
+        msg: '',
+        result: ''
+      })
+    }
+  })
+});
+//修改地址
+router.post('/changeAddress',(req,res,next)=>{
+  Users.updateOne({userName:req.body.userName},{
+    $set:{
+      userAddress:req.body.type
+    }
   },(err,doc)=>{
     if(err){
       res.json({
         status:'1',
-        msg:err.message,
+        msg:'',
         result:''
       })
-    }else {
-      //添加到好友的消息库
-      Users.updateOne({userName:req.body.to},{
-        $push:{
-        chatList:{
-          from: req.body.from,
-          to: req.body.to,
-          message: req.body.message,
-          liClass: 'you',
-          imgClass: 'youHead',
-          spanClass: 'youMsg'
-        }
-      }
-    },(err,doc)=>{
-      if(err){
-        res.json({
-          status:'1',
-          msg:err.message,
-          result:''
-        })
-      }else {
-        res.json({
-          status:'0',
-          msg:'',
-          result:doc
-        })
-      }
-    }) 
+    }else{
+      res.json({
+        status:'0',
+        msg:'',
+        result:''
+      })
     }
   })
-}); 
-
-//修改性别
-router.post('/changeSex',(req,res,next)=>{
-  
-})
+});
+//修改家乡
+router.post('/changeHomeTown',(req,res,next)=>{
+  Users.updateOne({userName:req.body.userName},{
+    $set:{
+      userHometown:req.body.type
+    }
+  },(err,doc)=>{
+    if(err){
+      res.json({
+        status:'1',
+        msg:'',
+        result:''
+      })
+    }else{
+      res.json({
+        status:'0',
+        msg:'',
+        result:''
+      })
+    }
+  })
+});
+//修改邮箱
+router.post('/changeEmail',(req,res,next)=>{
+  Users.updateOne({userName:req.body.userName},{
+    $set:{
+      userEmail:req.body.type
+    }
+  },(err,doc)=>{
+    if(err){
+      res.json({
+        status:'1',
+        msg:'',
+        result:''
+      })
+    }else{
+      res.json({
+        status:'0',
+        msg:'',
+        result:''
+      })
+    }
+  })
+});
+//修改爱好
+router.post('/changeHoppy',(req,res,next)=>{
+  Users.updateOne({userName:req.body.userName},{
+    $set:{
+      userHoppy:req.body.type
+    }
+  },(err,doc)=>{
+    if(err){
+      res.json({
+        status:'1',
+        msg:'',
+        result:''
+      })
+    }else{
+      res.json({
+        status:'0',
+        msg:'',
+        result:''
+      })
+    }
+  })
+});
+//修改个签
+router.post('/changePersonal',(req,res,next)=>{
+  Users.updateOne({userName:req.body.userName},{
+    $set:{
+      userPersonal:req.body.type
+    }
+  },(err,doc)=>{
+    if(err){
+      res.json({
+        status:'1',
+        msg:'',
+        result:''
+      })
+    }else{
+      res.json({
+        status:'0',
+        msg:'',
+        result:''
+      })
+    }
+  })
+});
 
 module.exports = router;

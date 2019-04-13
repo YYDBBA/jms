@@ -132,14 +132,24 @@
               this.isCheckLogin = true;
             }
           } else {
-            console.log('校验失败');
-            this.isCheckLogin = true;
+            this.$message.error(resLogin.msg);
           }
         })
       },
       //注销登录
       canelLogin() {
-          this.$store.commit("canelLogin", [false, '']);
+          axios.post('/users/canelToken',
+          {
+            userName: this.$store.state.loginName
+          }).then(res => {
+            let ress = res.data;
+            if(ress.status === '0'){
+              this.$store.commit("canelLogin", [false, '']);
+              this.$message.success('注销成功');
+            }else {
+              this.$message.error('注销登录');
+            }
+        })
       },
       //注册校验
       registerCheck() {

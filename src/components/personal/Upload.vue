@@ -8,7 +8,7 @@
     >
        <el-button class="upload-head">上传图片</el-button>
     </el-upload>
-    <ul v-for="(item,index) of picUrlList" :key="index" class="dd">
+    <ul v-for="(item,index) of picUrlList" :key="index" class="dd animated rollIn faster">
       <li class="pics">
         <img v-lazy="'http://localhost:3000/avatar/'+ item.name" class="pic">
       </li>

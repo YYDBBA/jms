@@ -116,7 +116,7 @@
 
   .small {
     width: 100%;
-    height: 50px;
+    height: 40px;
   }
 
   .big {

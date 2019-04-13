@@ -10,7 +10,7 @@
 
 <style scoped>
   .footer {
-    margin-top: 593px;
+    margin-top: 497px;
     width: 100%;
     height: 100px;
     background-color: lightblue;

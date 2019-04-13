@@ -3,7 +3,9 @@
       <router-link to="/">
         <span class="el-icon-back back">返回</span>
       </router-link>
-      <span class="nav-title">走咯旅行服务网站</span>
+      <span class="nav-title">
+        <img class="logo" src="./../../../static/image/logotwo.png" alt="">
+        走咯旅行服务网站</span>
     </div>
 </template>
 
@@ -19,6 +21,10 @@
     height: 60px;
     background-color: lightblue;
   }
+  .logo {
+    width: 120px;
+    height: 60px;
+  }
   .back{
     font-size: 20px;
     color: #fff;
@@ -27,7 +33,7 @@
   }
 
   .nav-title {
-    margin-left: 38%;
+    margin-left: 32%;
     font-size: 25px;
     line-height: 60px;
     color: #fff;

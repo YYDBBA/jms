@@ -1,6 +1,6 @@
 <template>
   <div class="nav-menu">
-    <el-tabs :tab-position="tabPosition" style="width: 90%; height: 500px;">
+    <el-tabs :tab-position="tabPosition" style="width: 94%; height: 500px;">
 
       <!--用户信息管理-->
       <el-tab-pane label="用户信息" class="userInfo">
@@ -460,6 +460,6 @@
   .fenye {
     position: fixed;
     left: 38%;
-    bottom: 180px;
+    bottom: 100px;
   }
 </style>
