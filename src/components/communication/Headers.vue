@@ -5,7 +5,7 @@
       </router-link>
       <div class="name">
         <img class="logo" src="./../../../static/image/logotwo.png" alt="">
-        海量美图
+        走咯旅游服务网站
       </div>
     </div>
 </template>
@@ -27,13 +27,13 @@
   .name {
     position: absolute;
     top: 0;
-    left: 35%;
+    left: 34%;
     color: #fff;
     font-size: 25px;
     line-height: 60px;
   }
   .logo {
-    width: 120px;
+    width: 140px;
     height: 60px;
   }
 

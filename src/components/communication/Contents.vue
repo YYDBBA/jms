@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content animated rotateInUpRight">
     <el-tabs v-model="activeName2" type="card" @tab-click="handleClick">
       <el-tab-pane label="超话社区" name="first">
         <div class="info-list border-bottom">

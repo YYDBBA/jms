@@ -26,6 +26,7 @@ export default {
 
 <style scoped>
 .ddd {
+  height:60px;
   line-height: 60px;
   background-color: lightblue;
   color: #fff;
@@ -35,8 +36,8 @@ export default {
   text-align: right;
 }
 .logo {
-  width: 100px;
-  height: 50px;
+  width: 140px;
+  height: 60px;
 }
 .bg-purple-light {
   text-align: center;

@@ -5,7 +5,7 @@
       </router-link>
       <div class="name">
         <img class="logo" src="./../../../static/image/logotwo.png" alt="">
-        海量美图
+        走咯旅行服务网站
       </div>
     </div>
 </template>

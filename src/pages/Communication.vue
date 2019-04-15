@@ -1,5 +1,5 @@
 <template>
-  <div class="all animated rollIn faster">
+  <div class="all">
     <communi-header></communi-header>
     <communi-tips></communi-tips>
     <communi-contents></communi-contents>

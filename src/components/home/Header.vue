@@ -57,7 +57,7 @@
             <el-menu-item index="1" class="menu">旅行主页</el-menu-item>
             <el-menu-item index="2" class="menu" @click="goCommuni">社区论坛</el-menu-item>
             <el-menu-item index="3" class="menu" @click="goPicture">海量美图</el-menu-item>
-            <el-menu-item index="4" class="menu">关于我们</el-menu-item>
+            <el-menu-item index="4" class="menu" @click="goAbout">关于我们</el-menu-item>
             <el-menu-item index="5" class="menu" @click="goEnd">更多>></el-menu-item>
           </el-menu>
         </div>
@@ -202,6 +202,9 @@
       },
       goPicture() {
         this.$router.push('/picture');
+      },
+      goAbout() {
+        this.$router.push('/about');
       },
       goEnd() {
         this.$router.push('/end');

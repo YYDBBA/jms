@@ -1,5 +1,5 @@
 <template>
-  <div class="ttt">
+  <div class="ttt animated rotateInDownRight">
     <div class="page">
       <waterfall :line-gap="230" :watch="items">
         <waterfall-slot

@@ -1,5 +1,5 @@
 <template>
-    <div class="tips">
+    <div class="tips animated rollIn">
       <div class="tips-item">
         <h4 class="smallTip">最新资讯</h4>
         <ul>

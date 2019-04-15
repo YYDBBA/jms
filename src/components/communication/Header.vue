@@ -1,28 +1,8 @@
 <template>
   <div>
     <!--头部样式-->
-    <el-row class="nav-menu">
-      <el-col :span="6">
-        <div class="grid-content text-mute logo">我是logo</div>
-      </el-col>
-      <el-col :span="12">
-        <div class="grid-content text-mute menu-father">
-          <el-menu default-active="2" class="el-menu-demo delBorder" mode="horizontal">
-            <el-menu-item index="1" class="menu" @click="goPersonal">个人主页</el-menu-item>
-            <el-menu-item index="2" class="menu">社区论坛</el-menu-item>
-            <el-menu-item index="3" class="menu">海量美图</el-menu-item>
-            <el-menu-item index="4" class="menu">关于我们</el-menu-item>
-            <el-menu-item index="5" class="menu">更多>></el-menu-item>
-          </el-menu>
-        </div>
-      </el-col>
-      <el-col :span="6">
-        <div class="grid-content text-mute personal">
-          <router-link to="/">返回主页</router-link>
-        </div>
-      </el-col>
-    </el-row>
-    <div class="communiTitle">
+    <nav-header></nav-header>
+    <div class="communiTitle animated fadeInDown faster">
       <h3 class="content">社区论坛</h3>
     </div>
   </div>
@@ -30,9 +10,13 @@
 
 <script>
   import axios from 'axios'
+  import NavHeader from './Headers'
 
   export default {
     name: "Header",
+    components:{
+          NavHeader
+        },
     data() {
       return {
         dialogVisible: false,
