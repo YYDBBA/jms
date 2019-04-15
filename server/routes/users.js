@@ -183,11 +183,6 @@ router.post('/checkLogin', (req, res, next) => {
       });
     } else {
       if (docLogin) {
-        // res.json({
-        //   status: "0",
-        //   msg: '该用户已经存在！',
-        //   result: ''
-        // });
         if(docLogin.token === "login"){
           res.json({
             status:'1',

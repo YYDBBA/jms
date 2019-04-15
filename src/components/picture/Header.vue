@@ -1,9 +1,12 @@
 <template>
     <div class="some">
-      <router-link to="/personal">
+      <router-link to="/">
         <span class="el-icon-back back">返回</span>
       </router-link>
-      走咯旅游服务网站
+      <div class="name">
+        <img class="logo" src="./../../../static/image/logotwo.png" alt="">
+        走咯旅游服务网站
+      </div>
     </div>
 </template>
 
@@ -15,9 +18,23 @@
 
 <style scoped>
   .some {
+    position: relative;
     width: 100%;
     height: 60px;
     background-color: lightblue;
+  }
+
+  .name {
+    position: absolute;
+    top: 0;
+    left: 35%;
+    color: #fff;
+    font-size: 25px;
+    line-height: 60px;
+  }
+  .logo {
+    width: 120px;
+    height: 60px;
   }
 
   .back{

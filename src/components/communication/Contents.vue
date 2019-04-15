@@ -99,8 +99,8 @@
   .content {
     position: absolute;
     top: 160px;
-    left: 35.5%;
-    width: 752px;
+    left: 37.7%;
+    width: 650px;
     height: 400px;
   }
 
@@ -164,7 +164,7 @@
   }
 
   .infoTop {
-    margin-left: 450px;
+    margin-left: 370px;
   }
 
   .infoDown {

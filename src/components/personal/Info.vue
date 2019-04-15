@@ -113,7 +113,7 @@
     </div>
     <transition name="el-fade-in-linear">
       <div class="chat" v-show="isChat">
-        <span class="friendName">{{friendName}}</span>
+        <span class="friendName">{{friendName}}{{online}}</span>
         <span class="close" @click="closeChat">×</span>
         <ul class="msg" ref="message">
           <li v-for="(item,index) of chatList" :key="index" :class="item.liClass">
@@ -164,6 +164,7 @@ export default {
       userFriendList: [],
       userCareList: [],
       friendName: "",
+      online:'',
       friendHead: "",
       infoCount: "1",
       chatList: [],
@@ -221,7 +222,7 @@ export default {
           }
         });
     },
-    getChatInfo() {
+    getChatInfo(a) {
       let userName = this.$store.state.loginName;
       axios
         .get("http://localhost:3000/users/getPersonalInfo", {
@@ -232,10 +233,17 @@ export default {
         .then(response => {
           let res2 = response.data;
           if (res2.status === "0") {
-            //成功
-            this.chatList = res2.result.chatList;
-            //to do someting
-            //将请求到的数据过滤to === friend || from === friend
+            let temp = res2.result.chatList;
+            let arr = [];
+            for(let i in temp) {
+              console.log(i);
+              if(temp[i].from === a.userName || temp[i].to === a.userName){
+                arr.push(temp[i]);
+              }else{
+                console.log('我不是');
+              }
+              this.chatList = arr;
+            }
           } else {
             //失败
             console.log(222);
@@ -317,7 +325,7 @@ export default {
       this.qq().emit("setRoom", {
         from: this.$store.state.loginName
       });
-      this.getChatInfo();
+      this.getChatInfo(item1);
     },
     closeChat() {
       this.isChat = false;
@@ -341,6 +349,20 @@ export default {
           // console.log(arr);
           // this.chatList.push(data);
         });
+        // socket.on("noOnline", data => {
+        //   // let a = Array.from(data);
+        //   // this.$message.error(data);
+        //   this.online = data;
+        //   // console.log(arr);
+        //   // this.chatList.push(data);
+        // });
+        // socket.on("online", data => {
+        //   // let a = Array.from(data);
+        //   // this.$message.error(data);
+        //   this.online = data;
+        //   // console.log(arr);
+        //   // this.chatList.push(data);
+        // });
       });
       //接收服务器返回的消息
       return socket;
@@ -349,7 +371,6 @@ export default {
     sendMsg() {
       if (this.msg !== "") {
         this.qq().emit("sendTo", {
-          toId: this.friendName,
           from: this.$store.state.loginName,
           to: this.friendName,
           userHead: this.friendHead,
