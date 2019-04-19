@@ -9,9 +9,9 @@
         alt
         @click="centerDialogVisible = true"
       >
-      <el-dialog title="提示" :visible.sync="centerDialogVisible" width="30%" center>
+      <el-dialog title="头像" :visible.sync="centerDialogVisible" width="30%" center>
         <span slot="footer" class="dialog-footer">
-          <el-button icon="el-icon-search">查看大图</el-button>
+          <el-button icon="el-icon-search" @click="bigLook">查看大图</el-button>
           <el-button icon="el-icon-upload el-icon--right" @click="goHeadWall">上传头像</el-button>
         </span>
       </el-dialog>
@@ -40,6 +40,7 @@ export default {
   data() {
     return {
       centerDialogVisible: false,
+      bigUrl:false,
       userName: "",
       userHead: "",
       time: "",
@@ -79,6 +80,9 @@ export default {
     goHeadWall() {
       this.$router.push("/headpic");
     },
+    bigLook() {
+        this.$router.push('/bighead');
+    },
     getTime() {
       let a = new Date();
       let time = a.getHours();
@@ -112,6 +116,9 @@ export default {
   }
 }
 
+.picbig {
+  margin-left: 30px;
+}
 .nav-menu {
   background-color: #fff;
 }

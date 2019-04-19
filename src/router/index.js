@@ -56,6 +56,11 @@ let About = (resolve) => {
     resolve(require('@/pages/About'))
   })
 };
+let Bighead = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/pages/Bighead'))
+  })
+};
 //这种懒加载不能传第三个参数，也就是不能合并
 // let No = (resolve) => {
 //   return import('@/pages/404')
@@ -107,6 +112,11 @@ const router = new Router({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/bighead',
+      name: 'Bighead',
+      component: Bighead
     },
     {
       path: '*',

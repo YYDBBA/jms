@@ -82,6 +82,23 @@
                 <li class="item infoTop" @click="up(item)">{{item.up}}</li>
                 <li class="item infoDown" @click="down(item)">{{item.down}}</li>
               </ul>
+              <ul class="comment">
+                <li class="comment-content">
+                  <span class="comment-name">名字:</span>
+                  <span class="comment-des">内容</span>
+                  <span class="comment-time">时间</span>
+                </li>
+                <!-- <li class="comment-content">
+                  <span class="comment-name">名字:</span>
+                  <span class="comment-des">内容</span>
+                  <span class="comment-time">时间</span>
+                </li>
+                <li class="comment-content">
+                  <span class="comment-name">名字:</span>
+                  <span class="comment-des">内容</span>
+                  <span class="comment-time">时间</span>
+                </li> -->
+              </ul>
             </div>
           </div>
         </el-tab-pane>
@@ -586,13 +603,15 @@ float:right;
 
 .info-list {
   width: 100%;
-  min-height: 200px;
+  min-height: 250px;
 }
 
 .info {
   width: 100%;
-  height: 200px;
+  min-height: 250px;
   position: relative;
+  overflow-y: auto;
+  overflow-x:hidden;
 }
 
 .only-info {
@@ -622,7 +641,7 @@ float:right;
 
 .delete {
   position: absolute;
-  bottom: 15px;
+  top: 165px;
   right: 10px;
   font-size: 20px;
   cursor: pointer;
@@ -654,6 +673,36 @@ float:right;
 
 .infoDown {
   margin-left: 50px;
+}
+
+.comment{
+  position: absolute;
+  top: 220px;
+  left: 0;
+width: 100%;
+min-height: 30px;
+}
+.comment-content {
+  width: 100%;
+  min-height:30px;
+  position: relative;
+}
+.comment-name {
+  position: absolute;
+  top: 0;
+  left: 5px;
+}
+
+.comment-des {
+  position: absolute;
+  top: 0;
+  left: 40px;
+}
+
+.comment-time {
+  position: absolute;
+  top: 0;
+  right: 30px;
 }
 
 .star-friend {
