@@ -56,7 +56,7 @@
     left: 15%;
     width: 300px;
     min-height: 450px;
-    background-color: lightblue;
+    background: linear-gradient(to bottom,rgb(0, 247, 255,.2),rgb(251, 255, 0,.4));
   }
 
   .tips-item {

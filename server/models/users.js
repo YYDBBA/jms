@@ -37,25 +37,6 @@ let userScheam = new Scheam({
       "userHead": String
     }
   ],
-  "sendList": [
-    {
-      "sendId": String,
-      "userName": String,
-      "userHead": String,
-      "content": String,
-      "time": String,
-      "up": Number,
-      "down": Number,
-      "commentList": [
-        {
-          "commentUserName": String,
-          "commentId": String,
-          "commentContent": String,
-          "commentTime": String,
-        }
-      ]
-    }
-  ],
   "uploadPicList": [
     {
       "picId": String,

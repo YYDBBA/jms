@@ -83,21 +83,11 @@
                 <li class="item infoDown" @click="down(item)">{{item.down}}</li>
               </ul>
               <ul class="comment">
-                <li class="comment-content">
-                  <span class="comment-name">名字:</span>
-                  <span class="comment-des">内容</span>
-                  <span class="comment-time">时间</span>
+                <li class="comment-content" v-for="(item1,index1) of item.commentList" :key="index1">
+                  <span class="comment-name">{{item1.commentUserName}}:</span>
+                  <span class="comment-des">{{item1.commentContent}}</span>
+                  <span class="comment-time">{{item1.commentTime}}</span>
                 </li>
-                <!-- <li class="comment-content">
-                  <span class="comment-name">名字:</span>
-                  <span class="comment-des">内容</span>
-                  <span class="comment-time">时间</span>
-                </li>
-                <li class="comment-content">
-                  <span class="comment-name">名字:</span>
-                  <span class="comment-des">内容</span>
-                  <span class="comment-time">时间</span>
-                </li> -->
               </ul>
             </div>
           </div>
@@ -200,6 +190,7 @@ export default {
   },
   mounted() {
     this.getPersonalInfo();
+    this.getSendInfo();
   },
   computed: {
     value() {
@@ -220,9 +211,6 @@ export default {
           let res1 = response.data;
           if (res1.status === "0") {
             //成功
-            this.sendList = res1.result.sendList.sort((a, b) => {
-              return a > b ? 1 : -1;
-            });
             this.userFriendList = res1.result.userFriendList;
             this.userCareList = res1.result.userCareList;
             this.sex = res1.result.userSex;
@@ -267,19 +255,35 @@ export default {
           }
         });
     },
+    //拿到动态信息
+    getSendInfo() {
+      let userName = this.$store.state.loginName;
+      axios.get("http://localhost:3000/send",{
+        params:{
+          userName:userName
+        }
+      }).then(response => {
+          let res1 = response.data;
+          if (res1.status === "0") {
+            //成功
+            this.sendList = res1.result.sort((a, b) => {
+              return a > b ? 1 : -1;
+            });
+          } else {
+            //失败
+            console.log(222);
+          }
+        });
+    },
     //发表新的动态
     sendNew() {
       if (this.sendTip !== "") {
         let sendParams = this.sendTip;
-
-        //拿到当前用户登录信息
-        let userName = this.$store.state.loginName;
-
-        //获取发表时间
-        let date = this.getTime();
+        let userName = this.$store.state.loginName; //拿到当前用户登录信息
+        let date = this.getTime();//获取发表时间
 
         axios
-          .post("http://localhost:3000/users/addNewSend", {
+          .post("http://localhost:3000/send/addNewSend", {
             userName: userName,
             content: sendParams,
             date: date
@@ -290,7 +294,7 @@ export default {
               //成功
               this.$message.success("发表成功！");
               this.sendTip = "";
-              this.getPersonalInfo();
+              this.getSendInfo();
             } else {
               //失败
               console.log(222);
@@ -302,7 +306,7 @@ export default {
       let sendTime = item.time;
       let flag = 1;
       axios
-        .post("http://localhost:3000/users/upDown", {
+        .post("http://localhost:3000/send/upDown", {
           time: sendTime,
           up: item.up,
           flag: flag
@@ -320,7 +324,7 @@ export default {
       let sendTime = item.time;
       let flag = -1;
       axios
-        .post("http://localhost:3000/users/upDown", {
+        .post("http://localhost:3000/send/upDown", {
           time: sendTime,
           down: item.down,
           flag: flag
@@ -438,7 +442,7 @@ export default {
           let time = item.time;
           let name = item.userName;
           axios
-            .post("http://localhost:3000/users/delSend", {
+            .post("http://localhost:3000/send/delSend", {
               time: time,
               userName: name
             })
@@ -449,7 +453,7 @@ export default {
                   type: "success",
                   message: "删除成功!"
                 });
-                this.getPersonalInfo();
+                this.getSendInfo();
               } else {
                 console.log(222);
               }

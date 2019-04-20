@@ -23,89 +23,11 @@
         userName: '',
         userPwd: ''
       }
-    },
-    methods: {
-      handleClose(done) {
-        done();
-      },
-      loginCheck() {
-      },
-      registerCheck() {
-        let userName = this.userName;
-        let userPwd = this.userPwd;
-        //todo something
-        let params = {
-          userName: userName,
-          userPwd: userPwd
-        };
-        axios.post('/users/checkRegister', params).then((response) => {
-          let res1 = response.data;
-          if (res1.status === "0") {
-            //返回0，校验成功
-            if (res1.msg === '该用户不存在') {
-              this.addUser(params);
-            } else {
-              console.log(res1.msg);
-            }
-          } else {
-            console.log('校验失败');
-          }
-        })
-      },
-      addUser(params) {
-        axios.post('/users/addRegister', params).then((response) => {
-          let res2 = response.data;
-          if (res2.status === "0") {
-            //返回0，添加成功
-            //todo something
-            console.log("注册成功!");
-            this.dialogVisible = false;
-          } else {
-            console.log("注册失败");
-          }
-        })
-      },
-      goPersonal() {
-        this.$router.push('/personal');
-      }
-    }
+    } 
   }
 </script>
 
 <style scoped>
-  @media only screen and (max-width: 900px) {
-    .text-mute {
-      font-size: 8px;
-      color: #303133;
-    }
-  }
-
-  .nav-menu {
-    background-color: lightblue;
-  }
-
-  .grid-content {
-    min-height: 40px;
-    text-align: center;
-    line-height: 40px;
-  }
-
-  .logo {
-    float: right;
-    line-height: 60px;
-  }
-
-  .menu-father {
-    margin-left: 50px;
-  }
-
-  .delBorder {
-    border: none;
-  }
-
-  .personal {
-    line-height: 60px;
-  }
 
   /*标题*/
 
@@ -114,7 +36,7 @@
     height: 80px;
     margin: 0 auto;
     margin-top: 10px;
-    background-color: lightblue;
+    background: linear-gradient(to right,rgb(0, 247, 255,.2),rgb(251, 255, 0,.4));
   }
 
   .content {

@@ -2,15 +2,29 @@
   <div class="bg-search animated bounceInRight">
     <img class="back" src="./../../../static/image/bg1.jpg" alt>
     <div class="search">
-      <el-input size="medium" v-model="input" placeholder="搜索你喜欢的" @focus="sss" @blur="cancel"></el-input>
-      <el-button class="send" type="primary" size="mini" plain icon="el-icon-search">搜索</el-button>
+      <el-input
+        id="input"
+        placeholder="请输入内容"
+        v-model="input"
+        class="input-with-select"
+        @focus="sss"
+        @blur="cancel"
+      >
+        <el-select v-model="select" slot="prepend" placeholder="请选择">
+          <el-option label="城市" value="1"></el-option>
+          <el-option label="用户" value="2"></el-option>
+        </el-select>
+      </el-input>
     </div>
-    <ul class="search-file" v-show="search">
-      <li class="item border-bottom" @click="go" v-for="item of list" :key="item.id">{{item.name}}</li>
-    </ul>
-    <!-- <ul class="search-file" v-show="!search">
-          <li class="item border-bottom">暂无数据</li>
-    </ul>-->
+    <transition name="el-zoom-in-top">
+      <ul class="search-file" id="search" v-show="search">
+        <li class="item border-bottom no-data" v-if="isCity">
+          <i class="el-icon-warning"></i>
+          暂无数据
+        </li>
+        <li class="item border-bottom" @click="go" v-for="item of list" :key="item.id">{{item.name ||item.userName}}</li>
+      </ul>
+    </transition>
   </div>
 </template>
 
@@ -22,40 +36,101 @@ export default {
     return {
       input: "",
       search: false,
-      city: []
+      city: [],
+      user: [],
+      isCity: true,
+      select: ""
     };
   },
-  computed:{
-    list(){
-      if(this.input === ''){
+  watch: {
+    input() {
+      if (this.input === "") {
+        this.isCity = true;
+      }
+    }
+  },
+  computed: {
+    list() {
+      if (this.select === "1") {
+        if (this.input === "") {
+          return;
+        }
+        let arr = [];
+        for (let i = 0; i < this.city.length; i++) {
+          if (
+            this.city[i].name.indexOf(this.input) != -1 ||
+            this.city[i].spell.indexOf(this.input) != -1
+          ) {
+            arr.push(this.city[i]);
+          }
+        }
+        if (arr !== []) {
+          this.isCity = false;
+        } else {
+          this.isCity = true;
+        }
+        return arr;
+      } else if(this.select === '2') {
+        if (this.input === "") {
+          return;
+        }
+        let add = [];
+        for (let i = 0; i < this.user.length; i++) {
+          if (this.user[i].userName.indexOf(this.input) != -1) {
+            add.push(this.user[i]);
+          }
+        }
+        if (add !== []) {
+          this.isCity = false;
+        } else {
+          this.isCity = true;
+        }
+        return add;
+      }else{
         return
       }
-      let arr = [];
-      for(let i=0; i<this.city.length;i++){
-        if(this.city[i].name.indexOf(this.input) !=-1 || this.city[i].spell.indexOf(this.input) !=-1){
-          arr.push(this.city[i]);
-        }
-      }
-      return arr;
     }
   },
   methods: {
     sss() {
       this.search = true;
-      axios.get("http://localhost:3000/city").then(response => {
-        let res = response.data;
-        if (res.status === "0") {
-          this.city = res.result.cities;
+      if (this.select === "1") {
+        axios.get("http://localhost:3000/city").then(response => {
+          let res = response.data;
+          if (res.status === "0") {
+            this.city = res.result.cities;
+          } else {
+            console.log("222");
+          }
+        });
+      } else if (this.select === "2") {
+        axios.get("http://localhost:3000/users").then(response => {
+          let res = response.data;
+          if (res.status === "0") {
+            this.user = res.result.list;
+            console.log(res.result.list);
+          } else {
+            console.log("222");
+          }
+        });
+      } else {
+        return;
+      }
+    },
+    cancel() {
+      let a = document.getElementById("search");
+      let b = document.getElementById("input");
+      window.addEventListener("click", e => {
+        e.preventDefault;
+        if (e.target === a || e.target === b) {
         } else {
-          console.log("222");
+          this.search = false;
+          this.isCity = true;
         }
       });
     },
-    cancel(){
-      this.search = false;
-    },
     go() {
-      this.search = false;
+      this.$router.push("/detail");
     }
   }
 };
@@ -79,9 +154,9 @@ export default {
 }
 .search-file {
   position: absolute;
-  top: 54%;
-  left: 40.5%;
-  width: 197px;
+  top: 55%;
+  left: 46%;
+  width: 171px;
   min-height: 100px;
   background-color: #fff;
   z-index: 9999;
@@ -92,6 +167,9 @@ export default {
   line-height: 30px;
   z-index: 9999;
   cursor: pointer;
+}
+.no-data {
+  text-align: center;
 }
 .send {
   position: absolute;

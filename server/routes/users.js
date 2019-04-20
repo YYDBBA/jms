@@ -442,136 +442,7 @@ router.post('/addPicInfo', (req, res, next) => {
   });
 });
 
-//9用户发表一条动态
-router.post('/addNewSend', (req, res, next) => {
-
-  let up = 0;
-  let down = 0;
-  let userHead = '' || 'default.jpg';
-  Users.updateOne({
-    userName: req.body.userName
-  }, {
-    $push: {
-      sendList: {
-        content: req.body.content,
-        time: req.body.date,
-        userName: req.body.userName,
-        up: up,
-        down: down,
-        userHead: userHead
-      }
-    }
-  }, (err, doc) => {
-    if (err) {
-      res.json({
-        status: '1',
-        msg: '',
-        result: ''
-      });
-    } else {
-      res.json({
-        status: '0',
-        msg: '',
-        result: ''
-      });
-    }
-  });
-});
-
-//9.1用户发表评论
-router.post('/sendComment', (req, res, next) => {
-
-  let up = 0;
-  let down = 0;
-  let userHead = '' || 'default.jpg';
-  Users.updateOne({
-    userName: req.body.userName
-  }, {
-    $push: {
-      sendList: {
-        content: req.body.content,
-        time: req.body.date,
-        userName: req.body.userName,
-        up: up,
-        down: down,
-        userHead: userHead
-      }
-    }
-  }, (err, doc) => {
-    if (err) {
-      res.json({
-        status: '1',
-        msg: '',
-        result: ''
-      });
-    } else {
-      res.json({
-        status: '0',
-        msg: '',
-        result: ''
-      });
-    }
-  });
-});
-
-//9.2用户点赞，点low
-// router.post('/upDown', (req, res, next) => {
-//
-//   let flag = req.body.flag;
-//   if(flag === '1'){
-//     let up = parseInt(req.body.up) + 1;
-//     Users.updateOne({userName: req.body.userName}, {
-//       $push: {
-//         sendList: {
-//           up: up
-//         }
-//       }
-//     }, (err, doc) => {
-//       if (err) {
-//         res.json({
-//           status: '1',
-//           msg: '',
-//           result: ''
-//         });
-//       } else {
-//         res.json({
-//           status: '0',
-//           msg: '',
-//           result: ''
-//         });
-//       }
-//     });
-//   }
-// });
-
-//10用户删除一条动态
-router.post('/delSend', (req, res, next) => {
-  Users.updateOne({
-    userName: req.body.userName
-  }, {
-    $pull: {
-      sendList: {
-        time: req.body.time
-      }
-    }
-  }, (err, doc) => {
-    if (err) {
-      res.json({
-        status: '1',
-        msg: '',
-        result: ''
-      });
-    } else {
-      res.json({
-        status: '0',
-        msg: '',
-        result: ''
-      });
-    }
-  });
-});
-
-//11用户添加好友
+//9用户添加好友
 router.post('/addFriend', (req, res, next) => {
   Users.updateOne({
     userName: req.body.userName
@@ -598,7 +469,7 @@ router.post('/addFriend', (req, res, next) => {
   });
 });
 
-//12用户删除好友
+//10用户删除好友
 router.post('/delFriend', (req, res, next) => {
   Users.updateOne({
     userName: req.body.userName
@@ -625,7 +496,7 @@ router.post('/delFriend', (req, res, next) => {
   });
 });
 
-//13用户添加关注
+//11用户添加关注
 router.post('/addCare', (req, res, next) => {
   Users.updateOne({
     userName: req.body.userName
@@ -652,7 +523,7 @@ router.post('/addCare', (req, res, next) => {
   });
 });
 
-//14用户取消关注
+//12用户取消关注
 router.post('/delCare', (req, res, next) => {
   Users.updateOne({
     userName: req.body.userName
@@ -679,7 +550,7 @@ router.post('/delCare', (req, res, next) => {
   });
 });
 
-//15用户拿到头像墙
+//13用户拿到头像墙
 router.get('/getHeadWall', (req, res, next) => {
   let name = req.param('userName');
   Users.findOne({
@@ -701,7 +572,7 @@ router.get('/getHeadWall', (req, res, next) => {
   });
 });
 
-//16用户上传头像
+//14用户上传头像
 router.post('/uploadHead', (req, res, next) => {
   let AVATAR_UPLOAD_FOLDER = '/userHeader';
   //创建上传表单
@@ -783,7 +654,7 @@ router.post('/uploadHead', (req, res, next) => {
   })
 });
 
-//17将头像信息存在数据库里
+//15将头像信息存在数据库里
 router.post('/addHeadInfo', (req, res, next) => {
   let name = req.body.picInfo;
   let userName = req.body.userName;
@@ -812,7 +683,7 @@ router.post('/addHeadInfo', (req, res, next) => {
   });
 });
 
-//18用户删除头像墙
+//16用户删除头像墙
 router.post('/delHead', (req, res, next) => {
   let name = req.body.name;
   let userName = req.body.userName;
@@ -841,7 +712,7 @@ router.post('/delHead', (req, res, next) => {
   });
 });
 
-//19用户头像墙设置头像
+//17用户头像墙设置头像
 router.post('/setHead', (req, res, next) => {
   let name = req.body.name;
   let userName = req.body.userName;
@@ -888,7 +759,7 @@ router.post('/setHead', (req, res, next) => {
   });
 });
 
-//20添加到自己的消息库
+//18添加到自己的消息库
 router.post('/addMessage', (req, res, next) => {
   Users.updateOne({
     userName: req.body.from

@@ -21,14 +21,14 @@
     position: relative;
     width: 100%;
     height: 60px;
-    background-color: lightblue;
+    background: linear-gradient(to right,rgb(0, 247, 255,.2),rgb(251, 255, 0,.4));
   }
 
   .name {
     position: absolute;
     top: 0;
     left: 34%;
-    color: #fff;
+    color: rgb(192, 46, 46);
     font-size: 25px;
     line-height: 60px;
   }
@@ -39,7 +39,7 @@
 
   .back{
     font-size: 20px;
-    color: #fff;
+    color: rgb(192, 46, 46);
     line-height: 60px;
     margin-left: 10px;
   }
