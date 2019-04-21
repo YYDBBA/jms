@@ -751,9 +751,9 @@ min-height: 30px;
   height: 400px;
   padding: 10px;
   transform: translate(-50%, -50%);
-  z-index: 20;
+  z-index: 100;
   box-sizing: border-box;
-  background-color: lightblue;
+  background-color: rgb(210, 236, 238);
 }
 
 .friendName {
@@ -824,7 +824,11 @@ min-height: 30px;
   line-height: 20px;
   margin-left: 5px;
   box-sizing: border-box;
-  background-color: lightblue;
+  background: linear-gradient(
+    to right,
+    rgb(0, 247, 255, 0.2),
+    rgb(251, 255, 0, 0.4)
+  );
 }
 
 .myHead,

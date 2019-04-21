@@ -1,5 +1,5 @@
 <template>
-  <el-row>
+  <el-row class="sf">
     <el-col :span="4" class="grid-content bg-purple ddd fff">
       <img class="logo" src="./../../../static/image/logotwo.png" alt>
     </el-col>
@@ -25,10 +25,16 @@ export default {
 </script>
 
 <style scoped>
+.sf {
+  background: linear-gradient(
+    to right,
+    rgb(0, 247, 255, 0.2),
+    rgb(251, 255, 0, 0.4)
+  );
+}
 .ddd {
   height:60px;
   line-height: 60px;
-  background-color: lightblue;
   color: #fff;
   font-size: 15px;
 }

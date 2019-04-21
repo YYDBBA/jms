@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--头部样式-->
-    <el-row>
+    <el-row class="sf">
       <el-col :span="6">
         <div class="grid-content text-mute border-rightbottom">
           <i class="iconfont">&#xe609;</i>

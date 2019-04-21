@@ -8,6 +8,8 @@ var homeDataRouter = require('./routes/homeData');
 var usersRouter = require('./routes/users');
 var cityRouter = require('./routes/city');
 var sendRouter = require('./routes/send');
+var comRouter = require('./routes/communi');
+var picRouter = require('./routes/pic_data');
 
 var app = express();
 
@@ -26,6 +28,8 @@ app.use('/homeData', homeDataRouter);
 app.use('/users', usersRouter);
 app.use('/city', cityRouter);
 app.use('/send', sendRouter);
+app.use('/com', comRouter);
+app.use('/pic', picRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

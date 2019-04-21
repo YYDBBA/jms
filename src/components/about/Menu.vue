@@ -65,11 +65,9 @@
     name: "Menu",
     data() {
       return {
-        
       }
     },
     mounted() {
-      
     },
     methods: {
       
@@ -89,7 +87,11 @@
     font-size:20px;
     padding-top:20px;
     padding-left: 100px;
-    background-color: rgba(134,205,249,.1);
+    background: linear-gradient(
+    to right,
+    rgb(0, 247, 255, 0.2),
+    rgb(251, 255, 0, 0.4)
+  );
     position: relative;
 }
 .sss{
@@ -101,7 +103,11 @@
     width: 80%;
     height: 450px;
     margin: 50px 10% 0 10%;
-    background-color: rgba(134,205,249,.1);
+    background: linear-gradient(
+    to bottom,
+    rgb(0, 247, 255, 0.2),
+    rgb(251, 255, 0, 0.4)
+  );
 }
 .box .pic{
     width: 550px;

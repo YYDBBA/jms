@@ -109,42 +109,6 @@ export default {
 </script>
 
 <style scoped>
-@media only screen and (max-width: 900px) {
-  .text-mute {
-    font-size: 8px;
-    color: #303133;
-  }
-}
-
-.picbig {
-  margin-left: 30px;
-}
-.nav-menu {
-  background-color: #fff;
-}
-
-.grid-content {
-  min-height: 40px;
-  text-align: center;
-  line-height: 40px;
-}
-
-.logo {
-  float: right;
-  line-height: 60px;
-}
-
-.menu-father {
-  margin-left: 50px;
-}
-
-.delBorder {
-  border: none;
-}
-
-.personal {
-  line-height: 60px;
-}
 
 /*标题*/
 
@@ -203,7 +167,11 @@ export default {
 }
 
 .communiTitle {
-  background-color: lightblue;
+  background: linear-gradient(
+    to right,
+    rgb(0, 247, 255, 0.2),
+    rgb(251, 255, 0, 0.4)
+  );
   width: 70%;
   height: 80px;
   margin: 0 auto;

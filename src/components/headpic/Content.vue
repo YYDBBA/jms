@@ -153,7 +153,11 @@
   .now-head {
     width: 20%;
     height: 593px;
-    background-color: rgba(134,205,249,.1);
+    background: linear-gradient(
+    to bottom,
+    rgb(0, 247, 255, 0.2),
+    rgb(251, 255, 0, 0.4)
+  );
   }
 
   .now-head-pic {

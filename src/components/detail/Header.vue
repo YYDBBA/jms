@@ -19,7 +19,11 @@
   .some {
     width: 100%;
     height: 60px;
-    background-color: lightblue;
+    background: linear-gradient(
+    to right,
+    rgb(0, 247, 255, 0.2),
+    rgb(251, 255, 0, 0.4)
+  );
   }
   .logo {
     width: 120px;

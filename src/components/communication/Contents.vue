@@ -82,11 +82,15 @@ export default {
       activeName2: "first",
       isLogin: false,
       sendList: [],
-      input: ""
+      input: "",
+      superList: [],
+      hotComment: [],
+      moreNew: []
     };
   },
   mounted() {
     this.checkLogin();
+    // this.getComData();
   },
   computed: {
     value() {
@@ -96,7 +100,11 @@ export default {
   methods: {
     handleClick(tab, event) {
       if (tab.label === "我的关注") {
-        this.getSendInfo();
+        if (this.checkLogin()) {
+          this.getSendInfo();
+        } else {
+          return;
+        }
       } else {
         return;
       }
@@ -105,6 +113,7 @@ export default {
       //是否登录
       let flag = this.$store.state.checkLogin;
       this.isLogin = !!flag;
+      return flag;
     },
     getSendInfo() {
       //获取当前用户关注的发表
@@ -120,29 +129,41 @@ export default {
           if (res.status === "0") {
             let a = res.result.userCareList;
             let tem = [];
-            let obj ={};
+            let obj = {};
             for (let i in a) {
-              obj = {userName:a[i].userName};
+              obj = { userName: a[i].userName };
               tem.push(obj);
             }
-            axios.get("http://localhost:3000/send/allSend",{
-              params:{
-                list:JSON.stringify(tem)
-              }
-            }).then(response => {
-              let res1 = response.data;
-              if (res1.status === "0") {
-                //成功
-                this.sendList = res1.result.sort((a, b) => {
-                  return a > b ? 1 : -1;
-                });
-              }
-            });
+            axios
+              .get("http://localhost:3000/send/allSend", {
+                params: {
+                  list: JSON.stringify(tem)
+                }
+              })
+              .then(response => {
+                let res1 = response.data;
+                if (res1.status === "0") {
+                  //成功
+                  this.sendList = res1.result.sort((a, b) => {
+                    return a > b ? 1 : -1;
+                  });
+                }
+              });
           } else {
             //失败
             console.log(222);
           }
         });
+    },
+    getComData() {
+      axios.get("http://localhost:3000/com").then(res => {
+        let data = res.data;
+        if (data.status === "0") {
+          this.newOne = data.result.newOne;
+          this.newTwo = data.result.newTwo;
+          this.newThree = data.result.Three;
+        }
+      });
     },
     addCom(item) {
       //发表评论
@@ -211,7 +232,7 @@ export default {
 
 .check-login {
   font-size: 20px;
-  color: #fff;
+  color: black;
   text-align: center;
   padding-top: 80px;
   box-sizing: border-box;

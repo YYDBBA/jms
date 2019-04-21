@@ -16,7 +16,11 @@
     width: 100%;
     height: 82px;
     margin-top: 15px;
-    background-color: lightblue;
+   background: linear-gradient(
+    to right,
+    rgb(0, 247, 255, 0.2),
+    rgb(251, 255, 0, 0.4)
+  );
     text-align: center;
     padding-top: 30px;
     box-sizing: border-box;

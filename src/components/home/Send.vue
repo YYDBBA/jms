@@ -73,7 +73,11 @@
     height: 360px;
   }
   .footer {
-    background-color: lightblue;
+    background: linear-gradient(
+    to right,
+    rgb(0, 247, 255, 0.2),
+    rgb(251, 255, 0, 0.4)
+  );
     padding: 30px 40px 0 40px;
   }
   .tip{
