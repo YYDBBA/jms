@@ -102,6 +102,7 @@ let onlineCount = 0;
 io.on('connection', (socket) => {
   console.log('连接成功');
   //接受客户端的消息
+  console.log(socket.id);
   socket.emit('open');
   socket.on('setRoom', function(obj) {
     //将新加入用户的唯一标识当作socket的名称，后面退出的时候会用到,检查在线列表，如果不在里面就加入
@@ -109,7 +110,6 @@ io.on('connection', (socket) => {
       onlineUser[obj.from] = socket;
       //在线人数+1
       onlineCount++;
-      console.log(onlineCount);
       if(!onlineUser.hasOwnProperty(obj.to)) {
         socket.emit('noOnline','当前用户不在线');
       }else {
@@ -118,6 +118,7 @@ io.on('connection', (socket) => {
     }else{
       console.log(111);
     }
+    console.log(onlineCount);
   });
   socket.on('sendTo', function (data) {
     console.log(data);

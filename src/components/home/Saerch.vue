@@ -22,7 +22,12 @@
           <i class="el-icon-warning"></i>
           暂无数据
         </li>
-        <li class="item border-bottom" @click="go" v-for="item of list" :key="item.id">{{item.name ||item.userName}}</li>
+        <li
+          class="item border-bottom"
+          @click="go"
+          v-for="item of list"
+          :key="item.id"
+        >{{item.name ||item.userName}}</li>
       </ul>
     </transition>
   </div>
@@ -54,40 +59,44 @@ export default {
       if (this.select === "1") {
         if (this.input === "") {
           return;
-        }
-        let arr = [];
-        for (let i = 0; i < this.city.length; i++) {
-          if (
-            this.city[i].name.indexOf(this.input) != -1 ||
-            this.city[i].spell.indexOf(this.input) != -1
-          ) {
-            arr.push(this.city[i]);
+        } else {
+          let arr = [];
+          for (let i = 0; i < this.city.length; i++) {
+            if (
+              this.city[i].name.indexOf(this.input) != -1 ||
+              this.city[i].spell.indexOf(this.input) != -1
+            ) {
+              arr.push(this.city[i]);
+            }
           }
-        }
-        if (arr !== []) {
+          if (arr.length != 0) {
           this.isCity = false;
         } else {
           this.isCity = true;
         }
         return arr;
-      } else if(this.select === '2') {
+        }
+        
+        
+      } else if (this.select === "2") {
         if (this.input === "") {
           return;
-        }
-        let add = [];
-        for (let i = 0; i < this.user.length; i++) {
-          if (this.user[i].userName.indexOf(this.input) != -1) {
-            add.push(this.user[i]);
+        } else {
+          let add = [];
+          for (let i = 0; i < this.user.length; i++) {
+            if (this.user[i].userName.indexOf(this.input) != -1) {
+              add.push(this.user[i]);
+            }
           }
-        }
-        if (add !== []) {
+           if (add.length != 0) {
           this.isCity = false;
         } else {
           this.isCity = true;
         }
         return add;
-      }else{
-        return
+        }
+      } else {
+        return;
       }
     }
   },
@@ -108,7 +117,7 @@ export default {
           let res = response.data;
           if (res.status === "0") {
             this.user = res.result.list;
-            console.log(res.result.list);
+            // console.log(res.result.list);
           } else {
             console.log("222");
           }

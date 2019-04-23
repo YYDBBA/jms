@@ -10,14 +10,7 @@
 </template>
 
 <script>
-  // import HomeHeader from './../components/home/Header'
-  // import HomeSearch from './../components/home/Saerch'
-  // import HomeHot from './../components/home/Hot'
-  // import HomeRecommend from './../components/home/Recommend'
-  // import HomeSkip from './../components/home/Skip'
-  // import HomeSend from './../components/home/Send'
   import axios from 'axios'
-
 
   let HomeHeader = (resolve) => {
     return require.ensure([], () => {

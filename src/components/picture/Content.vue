@@ -11,7 +11,7 @@
         >
           <div class="box">
             <div class="pic">
-              <img :src="'./../../static/image/'+item.img" alt class="img">
+              <img v-lazy="'./../../static/image/'+item.img" alt class="img">
             </div>
             <div class="pro animated fadeInUp faster">
               <p class="des">{{item.des}}</p>
@@ -20,6 +20,7 @@
         </waterfall-slot>
       </waterfall>
     </div>
+    <div class="no-data" v-if="has">没有更多数据了o(╥﹏╥)o</div>
   </div>
 </template>
 
@@ -35,22 +36,47 @@ export default {
   },
   data() {
     return {
-      items: []
+      items: [],
+      page:1,
+      pageSize:10,
+      has:false
     };
   },
   mounted(){
     this.getPicData();
   },
+  created(){
+    window.addEventListener("scroll",()=>{
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      if(scrollTop+window.innerHeight>=document.body.clientHeight){
+        this.loadMorePic();
+      }
+    })
+  },
   methods:{
     getPicData() {
-      axios.get("http://localhost:3000/pic").then(res => {
+      axios.get("http://localhost:3000/pic",{
+        params:{
+          page:this.page,
+          pageSize:this.pageSize
+        }
+      }).then(res => {
         let data = res.data;
         if (data.status === "0") {
-          this.items = data.result.picList;
+          this.items = this.items.concat(data.result.list);
         }else{
           return
         }
       });
+    },
+    loadMorePic() {
+      if(this.items.length < 71){
+        this.page++;
+        this.getPicData();
+        console.log(this.items.length);
+      }else{
+        this.has = true;
+      }
     }
   }
 };
@@ -105,5 +131,12 @@ export default {
   left: 10px;
   bottom: 10px;
   color: #fff;
+}
+.no-data {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+  font-size: 20px;
+  line-height: 50px;
 }
 </style>

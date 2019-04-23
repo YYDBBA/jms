@@ -154,7 +154,6 @@
 import UploadPic from "./Upload";
 import axios from "axios";
 import io from "socket.io-client";
-
 export default {
   name: "Info",
   components: {
@@ -281,7 +280,6 @@ export default {
         let sendParams = this.sendTip;
         let userName = this.$store.state.loginName; //拿到当前用户登录信息
         let date = this.getTime();//获取发表时间
-
         axios
           .post("http://localhost:3000/send/addNewSend", {
             userName: userName,
@@ -355,14 +353,11 @@ export default {
     qq() {
       let url = "http://localhost:3000";
       let socket = io.connect(url);
-
       //监听连接
       socket.on("connect", () => {
         console.log("success");
-
         //打开通道
         socket.emit("open");
-
         socket.on("message", data => {
           // let a = Array.from(data);
           this.chatList.push(data);
@@ -829,6 +824,7 @@ min-height: 30px;
     rgb(0, 247, 255, 0.2),
     rgb(251, 255, 0, 0.4)
   );
+  font-size: 12px;
 }
 
 .myHead,
