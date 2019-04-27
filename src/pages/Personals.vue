@@ -22,6 +22,7 @@
 
 <script>
 import axios from "axios";
+import io from "socket.io-client";
 
 export default {
   name: "Personals",
@@ -30,13 +31,16 @@ export default {
       name:'',
       head:'',
       careList:[],
-      flag:false
+      friendList:[],
+      flag:false,
+      flag1:false
     };
   },
   mounted() {
     this.name = this.$route.params.name;
     this.getHead();
     this.getMy();
+    this.qq();
   },
   methods: {
     getHead() {
@@ -70,6 +74,7 @@ export default {
         let res = response.data;
         if (res.status === "0") {
           this.careList = res.result.userCareList;
+          this.friendList = res.result.userFriendList;
         } else {
           console.log(222);
         }
@@ -78,7 +83,7 @@ export default {
     addCare() {
       let a = this.$store.state.loginName;
       let b = this.$store.state.checkLogin;
-      if(b === 'true'){
+      if(a !== ''){
         let list = this.careList;
         for(let i in list){
           if(list[i].userName.indexOf(this.name)!=-1){
@@ -109,22 +114,68 @@ export default {
     addFriend(){
       let a = this.$store.state.loginName;
       let b = this.$store.state.checkLogin;
-      if(b === 'true'){
-        //socket.io发送请求，保存请求状态
-      //添加对象处理过后返回处理结果，同意则存入数据库
-        axios.post('http://localhost:3000/users/addFriend',{
-          userName:a,
-          name:this.name
-        }).then(response=>{
-          let res = response.data;
-          if(res.status === '0'){
-            this.$message.success('请求发送成功！');
+      if(a !== ''){
+        let list = this.friendList;
+        for(let i in list){
+          if(list[i].userName.indexOf(this.name)!=-1){
+            console.log(list[i]);
+            this.flag1 = true;
+          }else{
+            console.log(111);
           }
-        })
+        }
+        if(this.flag1){
+          this.$message.warning('该用户已经是您的好友！');
+        }else{
+            this.qq().emit('addReq',{
+              from:a,
+              to:this.name
+            });
+        }
       }else{
         this.$message.error('请先登录！');
         this.$router.push('/');
       }
+    },
+    qq() {
+      let url = "http://localhost:3000";
+      let socket = io.connect(url);
+      //监听连接
+      socket.on("connect", () => {
+        console.log("success");
+        //打开通道
+        socket.emit("open");
+        
+        socket.on('who',who=>{
+          localStorage.setItem('who',who.from);
+        })
+        
+        socket.on("message", data => {
+          let b = localStorage.getItem('loginName');
+          if(b === ''){
+            return
+          }else{
+            if (data.to === b) {
+            this.$message.warning("收到一条消息");
+            console.log(data);
+           } else {
+            return
+          }
+          }
+        });
+        // socket.on('add',data=>{
+        //   let a = localStorage.getItem('loginName');
+        //   if(data.from === a){
+        //     this.$message.success('请求发送成功！');
+        //     console.log('sja')
+        //   }else{
+        //     return
+        //   }
+        // })
+      });
+      //接收服务器返回的消息
+      return socket;
+      //添加用户发送消息
     }
   }
 };

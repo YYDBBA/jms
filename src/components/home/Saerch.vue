@@ -65,7 +65,7 @@ export default {
             if (
               this.city[i].name.indexOf(this.input) != -1 ||
               this.city[i].spell.indexOf(this.input) != -1
-            ) {
+            ){
               arr.push(this.city[i]);
             }
           }
@@ -142,7 +142,12 @@ export default {
       if(this.select === '1'){
           this.$router.push("/detail");
       }else{
+        let a = localStorage.getItem('loginName');
+        if(item.userName!==a){
           this.$router.push(`/personals/${item.userName}`);
+        }else{
+          return
+        }
       }
     }
   }

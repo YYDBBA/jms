@@ -99,6 +99,7 @@ function onListening() {
  let _ = require('underscore');
 //在线用户,当前在线人数
 let onlineUser = {};
+let id = {};
 let onlineCount = 0;
 io.on('connection', (socket) => {
   console.log('连接成功');
@@ -107,8 +108,9 @@ io.on('connection', (socket) => {
   socket.emit('open');
   socket.on('setRoom', function(obj) {
     //将新加入用户的唯一标识当作socket的名称，后面退出的时候会用到,检查在线列表，如果不在里面就加入
-    // if (!onlineUser.hasOwnProperty(obj.from)) {
+    if (!onlineUser.hasOwnProperty(obj.from)) {
       onlineUser[obj.from] = socket;
+      id[obj.from] = socket.id;
       //在线人数+1
       onlineCount++;
       // if(!onlineUser.hasOwnProperty(obj.to)) {
@@ -116,27 +118,36 @@ io.on('connection', (socket) => {
       // }else {
         // socket.emit('online','在线');
       // }
-    // }else{
-      // console.log(111);
-    // }
+    }else{
+      onlineUser[obj.from] = socket;
+      id[obj.from] = socket.id;
+    }
     console.log(onlineCount);
-    console.log(onlineUser);
+    console.log(id);
   });
+  socket.on('oneRoom',function(data){
+    socket.emit('who',{
+      from:data.to,
+      to:data.from
+    })
+  });
+  socket.on('addReq',data=>{
+
+    //向指定用户发消息
+    let toName = data.to;
+    if(onlineUser[toName]){
+      onlineUser[toName].emit('add',{
+        from: data.from,
+        to:toName
+      });
+    }else {
+      socket.emit('noOnline','当前用户不在线');
+    }
+  })
   socket.on('sendTo', function (data) {
     
     //向指定用户发消息
     let toName = data.to;
-    // let toSocket = _.findWhere(io.sockets.sockets,{id:toName});
-    // console.log(toSocket);
-    // toSocket.emit("message",{
-    //       from: data.from,
-    //       to:toName,
-    //       userHead: data.userHead,
-    //       message: data.message,
-    //       liClass: 'you',
-    //       imgClass: 'youHead',
-    //       spanClass: 'youMsg'
-    //     });
     if(onlineUser[toName]){
       onlineUser[toName].emit('message',{
         from: data.from,

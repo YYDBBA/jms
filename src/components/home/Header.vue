@@ -97,6 +97,7 @@
 
 <script>
 import axios from "axios";
+import io from "socket.io-client";
 
 export default {
   name: "Header",
@@ -109,6 +110,14 @@ export default {
       userName: "",
       userPwd: ""
     };
+  },
+  mounted(){
+    let a = localStorage.getItem('checkLogin');
+    if(a === 'true'){
+      this.qq();
+    }else{
+      return
+    }
   },
   computed: {
     loginUser() {
@@ -151,6 +160,9 @@ export default {
               this.userName = "";
               this.userPwd = "";
               this.$message.success('登录成功！');
+              this.qq().emit("setRoom", {
+        from: this.$store.state.loginName
+      });
             } else {
               console.log("登录失败");
               this.isCheckLogin = true;
@@ -159,6 +171,46 @@ export default {
             this.$message.error(resLogin.msg);
           }
         });
+    },
+     qq() {
+      let url = "http://localhost:3000";
+      let socket = io.connect(url);
+      //监听连接
+      socket.on("connect", () => {
+        console.log("success");
+        //打开通道
+        socket.emit("open");
+        
+        socket.on('who',who=>{
+          localStorage.setItem('who',who.from);
+        })
+        
+        socket.on("message", data => {
+          let b = localStorage.getItem('loginName');
+          if(b === ''){
+            return
+          }else{
+            if (data.to === b) {
+            this.$message.warning("收到一条新消息");
+            console.log(data);
+           } else {
+            return
+          }
+          }
+        });
+        socket.on('add',data=>{
+          let a = localStorage.getItem('loginName');
+          if(data.to === a){
+            this.$message.warning('收到一个添加好友请求！亲赶快去处理');
+            localStorage.setItem('reqName',data.from);
+          }else{
+            return
+          }
+        })
+      });
+      //接收服务器返回的消息
+      return socket;
+      //添加用户发送消息
     },
     //注销登录
     canelLogin() {

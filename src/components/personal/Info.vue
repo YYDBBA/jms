@@ -148,7 +148,7 @@
           <span class="who">{{item.name}}请求添加您为好友</span>
           <span class="do">
             <el-button @click="delwith = false" type="primary">取消</el-button>
-            <el-button type="danger">添加</el-button>
+            <el-button type="danger" @click="addFriend">添加</el-button>
           </span>
         </li>
       </ul>
@@ -199,14 +199,24 @@ export default {
       hoppy: "-",
       personal: "-",
       changeValue: "-",
-      newReq:true,
+      newReq:false,
       delwith:false,
-      reqList:[{name:"xdd"}]
+      reqList:[]
     };
   },
   mounted() {
     this.getPersonalInfo();
     this.getSendInfo();
+    let b = localStorage.getItem('reqName');
+    let c = localStorage.getItem('loginName');
+
+    if(b && b !== c){
+      this.newReq = true;
+      let a = {
+        name:b
+      }
+      this.reqList.push(a);
+    }
   },
   computed: {
     value() {
@@ -353,6 +363,31 @@ export default {
           }
         });
     },
+    addFriend(){
+      let a = this.$store.state.loginName;
+      let b = localStorage.getItem('reqName');
+      axios.post('http://localhost:3000/users/addFriend',{
+          userName:a,
+          name:b
+        }).then(response=>{
+          let res = response.data;
+          if(res.status === '0'){
+            axios.post('http://localhost:3000/users/addFriend',{
+                userName:b,
+                name:a
+              }).then(response=>{
+                let res = response.data;
+                if(res.status === '0'){
+                  this.$message.success('添加成功！');
+                  this.newReq = false;
+                  this.delwith = false;
+                  localStorage.setItem('reqName','');
+                  this.getPersonalInfo();
+                }
+            })
+          }
+        });
+    },
     toChat(item1) {
       this.isChat = true;
       this.friendName = item1.userName;
@@ -361,6 +396,10 @@ export default {
       this.qq().emit("setRoom", {
         from: this.$store.state.loginName
       });
+      this.qq().emit('oneRoom',{
+        from: this.$store.state.loginName,
+        to:item1.userName
+      })
       this.getChatInfo(item1);
     },
     closeChat() {
@@ -375,26 +414,33 @@ export default {
         console.log("success");
         //打开通道
         socket.emit("open");
+        socket.on('who',who=>{
+          localStorage.setItem('who',who.from);
+        })
+        
         socket.on("message", data => {
-          // let a = Array.from(data);
-          this.chatList.push(data);
-          console.log(data);
-          // console.log(arr);
-          // this.chatList.push(data);
+          let a = localStorage.getItem('who');
+          let b = localStorage.getItem('loginName');
+          if (data.to === b && data.from === a) {
+            this.chatList.push(data);
+            console.log(data);
+           } else {
+            return
+          }
         });
         // socket.on("noOnline", data => {
-        //   // let a = Array.from(data);
-        //   // this.$message.error(data);
-        //   this.online = data;
-        //   // console.log(arr);
-        //   // this.chatList.push(data);
+           // let a = Array.from(data);
+           // this.$message.error(data);
+          // this.online = data;
+           // console.log(arr);
+           // this.chatList.push(data);
         // });
         // socket.on("online", data => {
-        //   // let a = Array.from(data);
-        //   // this.$message.error(data);
+           // let a = Array.from(data);
+           // this.$message.error(data);
         //   this.online = data;
-        //   // console.log(arr);
-        //   // this.chatList.push(data);
+           // console.log(arr);
+           // this.chatList.push(data);
         // });
       });
       //接收服务器返回的消息
