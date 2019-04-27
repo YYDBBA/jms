@@ -26,7 +26,7 @@
   );
   }
   .logo {
-    width: 120px;
+    width: 140px;
     height: 60px;
   }
   .back{

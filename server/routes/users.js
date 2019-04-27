@@ -183,25 +183,27 @@ router.post('/checkLogin', (req, res, next) => {
       });
     } else {
       if (docLogin) {
-        if(docLogin.token === "login"){
+        if (docLogin.token === "login") {
           res.json({
-            status:'1',
-            msg:'当前已经在其他地方登录',
-            result:''
+            status: '1',
+            msg: '当前已经在其他地方登录',
+            result: ''
           })
-        }else{
-          Users.updateOne({userName: userName},{
-            $set:{
-              token:"login"
-            }         
-          },(err,doc)=>{
-            if(err){
+        } else {
+          Users.updateOne({
+            userName: userName
+          }, {
+            $set: {
+              token: "login"
+            }
+          }, (err, doc) => {
+            if (err) {
               res.json({
                 status: "1",
                 msg: '该用户已经登录！',
                 result: ''
               });
-            }else{
+            } else {
               res.json({
                 status: "0",
                 msg: '该用户已经存在！',
@@ -252,23 +254,25 @@ router.post('/checkRegister', (req, res, next) => {
   })
 });
 
-router.post('/canelToken',(req,res,next)=>{
-  Users.updateOne({userName:req.body.userName},{
-    $set:{
-      token:"noLogin"
+router.post('/canelToken', (req, res, next) => {
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $set: {
+      token: "noLogin"
     }
-  },(err,doc)=>{
-    if(err){
+  }, (err, doc) => {
+    if (err) {
       res.json({
-        status:'1',
-        msg:'',
-        result:''
+        status: '1',
+        msg: '',
+        result: ''
       })
-    }else{
+    } else {
       res.json({
-        status:'0',
-        msg:'',
-        result:''
+        status: '0',
+        msg: '',
+        result: ''
       })
     }
   })
@@ -447,9 +451,9 @@ router.post('/addFriend', (req, res, next) => {
   Users.updateOne({
     userName: req.body.userName
   }, {
-    $pull: {
-      sendList: {
-        time: req.body.time
+    $push: {
+      userFriendList: {
+        userName: req.body.name
       }
     }
   }, (err, doc) => {
@@ -501,9 +505,9 @@ router.post('/addCare', (req, res, next) => {
   Users.updateOne({
     userName: req.body.userName
   }, {
-    $pull: {
-      sendList: {
-        time: req.body.time
+    $push: {
+      userCareList: {
+        userName: req.body.careName
       }
     }
   }, (err, doc) => {
@@ -888,111 +892,121 @@ router.post('/changeMajor', (req, res, next) => {
   })
 });
 //修改地址
-router.post('/changeAddress',(req,res,next)=>{
-  Users.updateOne({userName:req.body.userName},{
-    $set:{
-      userAddress:req.body.type
+router.post('/changeAddress', (req, res, next) => {
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $set: {
+      userAddress: req.body.type
     }
-  },(err,doc)=>{
-    if(err){
+  }, (err, doc) => {
+    if (err) {
       res.json({
-        status:'1',
-        msg:'',
-        result:''
+        status: '1',
+        msg: '',
+        result: ''
       })
-    }else{
+    } else {
       res.json({
-        status:'0',
-        msg:'',
-        result:''
+        status: '0',
+        msg: '',
+        result: ''
       })
     }
   })
 });
 //修改家乡
-router.post('/changeHomeTown',(req,res,next)=>{
-  Users.updateOne({userName:req.body.userName},{
-    $set:{
-      userHometown:req.body.type
+router.post('/changeHomeTown', (req, res, next) => {
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $set: {
+      userHometown: req.body.type
     }
-  },(err,doc)=>{
-    if(err){
+  }, (err, doc) => {
+    if (err) {
       res.json({
-        status:'1',
-        msg:'',
-        result:''
+        status: '1',
+        msg: '',
+        result: ''
       })
-    }else{
+    } else {
       res.json({
-        status:'0',
-        msg:'',
-        result:''
+        status: '0',
+        msg: '',
+        result: ''
       })
     }
   })
 });
 //修改邮箱
-router.post('/changeEmail',(req,res,next)=>{
-  Users.updateOne({userName:req.body.userName},{
-    $set:{
-      userEmail:req.body.type
+router.post('/changeEmail', (req, res, next) => {
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $set: {
+      userEmail: req.body.type
     }
-  },(err,doc)=>{
-    if(err){
+  }, (err, doc) => {
+    if (err) {
       res.json({
-        status:'1',
-        msg:'',
-        result:''
+        status: '1',
+        msg: '',
+        result: ''
       })
-    }else{
+    } else {
       res.json({
-        status:'0',
-        msg:'',
-        result:''
+        status: '0',
+        msg: '',
+        result: ''
       })
     }
   })
 });
 //修改爱好
-router.post('/changeHoppy',(req,res,next)=>{
-  Users.updateOne({userName:req.body.userName},{
-    $set:{
-      userHoppy:req.body.type
+router.post('/changeHoppy', (req, res, next) => {
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $set: {
+      userHoppy: req.body.type
     }
-  },(err,doc)=>{
-    if(err){
+  }, (err, doc) => {
+    if (err) {
       res.json({
-        status:'1',
-        msg:'',
-        result:''
+        status: '1',
+        msg: '',
+        result: ''
       })
-    }else{
+    } else {
       res.json({
-        status:'0',
-        msg:'',
-        result:''
+        status: '0',
+        msg: '',
+        result: ''
       })
     }
   })
 });
 //修改个签
-router.post('/changePersonal',(req,res,next)=>{
-  Users.updateOne({userName:req.body.userName},{
-    $set:{
-      userPersonal:req.body.type
+router.post('/changePersonal', (req, res, next) => {
+  Users.updateOne({
+    userName: req.body.userName
+  }, {
+    $set: {
+      userPersonal: req.body.type
     }
-  },(err,doc)=>{
-    if(err){
+  }, (err, doc) => {
+    if (err) {
       res.json({
-        status:'1',
-        msg:'',
-        result:''
+        status: '1',
+        msg: '',
+        result: ''
       })
-    }else{
+    } else {
       res.json({
-        status:'0',
-        msg:'',
-        result:''
+        status: '0',
+        msg: '',
+        result: ''
       })
     }
   })

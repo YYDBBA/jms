@@ -93,6 +93,10 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的好友">
+          <div class="star-friend border-bottom animated bounceInRight" @click="handleReq">
+            <span class="tips" v-if="newReq">收到一个好友请求！</span>
+            <span class="nothing" v-if="!newReq">暂无通知</span>
+          </div>
           <div
             class="star-friend border-bottom animated bounceInRight"
             @click="toChat(item1)"
@@ -102,7 +106,6 @@
             <img class="friend-head" :src="'http://localhost:3000/userHeader/'+item1.userHead" alt>
             <span class="friend-name">{{item1.userName}}</span>
             <span class="geqian">个性签名:{{item1.userPersonal}}</span>
-            <el-badge class="infoCount" :value="infoCount"></el-badge>
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的关注">
@@ -138,6 +141,17 @@
           </el-input>
         </div>
       </div>
+    </transition>
+    <transition name="el-fade-in-linear">
+      <ul class="get-friend" v-show="delwith">
+        <li class="req-list" v-for="(item,index) of reqList" :key="index">
+          <span class="who">{{item.name}}请求添加您为好友</span>
+          <span class="do">
+            <el-button @click="delwith = false" type="primary">取消</el-button>
+            <el-button type="danger">添加</el-button>
+          </span>
+        </li>
+      </ul>
     </transition>
     <div class="info-right"></div>
     <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
@@ -184,7 +198,10 @@ export default {
       email: "-",
       hoppy: "-",
       personal: "-",
-      changeValue: "-"
+      changeValue: "-",
+      newReq:true,
+      delwith:false,
+      reqList:[{name:"xdd"}]
     };
   },
   mounted() {
@@ -549,6 +566,13 @@ export default {
           done();
         })
         .catch(_ => {});
+    },
+    handleReq() {
+      if(this.newReq){
+        this.delwith = true;
+      }else{
+        this.delwith = false;
+      }
     }
   },
   updated() {
@@ -732,6 +756,21 @@ min-height: 30px;
   left: 50px;
 }
 
+.tips {
+  width:400px;
+  height:50px;
+  line-height:50px;
+  font-size:20px;
+  color:orange;
+}
+.nothing {
+  width:100%;
+  height:50px;
+  line-height:50px;
+  font-size:20px;
+  color:skyblue;
+}
+
 .infoCount {
   position: absolute;
   right: 5px;
@@ -746,11 +785,45 @@ min-height: 30px;
   height: 400px;
   padding: 10px;
   transform: translate(-50%, -50%);
+  z-index: 101;
+  box-sizing: border-box;
+  background-color: rgb(210, 236, 238);
+}
+
+.get-friend{
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  width: 400px;
+  min-height: 50px;
+  transform: translate(-200px, -50%);
   z-index: 100;
   box-sizing: border-box;
   background-color: rgb(210, 236, 238);
 }
 
+.req-list{
+  height:50px;
+  overflow:hidden;
+}
+.who {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width:230px;
+  height:50px;
+  line-height:50px;
+  color:black;
+  font-size:18px;
+}
+.do {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width:170px;
+  height:50px;
+  line-height:50px;
+}
 .friendName {
   position: absolute;
   top: 10px;

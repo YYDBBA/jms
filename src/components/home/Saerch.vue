@@ -24,7 +24,7 @@
         </li>
         <li
           class="item border-bottom"
-          @click="go"
+          @click="go(item)"
           v-for="item of list"
           :key="item.id"
         >{{item.name ||item.userName}}</li>
@@ -138,8 +138,12 @@ export default {
         }
       });
     },
-    go() {
-      this.$router.push("/detail");
+    go(item) {
+      if(this.select === '1'){
+          this.$router.push("/detail");
+      }else{
+          this.$router.push(`/personals/${item.userName}`);
+      }
     }
   }
 };
@@ -168,7 +172,7 @@ export default {
   width: 171px;
   min-height: 100px;
   background-color: #fff;
-  z-index: 9999;
+  z-index: 9999999 !important;
 }
 .item {
   height: 30px;

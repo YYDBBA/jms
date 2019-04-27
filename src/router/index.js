@@ -26,6 +26,11 @@ let Personal = (resolve) => {
     resolve(require('@/pages/Personal'))
   })
 };
+let Personals = (resolve) => {
+  return require.ensure([], () => {
+    resolve(require('@/pages/Personals'))
+  })
+};
 let Headpic = (resolve) => {
   return require.ensure([], () => {
     resolve(require('@/pages/Headpic'))
@@ -89,6 +94,11 @@ const router = new Router({
       component: Personal
     },
     {
+      path: '/personals/:name',
+      name: 'Personals',
+      component: Personals
+    },
+    {
       path: '/headpic',
       name: 'Headpic',
       component: Headpic
@@ -101,7 +111,10 @@ const router = new Router({
     {
       path: '/end',
       name: 'End',
-      component: End
+      component: End,
+      meta:{
+        login:true
+      }
     },
     {
       path: '/picture',
@@ -128,7 +141,8 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   if(to.meta.login){
-    if(router.app.$store.state.checkLogin){
+    let a = localStorage.getItem('checkLogin');
+    if(a === 'true'){
       next()
     }else{
       router.app.$message.error("当前未登录");

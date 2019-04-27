@@ -150,6 +150,7 @@ export default {
               this.isCheckNull = false;
               this.userName = "";
               this.userPwd = "";
+              this.$message.success('登录成功！');
             } else {
               console.log("登录失败");
               this.isCheckLogin = true;
