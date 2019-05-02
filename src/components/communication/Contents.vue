@@ -27,8 +27,8 @@
               <li class="item infoDown">{{item.down}}</li>
             </ul>
             <div class="send-com">
-              <el-input placeholder="我也来评论..." v-model="input" clearable class="f-left"></el-input>
-              <el-button class="f-left" @click="addCom(item)">评论</el-button>
+              <el-input placeholder="我也来评论..." v-model="input[index].a" clearable class="f-left"></el-input>
+              <el-button class="f-left" @click="addCom(item,index)">评论</el-button>
             </div>
             <ul class="comment">
               <li class="comment-content" v-for="(item1,index1) of item.commentList" :key="index1">
@@ -82,7 +82,7 @@ export default {
       activeName2: "first",
       isLogin: false,
       sendList: [],
-      input: "",
+      input: [],
       superList: [],
       hotComment: [],
       moreNew: []
@@ -90,12 +90,9 @@ export default {
   },
   mounted() {
     this.checkLogin();
-    // this.getComData();
   },
   computed: {
-    value() {
-      return this.input;
-    }
+   
   },
   methods: {
     handleClick(tab, event) {
@@ -147,6 +144,12 @@ export default {
                   this.sendList = res1.result.sort((a, b) => {
                     return a > b ? 1 : -1;
                   });
+                  for(let i in res1.result){
+                    let a = 'input'+i;
+                    this.input.push({
+                      a:''
+                      });
+                  }
                 }
               });
           } else {
@@ -165,22 +168,22 @@ export default {
         }
       });
     },
-    addCom(item) {
+    addCom(item,index) {
       //发表评论
-      if (this.value !== "") {
+      if (this.input[index].a !== "") {
         axios
           .post("http://localhost:3000/send/sendComment", {
             userName: item.userName,
             time: item.time,
             commentUserName: this.$store.state.loginName,
-            commentContent: this.value,
+            commentContent: this.input[index].a,
             commentTime: this.getTime()
           })
           .then(response => {
             let res = response.data;
             if (res.status === "0") {
               this.getSendInfo();
-              this.input = "";
+              this.input[index].a = "";
               this.$message.success("评论成功");
             } else {
               return;
