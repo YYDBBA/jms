@@ -18,7 +18,7 @@
       <el-tab-pane label="我的关注" name="second">
         <ul class="info-list" v-show="isLogin">
           <li class="info" v-for="(item,index) of sendList" :key="index">
-            <img class="user-head" src alt>
+            <img class="user-head" src="http://localhost:3000/userHeader/default.jpg" alt>
             <span class="username">{{item.userName}}</span>
             <p class="infoText">{{item.content}}</p>
             <ul class="info-operation">
@@ -183,7 +183,7 @@ export default {
             let res = response.data;
             if (res.status === "0") {
               this.getSendInfo();
-              this.input[index].a = "";
+              this.input[index].a = ""; 
               this.$message.success("评论成功");
             } else {
               return;

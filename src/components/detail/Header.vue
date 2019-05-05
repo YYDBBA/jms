@@ -31,7 +31,7 @@
   }
   .back{
     font-size: 20px;
-    color: #fff;
+    color: brown;
     line-height: 60px;
     margin-left: 10px;
   }
@@ -40,6 +40,6 @@
     margin-left: 32%;
     font-size: 25px;
     line-height: 60px;
-    color: #fff;
+    color: brown;
   }
 </style>

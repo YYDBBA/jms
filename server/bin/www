@@ -96,15 +96,11 @@ function onListening() {
  * 监听连接成功
  */
 
- let _ = require('underscore');
-//在线用户,当前在线人数
 let onlineUser = {};
 let id = {};
 let onlineCount = 0;
 io.on('connection', (socket) => {
   console.log('连接成功');
-  //接受客户端的消息
-  console.log(socket.id);
   socket.emit('open');
   socket.on('setRoom', function(obj) {
     //将新加入用户的唯一标识当作socket的名称，后面退出的时候会用到,检查在线列表，如果不在里面就加入
@@ -132,8 +128,6 @@ io.on('connection', (socket) => {
     })
   });
   socket.on('addReq',data=>{
-
-    //向指定用户发消息
     let toName = data.to;
     if(onlineUser[toName]){
       onlineUser[toName].emit('add',{
@@ -145,8 +139,6 @@ io.on('connection', (socket) => {
     }
   })
   socket.on('sendTo', function (data) {
-    
-    //向指定用户发消息
     let toName = data.to;
     if(onlineUser[toName]){
       onlineUser[toName].emit('message',{
@@ -161,8 +153,6 @@ io.on('connection', (socket) => {
     }else {
       socket.emit('noOnline','当前用户不在线');
     }
-
-  //监听连接关闭
   socket.on('disconnect', () => {
     console.log("连接已经关闭");
   });

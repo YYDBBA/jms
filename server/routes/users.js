@@ -133,19 +133,7 @@ router.post('/delUser', (req, res, next) => {
 
 //4.4修改一个用户信息
 router.post('/changeUser', (req, res, next) => {
-  let updataData = req.body;
-  Users.updateOne({
-    id: updataData.changeId
-  }, {
-    $set: {
-      name: updataData.changeName,
-      age: updataData.changeAge,
-      sendId: updataData.changeSendId,
-      sendName: updataData.changeSendName,
-      sendTop: updataData.changeSendTop,
-      sendBottom: updataData.changeSendBottom
-    }
-  }, (err3, doc3) => {
+  Users.updateOne(req.body, (err3, doc3) => {
     if (err3) {
       res.json({
         status: "1",

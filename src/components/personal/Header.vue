@@ -81,7 +81,10 @@ export default {
       this.$router.push("/headpic");
     },
     bigLook() {
-        this.$router.push('/bighead');
+        this.$router.push({
+          path:'/bighead',
+          query:{head:this.userHead}
+        });
     },
     getTime() {
       let a = new Date();

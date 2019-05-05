@@ -144,7 +144,7 @@ router.beforeEach((to, from, next) => {
   if(to.meta.login){
     let a = localStorage.getItem('checkLogin');
     if(a === 'true'){
-      next()
+        next();
     }else{
       router.app.$message.error("当前未登录");
     }

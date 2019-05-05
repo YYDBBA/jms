@@ -161,8 +161,13 @@ export default {
               this.userPwd = "";
               this.$message.success('登录成功！');
               this.qq().emit("setRoom", {
-        from: this.$store.state.loginName
-      });
+                from: this.$store.state.loginName
+              });
+              if(userName === 'admin'){
+                this.$router.push('/end');
+              }else{
+                return
+              }
             } else {
               console.log("登录失败");
               this.isCheckLogin = true;
@@ -283,7 +288,11 @@ export default {
       this.$router.push("/about");
     },
     goEnd() {
-      this.$router.push("/end");
+      if(this.$store.state.loginName === 'admin'){
+        this.$router.push("/end");
+      }else{
+        this.$message.warning("未登录管理员账号！");
+      }
     }
   }
 };

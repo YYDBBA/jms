@@ -35,11 +35,7 @@
         list: []
       }
     },
-    // computed: {
-    //   cityChangeName() {
-    //     return this.$store.state.city;
-    //   }
-    // },
+
     mounted() {
       this.getCityInfo();
     },

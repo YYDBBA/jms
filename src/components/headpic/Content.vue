@@ -152,7 +152,7 @@
 
   .now-head {
     width: 20%;
-    height: 593px;
+    height: 495px;
     background: linear-gradient(
     to bottom,
     rgb(0, 247, 255, 0.2),

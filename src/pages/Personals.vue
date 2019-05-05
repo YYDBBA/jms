@@ -17,6 +17,9 @@
           <el-button @click="addCare">加关注</el-button>
         </span>
       </div>
+      <div class="footer">
+      <span class="jj">版权所有，本网站不参与任何非法营运，仅供学习使用</span>  
+    </div>
   </div>
 </template>
 
@@ -197,7 +200,7 @@ export default {
   position: absolute;
   top: 0;
   left: 34%;
-  color: #fff;
+  color: brown;
   font-size: 25px;
   line-height: 60px;
 }
@@ -208,16 +211,20 @@ export default {
 
 .back {
   font-size: 20px;
-  color: #fff;
+  color: brown;
   line-height: 60px;
   margin-left: 10px;
 }
 .content {
   position:relative;
   width:80%;
-  height:480px;
+  height:455px;
   margin: 20px 10% 0 10%;
-  background: rgba(41, 168, 200, 0.5);
+  background: linear-gradient(
+    to right,
+    rgb(0, 247, 255, 0.2),
+    rgb(251, 255, 0, 0.4)
+  );
 }
 .head {
   position:absolute;
@@ -248,4 +255,23 @@ export default {
   text-align:center;
   transform:translate(-50%,-50%);
 }
+.footer {
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(
+    to right,
+    rgb(0, 247, 255, 0.2),
+    rgb(251, 255, 0, 0.4)
+  );
+  }
+  .jj{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    color:brown;
+    font-size: 20px;
+  }
 </style>

@@ -140,7 +140,10 @@ export default {
     },
     go(item) {
       if(this.select === '1'){
-          this.$router.push("/detail");
+          this.$router.push({path:"/detail",
+          query:{
+            name:item.name
+          }});
       }else{
         let a = localStorage.getItem('loginName');
         if(item.userName!==a){

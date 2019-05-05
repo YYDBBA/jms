@@ -25,6 +25,6 @@
     padding-top: 30px;
     box-sizing: border-box;
     font-size: 20px;
-    color: #fff;
+    color: brown;
   }
 </style>

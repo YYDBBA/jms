@@ -7,18 +7,41 @@
       <h3>走咯旅游服务网站系统后台</h3>
     </el-col>
     <el-col :span="4" class="grid-content bg-purple ddd">
-      <span class="name">YUYU</span>
-      <img class="head-pic" src alt @click="goHome">
+      <span class="name">admin</span>
+      <img class="head-pic" v-popover:popover2 src="http://localhost:3000/userHeader/default.jpg" alt>
     </el-col>
+    <el-popover
+      ref="popover2"
+      placement="bottom"
+      title=""
+      width="40"
+      trigger="click"
+      content="">
+      <el-button type="text" @click="goHome">退出登录</el-button>
+    </el-popover>
   </el-row>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "Header",
   methods: {
     goHome() {
-      this.$router.push("/");
+      axios
+        .post("/users/canelToken", {
+          userName: this.$store.state.loginName
+        })
+        .then(res => {
+          let ress = res.data;
+          if (ress.status === "0") {
+            this.$store.commit("canelLogin", [false, ""]);
+            this.$message.success("注销成功");
+            this.$router.push("/");
+          } else {
+            this.$message.error("注销登录");
+          }
+        });
     }
   }
 };
@@ -35,7 +58,7 @@ export default {
 .ddd {
   height:60px;
   line-height: 60px;
-  color: #fff;
+  color: brown;
   font-size: 15px;
 }
 .fff {
@@ -63,6 +86,7 @@ export default {
   height: 50px;
   border-radius: 50%;
   background-color: black;
+  cursor: pointer;
   z-index: 44;
 }
 </style>

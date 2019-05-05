@@ -73,7 +73,7 @@
           </div>
           <div class="info-list border-bottom" v-for="(item,index) of sendList" :key="index">
             <div class="info animated bounceIn">
-              <img class="user-head" :src="'http://localhost:3000/userHeader/'+item.userHead" alt>
+              <img class="user-head" src="http://localhost:3000/userHeader/default.jpg" alt>
               <span class="username">{{item.userName}}</span>
               <i class="el-icon-delete delete" title="删除" @click="delSend(item)"></i>
               <p class="infoText">{{item.content}}</p>
@@ -103,14 +103,14 @@
             v-for="(item1,index) of userFriendList"
             :key="index"
           >
-            <img class="friend-head" :src="'http://localhost:3000/userHeader/'+item1.userHead" alt>
+            <img class="friend-head" src="http://localhost:3000/userHeader/default.jpg" alt>
             <span class="friend-name">{{item1.userName}}</span>
             <span class="geqian">个性签名:{{item1.userPersonal}}</span>
           </div>
         </el-tab-pane>
         <el-tab-pane label="我的关注">
           <div class="star-friend border-bottom animated rotateIn faster" v-for="(item,index) of userCareList" :key="index">
-            <img class="friend-head" :src="'http://localhost:3000/userHeader/'+item.userHead" alt>
+            <img class="friend-head" src="http://localhost:3000/userHeader/default.jpg" alt>
             <span class="friend-name">{{item.userName}}</span>
             <span class="geqian">个性签名:{{item.userPersonal}}</span>
             <el-badge class="infoCount" :value="infoCount"></el-badge>
@@ -129,7 +129,7 @@
           <li v-for="(item,index) of chatList" :key="index" :class="item.liClass">
             <img
               :class="item.imgClass"
-              :src="'http://localhost:3000/userHeader/'+item.userHead"
+              src="http://localhost:3000/userHeader/default.jpg"
               alt
             >
             <span :class="item.spanClass">{{item.message}}</span>
@@ -147,7 +147,7 @@
         <li class="req-list" v-for="(item,index) of reqList" :key="index">
           <span class="who">{{item.name}}请求添加您为好友</span>
           <span class="do">
-            <el-button @click="delwith = false" type="primary">取消</el-button>
+            <el-button @click="canelFriend" type="primary">取消</el-button>
             <el-button type="danger" @click="addFriend">添加</el-button>
           </span>
         </li>
@@ -204,7 +204,7 @@ export default {
       reqList:[]
     };
   },
-  mounted() {
+  created() {
     this.getPersonalInfo();
     this.getSendInfo();
     let b = localStorage.getItem('reqName');
@@ -619,6 +619,11 @@ export default {
       }else{
         this.delwith = false;
       }
+    },
+    canelFriend() {
+      this.delwith = false;
+      this.newReq = false;
+      localStorage.removeItem('reqName');
     }
   },
   updated() {
