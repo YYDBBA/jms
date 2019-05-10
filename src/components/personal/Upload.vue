@@ -6,7 +6,7 @@
       :show-file-list="false"
       :on-success="handleAvatarSuccess"
     >
-       <el-button class="upload-head">上传图片</el-button>
+      <el-button class="upload-head">上传图片</el-button>
     </el-upload>
     <ul v-for="(item,index) of picUrlList" :key="index" class="dd animated rollIn faster">
       <li class="pics">

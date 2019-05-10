@@ -60,9 +60,9 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof port === 'string' ?
+    'Pipe ' + port :
+    'Port ' + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -85,9 +85,9 @@ function onError(error) {
 
 function onListening() {
   var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
+  var bind = typeof addr === 'string' ?
+    'pipe ' + addr :
+    'port ' + addr.port;
   debug('Listening on ' + bind);
 }
 
@@ -102,59 +102,52 @@ let onlineCount = 0;
 io.on('connection', (socket) => {
   console.log('连接成功');
   socket.emit('open');
-  socket.on('setRoom', function(obj) {
-    //将新加入用户的唯一标识当作socket的名称，后面退出的时候会用到,检查在线列表，如果不在里面就加入
+  socket.on('setRoom', function (obj) {
     if (!onlineUser.hasOwnProperty(obj.from)) {
       onlineUser[obj.from] = socket;
       id[obj.from] = socket.id;
-      //在线人数+1
       onlineCount++;
-      // if(!onlineUser.hasOwnProperty(obj.to)) {
-        // socket.emit('noOnline','当前用户不在线');
-      // }else {
-        // socket.emit('online','在线');
-      // }
-    }else{
+    } else {
       onlineUser[obj.from] = socket;
       id[obj.from] = socket.id;
     }
     console.log(onlineCount);
     console.log(id);
   });
-  socket.on('oneRoom',function(data){
-    socket.emit('who',{
-      from:data.to,
-      to:data.from
+  socket.on('oneRoom', function (data) {
+    socket.emit('who', {
+      from: data.to,
+      to: data.from
     })
   });
-  socket.on('addReq',data=>{
+  socket.on('addReq', data => {
     let toName = data.to;
-    if(onlineUser[toName]){
-      onlineUser[toName].emit('add',{
+    if (onlineUser[toName]) {
+      onlineUser[toName].emit('add', {
         from: data.from,
-        to:toName
+        to: toName
       });
-    }else {
-      socket.emit('noOnline','当前用户不在线');
+    } else {
+      socket.emit('noOnline', '当前用户不在线');
     }
   })
   socket.on('sendTo', function (data) {
     let toName = data.to;
-    if(onlineUser[toName]){
-      onlineUser[toName].emit('message',{
+    if (onlineUser[toName]) {
+      onlineUser[toName].emit('message', {
         from: data.from,
-        to:toName,
+        to: toName,
         userHead: data.userHead,
         message: data.message,
         liClass: 'you',
         imgClass: 'youHead',
         spanClass: 'youMsg'
       });
-    }else {
-      socket.emit('noOnline','当前用户不在线');
+    } else {
+      socket.emit('noOnline', '当前用户不在线');
     }
-  socket.on('disconnect', () => {
-    console.log("连接已经关闭");
-  });
-})
+    socket.on('disconnect', () => {
+      console.log("连接已经关闭");
+    });
+  })
 });

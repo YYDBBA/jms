@@ -1,0 +1,16 @@
+[
+  {
+    "userName": "wls",
+    "content": "今天天气不错",
+    "time": "2019-04-21 10:57:30",
+    "up": "0",
+    "down": "0",
+    "commentList": [
+      {
+        "commentUserName": "yly",
+        "commentContent": "点个赞",
+        "commentTime": "2019-04-21 10:58:10"
+      }
+    ]
+  }
+]

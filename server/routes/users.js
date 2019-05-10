@@ -42,9 +42,7 @@ router.get('/', (req, res, next) => {
       let countId = docId;
       let page = parseInt(req.param("page"));
       let pageSize = parseInt(req.param("pageSize"));
-
       let skip = (page - 1) * pageSize;
-
       let params = {};
       let usersModel = Users.find(params).skip(skip).limit(pageSize);
       usersModel.exec((err, doc) => {
@@ -326,15 +324,10 @@ router.get('/getPersonalInfo', (req, res, next) => {
 //8.1上传图片
 router.post('/uploadPic', (req, res, next) => {
   let AVATAR_UPLOAD_FOLDER = '/avatar';
-  //创建上传表单
   let form = new formidable.IncomingForm();
-  //设置编码格式
   form.encoding = 'utf-8';
-  //设置上传目录
   form.uploadDir = 'D:/code/jms/server/public' + AVATAR_UPLOAD_FOLDER;
-  //保留后缀
   form.keepExtensions = true;
-  //文件大小
   form.maxFieldsSize = 2 * 1024 * 1024;
   form.parse(req, function (err, fields, files) {
     let filesFile = files.file;
@@ -345,7 +338,6 @@ router.post('/uploadPic', (req, res, next) => {
         result: ''
       })
     }
-    // 限制文件大小 单位默认字节 这里限制大小为2m
     if (filesFile.size > form.maxFieldsSize) {
       fs.unlink(filesFile.path);
       return res.json({
@@ -354,7 +346,6 @@ router.post('/uploadPic', (req, res, next) => {
         result: ''
       })
     }
-    //后缀名
     let extName = '';
     switch (filesFile.type) {
       case 'image/pjpeg':
@@ -377,15 +368,10 @@ router.post('/uploadPic', (req, res, next) => {
         result: ''
       })
     }
-    //使用第三方模块silly-datetime
     let t = sd.format(new Date(), 'YYYYMMDDHHmmss');
-    //生成随机数
     let ran = parseInt(Math.random() * 8999 + 10000);
-    // 生成新图片名称
     let avatarName = t + '_' + ran + '.' + extName;
-    // 新图片路径
     let newPath = form.uploadDir + '/' + avatarName;
-    // 更改名字和路径
     fs.rename(filesFile.path, newPath, function (err) {
       if (err) {
         return res.json({

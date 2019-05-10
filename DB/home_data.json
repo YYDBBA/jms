@@ -1,0 +1,324 @@
+﻿[{
+  "_id" : ObjectId("5c6d46d534eeff0468da2700"),
+  "hotList" : [{
+      "hotImg" : "hot1.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4678",
+      "cityName" : "北京",
+      "title" : "北京欢迎你",
+      "adress" : "北京市",
+      "des" : "北京是一座有着三千多年历史的古都，在不同的朝代有着不同的称谓，大致算起来有二十多个别称。"
+    }, {
+      "hotImg" : "hot2.jpg",
+      "hotCount" : "6980",
+      "cityName" : "上海",
+      "wantCount" : "9595",
+      "title" : "东方明珠",
+      "adress" : "上海",
+      "des" : "上海，简称“沪”或“申”，是中国共产党的诞生地，是中华人民共和国省级行政区、31°53′之间，地处长江入海口，东隔东中国海与日本九州岛相望，南濒杭州湾，北、西与江苏、浙江两省相接，上海市总面积6340.5平方千米。"
+    }, {
+      "hotImg" : "hot3.jpg",
+      "hotCount" : "3689",
+      "cityName" : "深圳",
+      "wantCount" : "3456",
+      "title" : "腾讯老有钱了",
+      "adress" : "深圳",
+      "des" : "深圳地处广东南部，珠江口东岸，与香港一水之隔，东临大亚湾和大鹏湾，西濒珠江口和伶仃洋，南隔深圳河与香港相连，北部与东莞、惠州接壤"
+    }, {
+      "hotImg" : "hot4.jpg",
+      "hotCount" : "3476",
+      "cityName" : "长沙",
+      "wantCount" : "56698",
+      "title" : "看橘子洲头",
+      "adress" : "湖南长沙",
+      "des" : "长沙是首批国家历史文化名城，历经三千年城的名、城址是不变，享有“屈贾之乡”、“楚汉名城”、“潇湘洙泗”之称。"
+    }],
+  "forYouList" : [{
+      "hotImg" : "forYou1.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "广东",
+      "adress" : "广东省",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou2.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "南昌",
+      "adress" : "江西南昌省",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou3.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "天津",
+      "adress" : "河北天津",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou4.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "上饶",
+      "adress" : "江西上饶",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou5.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "鄱阳",
+      "adress" : "江西上饶鄱阳",
+      "title" : "鄱阳鱼米之乡",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou6.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "桂林",
+      "adress" : "广西桂林省",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou7.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "新疆",
+      "adress" : "新疆",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou8.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "西藏",
+      "adress" : "拉萨",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou9.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "南京",
+      "adress" : "广东省",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou10.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "武汉",
+      "adress" : "湖北武汉",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou11.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "杭州",
+      "adress" : "浙江杭州",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou12.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "义乌",
+      "adress" : "浙江义乌",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou13.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "黑龙江",
+      "adress" : "黑龙江",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou14.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "青藏高原",
+      "adress" : "西藏省",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }, {
+      "hotImg" : "forYou15.jpg",
+      "hotCount" : "2683",
+      "wantCount" : "4638",
+      "cityName" : "大理",
+      "adress" : "云南大理",
+      "title" : "人在广东漂泊十年",
+      "des" : "的巴萨打法就卡死的，的撒娇卡萨丁"
+    }],
+  "tipList" : [{
+      "id" : "1",
+      "title" : "最新精华游记",
+      "tipBigImg" : "forYou5.jpg",
+      "tipImgList" : [{
+          "id" : "01",
+          "tipSmallImg" : "hot1.jpg"
+        }, {
+          "id" : "02",
+          "tipSmallImg" : "hot2.jpg"
+        }, {
+          "id" : "03",
+          "tipSmallImg" : "hot3.jpg"
+        }, {
+          "id" : "04",
+          "tipSmallImg" : "hot4.jpg"
+        }],
+      "tipContentCnaList" : [{
+          "id" : "001",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "002",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "003",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "004",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "005",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "006",
+          "content" : "丽江：总有一种浪漫在等你"
+        }],
+      "tipContentForList" : [{
+          "id" : "007",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "008",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "009",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "010",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "011",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "012",
+          "content" : "丽江：总有一种浪漫在等你"
+        }]
+    }, {
+      "id" : "2",
+      "title" : "寻味·饕餮",
+      "tipBigImg" : "food1.jpg",
+      "tipImgList" : [{
+          "id" : "05",
+          "tipSmallImg" : "food2.jpg"
+        }, {
+          "id" : "06",
+          "tipSmallImg" : "food3.jpg"
+        }, {
+          "id" : "07",
+          "tipSmallImg" : "food4.jpg"
+        }, {
+          "id" : "08",
+          "tipSmallImg" : "food5.jpg"
+        }],
+      "tipContentCnaList" : [{
+          "id" : "013",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "014",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "015",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "016",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "017",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "018",
+          "content" : "丽江：总有一种浪漫在等你"
+        }],
+      "tipContentForList" : [{
+          "id" : "019",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "020",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "021",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "022",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "023",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "024",
+          "content" : "丽江：总有一种浪漫在等你"
+        }]
+    }, {
+      "id" : "3",
+      "title" : "花开一夏",
+      "tipBigImg" : "flower1.jpg",
+      "tipImgList" : [{
+          "id" : "09",
+          "tipSmallImg" : "flower2.jpg"
+        }, {
+          "id" : "10",
+          "tipSmallImg" : "flower3.jpg"
+        }, {
+          "id" : "11",
+          "tipSmallImg" : "flower4.jpg"
+        }, {
+          "id" : "12",
+          "tipSmallImg" : "flower5.jpg"
+        }],
+      "tipContentCnaList" : [{
+          "id" : "025",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "026",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "027",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "028",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "029",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "030",
+          "content" : "丽江：总有一种浪漫在等你"
+        }],
+      "tipContentForList" : [{
+          "id" : "031",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "032",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "033",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "034",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "035",
+          "content" : "丽江：总有一种浪漫在等你"
+        }, {
+          "id" : "036",
+          "content" : "丽江：总有一种浪漫在等你"
+        }]
+    }]
+},
+]

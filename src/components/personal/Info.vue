@@ -79,8 +79,8 @@
               <p class="infoText">{{item.content}}</p>
               <ul class="info-operation">
                 <li class="item infoTime">{{item.time}}</li>
-                <li class="item infoTop" @click="up(item)">{{item.up}}</li>
-                <li class="item infoDown" @click="down(item)">{{item.down}}</li>
+                <!-- <li class="item infoTop" @click="up(item)">{{item.up}}</li>
+                <li class="item infoDown" @click="down(item)">{{item.down}}</li> -->
               </ul>
               <ul class="comment">
                 <li class="comment-content" v-for="(item1,index1) of item.commentList" :key="index1">

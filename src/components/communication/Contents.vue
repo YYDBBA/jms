@@ -4,13 +4,13 @@
       <el-tab-pane label="超话社区" name="first">
         <div class="info-list border-bottom">
           <div class="info">
-            <img class="user-head" src>
+            <img class="user-head" src="http://localhost:3000/userHeader/default.jpg" >
             <span class="username">XIXI</span>
             <p class="infoText">人需要沉淀，有时间去反思，才能一步一步往前走。</p>
             <ul class="info-operation">
               <li class="item infoTime">2018-8-29 20:45:14</li>
-              <li class="item infoTop">3345</li>
-              <li class="item infoDown">2345</li>
+              <!-- <li class="item infoTop">3345</li>
+              <li class="item infoDown">2345</li> -->
             </ul>
           </div>
         </div>
@@ -23,8 +23,8 @@
             <p class="infoText">{{item.content}}</p>
             <ul class="info-operation">
               <li class="item infoTime">{{item.time}}</li>
-              <li class="item infoTop">{{item.up}}</li>
-              <li class="item infoDown">{{item.down}}</li>
+              <!-- <li class="item infoTop">{{item.up}}</li>
+              <li class="item infoDown">{{item.down}}</li> -->
             </ul>
             <div class="send-com">
               <el-input placeholder="我也来评论..." v-model="input[index].a" clearable class="f-left"></el-input>
@@ -44,13 +44,13 @@
       <el-tab-pane label="热点评论" name="third">
         <div class="info-list border-bottom">
           <div class="info">
-            <img class="user-head" src>
+            <img class="user-head" src="http://localhost:3000/userHeader/default.jpg" >
             <span class="username">XIXI</span>
             <p class="infoText">人需要沉淀，有时间去反思，才能一步一步往前走。</p>
             <ul class="info-operation">
               <li class="item infoTime">2018-8-29 20:45:14</li>
-              <li class="item infoTop">3345</li>
-              <li class="item infoDown">2345</li>
+              <!-- <li class="item infoTop">3345</li>
+              <li class="item infoDown">2345</li> -->
             </ul>
           </div>
         </div>
@@ -58,13 +58,13 @@
       <el-tab-pane label="更多资讯" name="fourth">
         <div class="info-list border-bottom">
           <div class="info">
-            <img class="user-head" src>
+            <img class="user-head" src="http://localhost:3000/userHeader/default.jpg" >
             <span class="username">XIXI</span>
             <p class="infoText">人需要沉淀，有时间去反思，才能一步一步往前走。</p>
             <ul class="info-operation">
               <li class="item infoTime">2018-8-29 20:45:14</li>
-              <li class="item infoTop">3345</li>
-              <li class="item infoDown">2345</li>
+              <!-- <li class="item infoTop">3345</li>
+              <li class="item infoDown">2345</li> -->
             </ul>
           </div>
         </div>
